@@ -5,7 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 
-namespace starstop.DAL
+namespace seoWebApplication.DAL
 {
     public class MongoHelper<T> where T : class
     {
@@ -15,7 +15,7 @@ namespace starstop.DAL
         static string connectionString = ConfigurationManager.ConnectionStrings["MongoDB"].ConnectionString;
         MongoUrl con = new MongoUrl(connectionString);
 
-        private string dbName = "starstop"; 
+        private string dbName = "seoWebApplication"; 
 
         public MongoCollection<T> Collection { get; private set; }
 

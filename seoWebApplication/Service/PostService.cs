@@ -1,13 +1,13 @@
 ﻿using MongoDB.Driver;
 using MongoDB.Driver.Builders;
-using starstop.DAL;
-using starstop.Models;
+using seoWebApplication.DAL;
+using seoWebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace starstop.Service
+namespace seoWebApplication.Service
 {
     public class PostService
     {

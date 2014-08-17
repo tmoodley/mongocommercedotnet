@@ -1,12 +1,12 @@
 ﻿using MongoDB.Driver; 
-using starstop.Models;
-using starstop.DAL;
+using seoWebApplication.Models;
+using seoWebApplication.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace starstop.Service
+namespace seoWebApplication.Service
 {    
     public class DeviceLogService
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace starstop.DAL
+namespace seoWebApplication.DAL
 {
     public static class Helpers
     {

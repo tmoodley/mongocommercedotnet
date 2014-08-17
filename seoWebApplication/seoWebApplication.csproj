@@ -55,6 +55,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="AspNet.Identity.MongoDB">
+      <HintPath>..\packages\AspNet.Identity.MongoDB.1.0.10\lib\net45\AspNet.Identity.MongoDB.dll</HintPath>
+    </Reference>
     <Reference Include="ComputerBeacon.Facebook">
       <HintPath>..\packages\ComputerBeacon.Facebook.5.0.480\lib\net40\ComputerBeacon.Facebook.dll</HintPath>
     </Reference>
@@ -86,8 +89,9 @@
     <Reference Include="Kendo.Mvc">
       <HintPath>..\..\..\..\Visual Studio 2012\Projects\Telliformer\Telliformer\bin\Kendo.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
@@ -1380,9 +1384,28 @@
     <Compile Include="FBHandler.ashx.cs">
       <DependentUpon>FBHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Framework\emailService.cs" />
+    <Compile Include="Framework\phasher.cs" />
+    <Compile Include="Framework\ResultHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Comments.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Device.cs" />
+    <Compile Include="Models\DeviceLog.cs" />
+    <Compile Include="Models\IdentityContext.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\Results.cs" />
+    <Compile Include="Models\Subscribe.cs" />
+    <Compile Include="Models\Subscriber.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="myaccount.aspx.cs">
       <DependentUpon>myaccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2080,7 +2103,6 @@
     <Folder Include="admin\ajax\" />
     <Folder Include="factoryClasses\" />
     <Folder Include="js\libs\bootstrap\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="st.SharkTankDAL\seowebappDataContext.dbml.layout">

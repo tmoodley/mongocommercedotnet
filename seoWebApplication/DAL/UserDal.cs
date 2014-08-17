@@ -5,10 +5,10 @@ using System.Web;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System.Configuration; 
-using starstop.Models;
-using starstop.Framework;
+using seoWebApplication.Models;
+using seoWebApplication.Framework;
 
-namespace starstop.DAL
+namespace seoWebApplication.DAL
 {
     public class UserDal : IDisposable
     {

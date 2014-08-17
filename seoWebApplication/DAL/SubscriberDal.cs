@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web; 
 using MongoDB.Driver;
 using System.Configuration;
-using starstop.Models;
+using seoWebApplication.Models;
 
-namespace starstop.DAL
+namespace seoWebApplication.DAL
 {
     public class SubscriberDal : IDisposable
     {
