@@ -15,7 +15,7 @@ namespace seoWebApplication.DAL
         static string connectionString = ConfigurationManager.ConnectionStrings["MongoDB"].ConnectionString;
         MongoUrl con = new MongoUrl(connectionString);
 
-        private string dbName = "seoWebApplication"; 
+        private string dbName = "mongocommerce"; 
 
         public MongoCollection<T> Collection { get; private set; }
 
