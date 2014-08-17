@@ -1,5 +1,4 @@
-﻿using Kendo.Mvc.UI;
-using Kendo.Mvc.Extensions;
+﻿ 
 using seoWebApplication.Models;
 using seoWebApplication.Service;
 using System;
@@ -100,11 +99,6 @@ namespace seoWebApplication.Controllers
             }
         }
 
-        public ActionResult Company_Read([DataSourceRequest]DataSourceRequest request)
-        {
-            var companys = _companyService.GetCompanys();
-            DataSourceResult result = companys.ToDataSourceResult(request);
-            return Json(result);
-        }
+        
     }
 }
