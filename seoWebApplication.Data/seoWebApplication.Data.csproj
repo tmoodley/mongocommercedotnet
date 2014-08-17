@@ -164,6 +164,9 @@
     <Compile Include="citySelectById_Result.cs">
       <DependentUpon>SeoWebAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Client.cs">
+      <DependentUpon>SeoWebAppModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CommerceLibOrderGetInfo_Result.cs">
       <DependentUpon>SeoWebAppModel.tt</DependentUpon>
     </Compile>
@@ -325,6 +328,9 @@
     <Compile Include="pcategoryproduct.cs">
       <DependentUpon>SeoWebAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Picture.cs">
+      <DependentUpon>SeoWebAppModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="point.cs">
       <DependentUpon>SeoWebAppModel.tt</DependentUpon>
     </Compile>
@@ -479,6 +485,9 @@
     <Compile Include="ShoppingCartSelectByWId_Result.cs">
       <DependentUpon>SeoWebAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SocialMedia.cs">
+      <DependentUpon>SeoWebAppModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>SeoWebAppModel.tt</DependentUpon>
     </Compile>
@@ -618,6 +627,9 @@
       <DependentUpon>SeoWebAppModel.tt</DependentUpon>
     </Compile>
     <Compile Include="webstoreSelectByWId_Result.cs">
+      <DependentUpon>SeoWebAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Widget.cs">
       <DependentUpon>SeoWebAppModel.tt</DependentUpon>
     </Compile>
     <Compile Include="zone.cs">

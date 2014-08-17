@@ -13,21 +13,26 @@ namespace seoWebApplication.Data
 {
 
 using System;
+    using System.Collections.Generic;
     
-public partial class AuditSelectByWOId_Result
+public partial class Picture
 {
 
-    public int AuditID { get; set; }
+    public int Id { get; set; }
 
-    public int OrderID { get; set; }
+    public string Name { get; set; }
 
-    public int webstore_id { get; set; }
+    public string Url { get; set; }
 
-    public System.DateTime DateStamp { get; set; }
+    public string Alt { get; set; }
 
-    public string Message { get; set; }
+    public string Description { get; set; }
 
-    public Nullable<int> MessageNumber { get; set; }
+    public Nullable<int> ProductFK { get; set; }
+
+
+
+    public virtual product product { get; set; }
 
 }
 

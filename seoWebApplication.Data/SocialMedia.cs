@@ -13,21 +13,24 @@ namespace seoWebApplication.Data
 {
 
 using System;
+    using System.Collections.Generic;
     
-public partial class AuditSelectByWOId_Result
+public partial class SocialMedia
 {
 
-    public int AuditID { get; set; }
+    public int Id { get; set; }
 
-    public int OrderID { get; set; }
+    public Nullable<int> WebstoreId { get; set; }
 
-    public int webstore_id { get; set; }
+    public string Facebook { get; set; }
 
-    public System.DateTime DateStamp { get; set; }
+    public string Twitter { get; set; }
 
-    public string Message { get; set; }
+    public string Google { get; set; }
 
-    public Nullable<int> MessageNumber { get; set; }
+    public string LinkedIn { get; set; }
+
+    public string AddThis { get; set; }
 
 }
 

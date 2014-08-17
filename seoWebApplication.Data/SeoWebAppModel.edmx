@@ -223,7 +223,7 @@ warning 6002: The table/view 'shopparazim.dbo.menuReviews' does not have a prima
           <Property Name="webstore_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="thumbnail" Type="nvarchar" MaxLength="50" />
           <Property Name="image" Type="nvarchar" MaxLength="50" />
           <Property Name="promofront" Type="bit" Nullable="false" />
@@ -528,6 +528,19 @@ warning 6002: The table/view 'shopparazim.dbo.storePointsSettings' does not have
           <Property Name="idCity" Type="int" Nullable="false" />
           <Property Name="zoneName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CellPhone" Type="nchar" MaxLength="10" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="EnteredOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="pcategory">
           <Key>
             <PropertyRef Name="Id" />
@@ -545,6 +558,38 @@ warning 6002: The table/view 'shopparazim.dbo.storePointsSettings' does not have
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pcategoryFK" Type="int" />
           <Property Name="productFK" Type="int" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Url" Type="nvarchar" MaxLength="50" />
+          <Property Name="Alt" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="ProductFK" Type="int" />
+        </EntityType>
+        <EntityType Name="SocialMedia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebstoreId" Type="int" />
+          <Property Name="Facebook" Type="nvarchar" MaxLength="255" />
+          <Property Name="Twitter" Type="nvarchar" MaxLength="255" />
+          <Property Name="Google" Type="nvarchar" MaxLength="255" />
+          <Property Name="LinkedIn" Type="nvarchar" MaxLength="255" />
+          <Property Name="AddThis" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Widget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="15" />
+          <Property Name="Data" Type="nvarchar(max)" />
+          <Property Name="WebstoreId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'shopparazim.dbo.vw_admins' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -981,6 +1026,18 @@ warning 6002: The table/view 'shopparazim.dbo.vw_product_attribute' does not hav
             </Principal>
             <Dependent Role="pcategoryproduct">
               <PropertyRef Name="productFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Picture_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="Picture" Type="Self.Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="ProductFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2493,8 +2550,12 @@ warning 6002: The table/view 'shopparazim.dbo.vw_product_attribute' does not hav
           <EntitySet Name="webstore" EntityType="Self.webstore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WebstoreCuisine" EntityType="Self.WebstoreCuisine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="zone" EntityType="Self.zone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="shadeadmin" store:Type="Tables" />
           <EntitySet Name="pcategory" EntityType="Self.pcategory" Schema="shadeadmin" store:Type="Tables" />
           <EntitySet Name="pcategoryproduct" EntityType="Self.pcategoryproduct" Schema="shadeadmin" store:Type="Tables" />
+          <EntitySet Name="Picture" EntityType="Self.Picture" Schema="shadeadmin" store:Type="Tables" />
+          <EntitySet Name="SocialMedia" EntityType="Self.SocialMedia" Schema="shadeadmin" store:Type="Tables" />
+          <EntitySet Name="Widget" EntityType="Self.Widget" Schema="shadeadmin" store:Type="Tables" />
           <EntitySet Name="menuReviews" EntityType="Self.menuReviews" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [menuReviews].[menuReviews_id] AS [menuReviews_id], 
@@ -2733,6 +2794,10 @@ warning 6002: The table/view 'shopparazim.dbo.vw_product_attribute' does not hav
           <AssociationSet Name="FK_pcategoryproduct_product" Association="Self.FK_pcategoryproduct_product">
             <End Role="product" EntitySet="product" />
             <End Role="pcategoryproduct" EntitySet="pcategoryproduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Picture_product" Association="Self.FK_Picture_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="Picture" EntitySet="Picture" />
           </AssociationSet>
           <AssociationSet Name="FK_points_webstore" Association="Self.FK_points_webstore">
             <End Role="webstore" EntitySet="webstore" />
@@ -4290,6 +4355,14 @@ warning 6002: The table/view 'shopparazim.dbo.vw_product_attribute' does not hav
           <AssociationSet Name="FK_pcategoryproduct_pcategory" Association="SeoWebAppModel.FK_pcategoryproduct_pcategory">
             <End Role="pcategory" EntitySet="pcategories" />
             <End Role="pcategoryproduct" EntitySet="pcategoryproducts" />
+          </AssociationSet>
+          <EntitySet Name="Clients" EntityType="SeoWebAppModel.Client" />
+          <EntitySet Name="Pictures" EntityType="SeoWebAppModel.Picture" />
+          <EntitySet Name="SocialMedias" EntityType="SeoWebAppModel.SocialMedia" />
+          <EntitySet Name="Widgets" EntityType="SeoWebAppModel.Widget" />
+          <AssociationSet Name="FK_Picture_product" Association="SeoWebAppModel.FK_Picture_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="Picture" EntitySet="Pictures" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="AttributeSelectAll_Result">
@@ -6294,7 +6367,7 @@ warning 6002: The table/view 'shopparazim.dbo.vw_product_attribute' does not hav
           <Property Name="webstore_id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="thumbnail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="promofront" Type="Boolean" Nullable="false" />
@@ -6313,6 +6386,7 @@ warning 6002: The table/view 'shopparazim.dbo.vw_product_attribute' does not hav
           <Property Name="IsSpecial" Type="Boolean" />
           <NavigationProperty Name="pcategoryproducts" Relationship="SeoWebAppModel.FK_pcategoryproduct_product" FromRole="product" ToRole="pcategoryproduct" />
           <NavigationProperty Name="productcategories" Relationship="SeoWebAppModel.FK_productcategory_product" FromRole="product" ToRole="productcategory" />
+          <NavigationProperty Name="Pictures" Relationship="SeoWebAppModel.FK_Picture_product" FromRole="product" ToRole="Picture" />
         </EntityType>
         <EntityType Name="ProductAttributeValue">
           <Key>
@@ -7170,6 +7244,64 @@ warning 6002: The table/view 'shopparazim.dbo.vw_product_attribute' does not hav
             </Principal>
             <Dependent Role="pcategoryproduct">
               <PropertyRef Name="pcategoryFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EnteredOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Alt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ProductFK" Type="Int32" />
+          <NavigationProperty Name="product" Relationship="SeoWebAppModel.FK_Picture_product" FromRole="Picture" ToRole="product" />
+        </EntityType>
+        <EntityType Name="SocialMedia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebstoreId" Type="Int32" />
+          <Property Name="Facebook" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Google" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LinkedIn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AddThis" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Widget">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebstoreId" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Picture_product">
+          <End Type="SeoWebAppModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="SeoWebAppModel.Picture" Role="Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="ProductFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10381,6 +10513,55 @@ warning 6002: The table/view 'shopparazim.dbo.vw_product_attribute' does not hav
               <MappingFragment StoreEntitySet="pcategoryproduct">
                 <ScalarProperty Name="productFK" ColumnName="productFK" />
                 <ScalarProperty Name="pcategoryFK" ColumnName="pcategoryFK" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="SeoWebAppModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="EnteredOn" ColumnName="EnteredOn" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pictures">
+            <EntityTypeMapping TypeName="SeoWebAppModel.Picture">
+              <MappingFragment StoreEntitySet="Picture">
+                <ScalarProperty Name="ProductFK" ColumnName="ProductFK" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Alt" ColumnName="Alt" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SocialMedias">
+            <EntityTypeMapping TypeName="SeoWebAppModel.SocialMedia">
+              <MappingFragment StoreEntitySet="SocialMedia">
+                <ScalarProperty Name="AddThis" ColumnName="AddThis" />
+                <ScalarProperty Name="LinkedIn" ColumnName="LinkedIn" />
+                <ScalarProperty Name="Google" ColumnName="Google" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="WebstoreId" ColumnName="WebstoreId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Widgets">
+            <EntityTypeMapping TypeName="SeoWebAppModel.Widget">
+              <MappingFragment StoreEntitySet="Widget">
+                <ScalarProperty Name="WebstoreId" ColumnName="WebstoreId" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

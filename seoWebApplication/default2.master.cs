@@ -35,17 +35,29 @@ namespace seoWebApplication
             webstoreId = seoWebAppConfiguration.IdWebstore;
 
             SeoWebAppEntities db = new SeoWebAppEntities();
-            var store = (from ws in db.webstores where ws.webstore_id == webstoreId select ws).FirstOrDefault();
-            var idCity = store.city;
-            var city = (from ws in db.cities where ws.idCity == idCity select ws).FirstOrDefault();
-            storeName = store.webstoreName;
-            seoDesc = store.seoDescription + " at "+ storeName;
-            seoKeywords = store.seoKeywords + " at " + storeName;
-            seoTitle = store.seoTitle;
-            address = store.address;
-            city2 = city.city1;
-            phone = Convert.ToInt32(store.ownerNumber);
-            imgLogo = store.image;
+            webstore store;
+            int idCity;
+            city city;
+            try
+            {
+                store = (from ws in db.webstores where ws.webstore_id == webstoreId select ws).FirstOrDefault();
+                idCity = Convert.ToInt32(store.city);
+                city = (from ws in db.cities where ws.idCity == idCity select ws).FirstOrDefault();
+                storeName = store.webstoreName;
+
+                seoDesc = store.seoDescription + " at " + storeName;
+                seoKeywords = store.seoKeywords + " at " + storeName;
+                seoTitle = store.seoTitle;
+                address = store.address;
+                city2 = city.city1;
+                phone = Convert.ToInt32(store.ownerNumber);
+                imgLogo = store.image;
+            }
+            catch {
+            
+            }
+         
+           
             url = HttpContext.Current.Request.Url.AbsoluteUri;
             host = HttpContext.Current.Request.Url.Host;
 

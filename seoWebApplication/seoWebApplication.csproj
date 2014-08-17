@@ -89,6 +89,7 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -1043,13 +1044,18 @@
     <Content Include="Styles\typography.css" />
     <Content Include="Styles\working-on-keyboard.JPG" />
     <Content Include="UserControls\AccordianRestaurantHours.ascx" />
+    <Content Include="UserControls\AdminPictures.ascx" />
     <Content Include="UserControls\CategoriesList.ascx" />
+    <Content Include="UserControls\contact.ascx" />
     <Content Include="UserControls\CuisineList.ascx" />
     <Content Include="UserControls\DeptCategoriesList.ascx" />
     <Content Include="UserControls\MapLocation.ascx" />
     <Content Include="UserControls\MenuList.ascx" />
+    <Content Include="UserControls\Pictures.ascx" />
+    <Content Include="UserControls\PicturesModals.ascx" />
     <Content Include="UserControls\ProductRecommendations.ascx" />
     <Content Include="UserControls\ProductsList.ascx" />
+    <Content Include="UserControls\ProductSpecials.ascx" />
     <Content Include="UserControls\RestaurantDeliveryMap.ascx" />
     <Content Include="UserControls\RestaurantHours.ascx" />
     <Content Include="UserControls\RestaurantMap.ascx" />
@@ -1306,6 +1312,8 @@
     <Compile Include="admin\settings\viewDeliveryZone.aspx.designer.cs">
       <DependentUpon>viewDeliveryZone.aspx</DependentUpon>
     </Compile>
+    <Compile Include="api\SocialMediaController.cs" />
+    <Compile Include="api\WidgetController.cs" />
     <Compile Include="App_Data\SEOBaseEditPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1318,7 +1326,19 @@
     <Compile Include="catalogAccesor.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\Config.cs" />
+    <Compile Include="Common\mvcConfig.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MenuItemController.cs" />
+    <Compile Include="Controllers\PCategoryController.cs" />
+    <Compile Include="Controllers\PCategoryProductController.cs" />
+    <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\ViewBindRouteController.cs" />
+    <Compile Include="Controllers\WebstoreController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1558,12 +1578,26 @@
     <Compile Include="UserControls\AccordianRestaurantHours.ascx.designer.cs">
       <DependentUpon>AccordianRestaurantHours.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\AdminPictures.ascx.cs">
+      <DependentUpon>AdminPictures.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdminPictures.ascx.designer.cs">
+      <DependentUpon>AdminPictures.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\CategoriesList.ascx.cs">
       <DependentUpon>CategoriesList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\CategoriesList.ascx.designer.cs">
       <DependentUpon>CategoriesList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\contact.ascx.cs">
+      <DependentUpon>contact.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\contact.ascx.designer.cs">
+      <DependentUpon>contact.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CuisineList.ascx.cs">
       <DependentUpon>CuisineList.ascx</DependentUpon>
@@ -1593,6 +1627,20 @@
     <Compile Include="UserControls\MenuList.ascx.designer.cs">
       <DependentUpon>MenuList.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Pictures.ascx.cs">
+      <DependentUpon>Pictures.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Pictures.ascx.designer.cs">
+      <DependentUpon>Pictures.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PicturesModals.ascx.cs">
+      <DependentUpon>PicturesModals.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\PicturesModals.ascx.designer.cs">
+      <DependentUpon>PicturesModals.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ProductRecommendations.ascx.cs">
       <DependentUpon>ProductRecommendations.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1606,6 +1654,13 @@
     </Compile>
     <Compile Include="UserControls\ProductsList.ascx.designer.cs">
       <DependentUpon>ProductsList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProductSpecials.ascx.cs">
+      <DependentUpon>ProductSpecials.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProductSpecials.ascx.designer.cs">
+      <DependentUpon>ProductSpecials.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\RestaurantDeliveryMap.ascx.cs">
       <DependentUpon>RestaurantDeliveryMap.ascx</DependentUpon>

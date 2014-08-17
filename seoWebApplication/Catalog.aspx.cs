@@ -141,7 +141,7 @@ namespace seoWebApplication
             }
 
             // Display pager controls
-            Pager1.Show(int.Parse(page), howManyPages, firstPageUrl, pagerFormat, true);
+            //Pager1.Show(int.Parse(page), howManyPages, firstPageUrl, pagerFormat, true);
             Pager2.Show(int.Parse(page), howManyPages, firstPageUrl, pagerFormat, true);
 
         }

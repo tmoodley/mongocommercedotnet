@@ -81,6 +81,11 @@
         <AssociationConnector Association="SeoWebAppModel.FK_productcategory_product" />
         <AssociationConnector Association="SeoWebAppModel.FK_pcategory_pcategory" />
         <AssociationConnector Association="SeoWebAppModel.FK_pcategoryproduct_pcategory" />
+        <EntityTypeShape EntityType="SeoWebAppModel.Client" Width="1.5" PointX="5.375" PointY="1.875" />
+        <EntityTypeShape EntityType="SeoWebAppModel.Picture" Width="1.5" PointX="12" PointY="0.75" />
+        <EntityTypeShape EntityType="SeoWebAppModel.SocialMedia" Width="1.5" PointX="7.375" PointY="1.875" />
+        <EntityTypeShape EntityType="SeoWebAppModel.Widget" Width="1.5" PointX="23.375" PointY="1.875" />
+        <AssociationConnector Association="SeoWebAppModel.FK_Picture_product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

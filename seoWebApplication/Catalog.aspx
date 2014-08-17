@@ -1,9 +1,10 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/default2.Master" AutoEventWireup="true" CodeBehind="Catalog.aspx.cs" Inherits="seoWebApplication.Catalog" Title="MyDinner2Go: Online Ordering" %>
 
-<%@ Register Src="UserControls/ProductsList.ascx" TagName="ProductsList" TagPrefix="uc1" %>
-<%@ Register Src="UserControls/Pager.ascx" TagName="Pager" TagPrefix="uc2" %>
+<%@ Register Src="UserControls/ProductsList.ascx" TagName="ProductsList" TagPrefix="uc1" %> 
 
 <%@ Register Src="UserControls/DeptCategoriesList.ascx" TagName="DeptCategoriesList" TagPrefix="uc3" %>
+<%@ Register Src="~/UserControls/Pager.ascx" TagPrefix="uc1" TagName="Pager" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -69,8 +70,8 @@
 				</div>
 				<div class="span4">
 					<div class="row-fluid print-hide">
-						<div class="span12">
-							 <uc2:Pager ID="Pager2" runat="server" /> 
+						<div class="span12"> 
+                             <uc1:Pager runat="server" id="Pager2" />
 						</div>
 					</div>
 					<div class="row-fluid print-hide">

@@ -13,21 +13,18 @@ namespace seoWebApplication.Data
 {
 
 using System;
+    using System.Collections.Generic;
     
-public partial class AuditSelectByWOId_Result
+public partial class Widget
 {
 
-    public int AuditID { get; set; }
+    public int Id { get; set; }
 
-    public int OrderID { get; set; }
+    public string Name { get; set; }
 
-    public int webstore_id { get; set; }
+    public string Data { get; set; }
 
-    public System.DateTime DateStamp { get; set; }
-
-    public string Message { get; set; }
-
-    public Nullable<int> MessageNumber { get; set; }
+    public Nullable<int> WebstoreId { get; set; }
 
 }
 
