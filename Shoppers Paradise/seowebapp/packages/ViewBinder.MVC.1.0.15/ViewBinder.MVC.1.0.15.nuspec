@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ViewBinder.MVC</id>
+    <version>1.0.15</version>
+    <title>View Binder - FrontEnd Framework For Dynamic Loading Of Views, Standard and custom Event Broadcast and Propagation</title>
+    <authors>Samuel Bamgboye</authors>
+    <owners>Samuel Bamgboye</owners>
+    <licenseUrl>http://opensource.org/licenses/MS-PL</licenseUrl>
+    <projectUrl>https://github.com/contactsamie/ViewBinder</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>FrontEnd Framework For Dynamic Loading Of Views, Standard and custom Event Broadcast and Propagation
+
+After Install, Point your browser to http://[YOUR ROOT]/viewbindersample,
+
+ e.g http://localhost:51163/viewbindersample</description>
+    <summary>This will add in classes and sample view to help yu get started with ViewBinder Framework in your .NET MVC Project
+
+After Install, Point your browser to http://[YOUR ROOT]/viewbindersample,
+
+ e.g</summary>
+    <releaseNotes>&lt;script&gt;
+    typeof require === "function" ? require(["viewbinder"], function(viewbinder) {
+            viewbinder.init({ rootUrl: "viewbinderDemoPartials/" });
+        }) : document.write('&lt;script data-viewbind-init="rootUrl:ViewBindRoute/get?viewName=Views/Partials/" src="/Scripts/viewbinder.min.js"&gt;&lt;\/script&gt;');
+&lt;/script&gt;
+
+may or maynot use with requirejs
+
+After Install, Point your browser to http://[YOUR ROOT]/viewbindersample,
+
+ e.g http://localhost:51163/viewbindersample</releaseNotes>
+    <copyright>samqode.com</copyright>
+    <tags>javascript framework jquery view mvc razor dynamic</tags>
+    <dependencies>
+      <dependency id="jQuery" version="1.9.1" />
+    </dependencies>
+  </metadata>
+</package>
