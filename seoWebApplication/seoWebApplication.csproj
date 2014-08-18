@@ -1422,6 +1422,7 @@
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\Comments.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Departments.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\DeviceLog.cs" />
     <Compile Include="Models\IdentityContext.cs" />
