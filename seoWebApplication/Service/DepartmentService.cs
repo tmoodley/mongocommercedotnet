@@ -35,6 +35,19 @@ namespace seoWebApplication.Service
             }
         }
 
+         public IList<Departments> GetDepartmentsById(int Id)
+         {
+             try
+             {
+                 return _departments.Collection.Find(Query.EQ("webstore_id", Id)).ToList<Departments>();
+                  
+             }
+             catch (MongoConnectionException)
+             {
+                 return new List<Departments>();
+             }
+         }
+
          public Departments GetDepartmentst(string name)
         {
             var post = _departments.Collection.Find(Query.EQ("Name", name)).Single();

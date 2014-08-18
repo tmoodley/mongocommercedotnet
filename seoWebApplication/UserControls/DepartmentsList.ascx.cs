@@ -12,12 +12,15 @@ using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
-using seoWebApplication.st.SharkTankDAL.Framework; 
+using seoWebApplication.st.SharkTankDAL.Framework;
+using seoWebApplication.Service;
+using seoWebApplication.Models; 
 
 namespace seoWebApplication.UserControls
 {
     public partial class DepartmentsList : System.Web.UI.UserControl
     {
+        private DepartmentService _departmentService = new DepartmentService();
         public bool showCategory;
         public int showDeptId;
         public int requestDeptId;
@@ -39,14 +42,10 @@ namespace seoWebApplication.UserControls
             }
            
             
-
-            // CatalogAccess.GetDepartments returns a DataTable object containing
-                // department data, which is read in the ItemTemplate of the DataList
-            using (seowebappDataContextDataContext db = new seowebappDataContextDataContext(dBHelper.GetSeoWebAppConnectionString()))
-            { 
-                list.DataSource = db.departmentSelectByWId(dBHelper.GetWebstoreId());
+             
+                list.DataSource = _departmentService.GetDepartmentsById(dBHelper.GetWebstoreId());
                 list.DataBind();
-            } 
+      
              
         
         }
@@ -55,7 +54,7 @@ namespace seoWebApplication.UserControls
         {
             if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
             {
-                departmentSelectByWIdResult obj = (departmentSelectByWIdResult)(e.Item.DataItem);
+                Departments obj = (Departments)(e.Item.DataItem);
 
                 HyperLink deptHyper = (HyperLink)e.Item.FindControl("deptHyperLink");
 
