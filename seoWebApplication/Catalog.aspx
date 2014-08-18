@@ -29,7 +29,7 @@
                     <div class="span5">
                     </div>
                     <div class="span3">
-                      <uc2:Pager ID="Pager1" runat="server" />  
+                      <uc1:Pager ID="Pager1" runat="server" />  
                     </div>
 					<div class="span4">
                     </div>
