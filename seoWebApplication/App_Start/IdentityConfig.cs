@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using AspNet.Identity.MongoDB;
+using seoWebApplication.Framework;
 
 namespace seoWebApplication.Models
 {
@@ -49,13 +50,17 @@ namespace seoWebApplication.Models
             {
                 MessageFormat = "Your security code is: {0}"
             });
+
+          
+              
             manager.RegisterTwoFactorProvider("EmailCode", new EmailTokenProvider<ApplicationUser>
             {
                 Subject = "SecurityCode",
                 BodyFormat = "Your security code is {0}"
             });
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
+
+            manager.EmailService = new EmailService(); 
+
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
@@ -140,6 +145,7 @@ namespace seoWebApplication.Models
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
+            emailSend.send(message.Destination, message.Subject, message.Body);
             return Task.FromResult(0);
         }
     }

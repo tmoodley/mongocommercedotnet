@@ -1411,7 +1411,8 @@
     <Compile Include="FBHandler.ashx.cs">
       <DependentUpon>FBHandler.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Framework\emailService.cs" />
+    <Compile Include="Framework\emailSend.cs" />
+    <Compile Include="Framework\EmailService.cs" />
     <Compile Include="Framework\phasher.cs" />
     <Compile Include="Framework\ResultHelper.cs" />
     <Compile Include="Global.asax.cs">
@@ -2164,6 +2165,11 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\ShowMenu.cshtml" />
+    <Content Include="Views\Shared\_PartialMenuItem.cshtml" />
+    <Content Include="Views\Shared\_LayoutKendo.cshtml" />
+    <Content Include="Views\Shared\_BasePartial.cshtml" />
     <None Include="Web References\com.shade4sale\authenticateUser.disco" />
     <None Include="Web References\com.shade4sale\authenticateUser.wsdl" />
     <None Include="Web References\com.shade4sale\Product.datasource">

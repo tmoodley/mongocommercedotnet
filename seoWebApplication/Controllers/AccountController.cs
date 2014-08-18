@@ -72,6 +72,17 @@ namespace seoWebApplication.Controllers
                 return View(model);
             }
 
+            // Require the user to have a confirmed email before they can log on.
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user != null)
+            {
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    ViewBag.errorMessage = "You must have a confirmed email to log on.";
+                    return View("Error");
+                }
+            }
+
             // This doen't count login failures towards lockout only two factor authentication
             // To enable password failures to trigger lockout, change to shouldLockout: true
             var result = await SignInHelper.PasswordSignIn(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -82,11 +93,13 @@ namespace seoWebApplication.Controllers
                 case seoWebApplication.Models.SignInStatus.LockedOut:
                     return View("Lockout");
                 case seoWebApplication.Models.SignInStatus.RequiresTwoFactorAuthentication:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case seoWebApplication.Models.SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+
+
             }
         }
 
@@ -104,7 +117,7 @@ namespace seoWebApplication.Controllers
             if (user != null)
             {
                 // To exercise the flow without actually sending codes, uncomment the following line
-                ViewBag.Status = "For DEMO purposes the current " + provider + " code is: " + await UserManager.GenerateTwoFactorTokenAsync(user.Id, provider);
+                //ViewBag.Status = "For DEMO purposes the current " + provider + " code is: " + await UserManager.GenerateTwoFactorTokenAsync(user.Id, provider);
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl });
         }
@@ -156,7 +169,11 @@ namespace seoWebApplication.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                  
                 if (result.Succeeded)
-                { 
+                {
+
+                    //  Comment the following line to prevent log in until the user is confirmed.
+                    await SignInHelper.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                      
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account",
                        new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
@@ -164,7 +181,15 @@ namespace seoWebApplication.Controllers
                        "Confirm your account", "Please confirm your account by clicking <a href=\""
                        + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+
+                    // Uncomment to debug locally 
+                    // TempData["ViewBagLink"] = callbackUrl;
+
+                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                                    + "before you can log in.";
+
+                    //return View("Info");
+                    return RedirectToAction("Index", "Home"); 
                 }
                 AddErrors(result);
             }
@@ -321,6 +346,8 @@ namespace seoWebApplication.Controllers
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl });
         }
+
+
 
         //
         // GET: /Account/ExternalLoginCallback
