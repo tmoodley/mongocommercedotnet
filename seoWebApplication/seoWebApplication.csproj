@@ -1388,6 +1388,7 @@
     <Compile Include="Controllers\PCategoryController.cs" />
     <Compile Include="Controllers\PCategoryProductController.cs" />
     <Compile Include="Controllers\PictureController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SubscribeController.cs" />
@@ -1434,6 +1435,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Images.cs" />
+    <Compile Include="Models\Products.cs" />
     <Compile Include="Models\Comments.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Categories.cs" />
@@ -1518,6 +1521,7 @@
     </Compile>
     <Compile Include="Service\CompanyService.cs" />
     <Compile Include="Service\CategoriesService.cs" />
+    <Compile Include="Service\ProductService.cs" />
     <Compile Include="Service\DepartmentService.cs" />
     <Compile Include="Service\DeviceLogService.cs" />
     <Compile Include="Service\DeviceService.cs" />
@@ -2198,6 +2202,11 @@
     <Content Include="Views\Category\Details.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
     <None Include="Web References\com.shade4sale\authenticateUser.disco" />
     <None Include="Web References\com.shade4sale\authenticateUser.wsdl" />
     <None Include="Web References\com.shade4sale\Product.datasource">
