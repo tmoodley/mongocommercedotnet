@@ -14,12 +14,15 @@ using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.Framework;  
 using System.IO;
+using seoWebApplication.Service;
+using seoWebApplication.Models;
  
 
 namespace seoWebApplication.UserControls
 {
     public partial class CategoriesList : System.Web.UI.UserControl
     {
+        private CategoriesService _categoriesService = new CategoriesService();
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -31,14 +34,8 @@ namespace seoWebApplication.UserControls
                 {
                     try
                     {
-                        // CatalogAccess.GetDepartments returns a DataTable object containing
-                        // department data, which is read in the ItemTemplate of the DataList
-                        using (var dc = new seowebappDataContext())
-                        {
-                            list.DataSource = dc.CatalogGetCategoriesIndepartment(Convert.ToInt32(department_id));
-                            list.DataBind();
-
-                        }
+                            list.DataSource = _categoriesService.GetCategoriesById(Convert.ToInt32(department_id));
+                            list.DataBind(); 
                     }
                     catch (Exception ex)
                     {
@@ -55,15 +52,15 @@ namespace seoWebApplication.UserControls
             if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
             {
 
-                CatalogGetCategoriesIndepartmentResult obj = (CatalogGetCategoriesIndepartmentResult)(e.Item.DataItem);
+                Categories obj = (Categories)(e.Item.DataItem);
                 string department_id = Request.QueryString["department_id"];
                 string category_id = Request.QueryString["category_id"];
                 HyperLink catHyper = (HyperLink)e.Item.FindControl("catHyperLink");
 
                 catHyper.CssClass = "class_menuitem_categorytype";
                 catHyper.NavigateUrl = LinkMaker.ToCategory(department_id.ToString(), obj.category_id.ToString());
-                catHyper.Text = HttpUtility.HtmlEncode(obj.name.ToString());
-                catHyper.ToolTip = HttpUtility.HtmlEncode(obj.description.ToString());
+                catHyper.Text = HttpUtility.HtmlEncode(obj.Name.ToString());
+                catHyper.ToolTip = HttpUtility.HtmlEncode(obj.Description.ToString());
 
                 var liCatView = e.Item.FindControl("liCatView") as HtmlGenericControl;
 
