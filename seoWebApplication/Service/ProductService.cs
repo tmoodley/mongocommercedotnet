@@ -44,7 +44,7 @@ namespace seoWebApplication.Service
              }
              catch (MongoConnectionException)
              {
-                 return new List<Products>();
+                 return new List<Products>();//
              }
          }
 
