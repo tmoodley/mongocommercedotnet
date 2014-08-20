@@ -1993,7 +1993,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="adminMstr.Master" />
-    <Content Include="packages.config" />
     <Content Include="FBHandler.ashx" />
     <Content Include="content\fonts\font-awesome\fontawesome-webfont.eot" />
     <Content Include="content\fonts\font-awesome\fontawesome-webfont.ttf" />
