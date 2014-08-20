@@ -89,9 +89,6 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\seoWebApplication.Admin\seoWebApplication.Admin.csproj">
       <Project>{CB6B3DB4-13E5-4655-B824-6616D6C791CB}</Project>
       <Name>seoWebApplication.Admin</Name>

@@ -1747,7 +1747,6 @@
     <Folder Include="js\libs\bootstrap\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
