@@ -8,7 +8,7 @@
 
 <%@ Register src="UserControls/ProductCustomAttributes.ascx" tagname="ProductCustomAttributes" tagprefix="uc4" %>
 <%@ Register Src="~/UserControls/contact.ascx" TagPrefix="uc1" TagName="contact" %>
-<%@ Register Src="~/UserControls/Pictures.ascx" TagPrefix="uc1" TagName="Pictures" %>
+ 
 <%@ Register Src="~/UserControls/PicturesModals.ascx" TagPrefix="uc1" TagName="PicturesModals" %>
 
 
@@ -33,7 +33,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server"> 
      <div class="row-fluid"> 
         <div class="span2">
-        <uc1:Pictures runat="server" id="Pictures" />
+         
         </div> 
         <div class="span2 img-thumbnail" style="width: 550px"><div class="paperShadow shadow-left">
             <asp:Image ID="productImage" runat="server" Height="75%" Width="100%" CssClass="img-thumbnail" /></div> 
