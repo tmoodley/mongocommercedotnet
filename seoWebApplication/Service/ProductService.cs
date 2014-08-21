@@ -66,5 +66,11 @@ namespace seoWebApplication.Service
             var post = _product.Collection.Find(Query.EQ("Name", name)).Single(); 
             return post;
         }
+
+         public Products GetProduct(string Id)
+         {
+             var post = _product.Collection.Find(Query.EQ("product_id", Id)).Single();
+             return post;
+         }
     }
 }

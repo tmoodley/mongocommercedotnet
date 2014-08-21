@@ -13,11 +13,14 @@ using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
+using seoWebApplication.Service;
+using seoWebApplication.Models;
  
 namespace seoWebApplication
 {
     public class catalogAccesor
     {
+        
         static catalogAccesor()
         {
             //
@@ -163,34 +166,22 @@ namespace seoWebApplication
         // Get product details
         public static ProductDetails GetProductDetails(string product_id)
         {
-            // get a configured DbCommand object
-            DbCommand comm = GenericDataAccessor.CreateCommand();
-            // set the stored procedure name
-            comm.CommandText = "CatalogGetProductDetails";
-            // create a new parameter
-            DbParameter param = comm.CreateParameter();
-            param.ParameterName = "@product_id";
-            param.Value = product_id;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // execute the stored procedure
-            DataTable table = GenericDataAccessor.ExecuteSelectCommand(comm);
+             
             // wrap retrieved data into a ProductDetails object
             ProductDetails details = new ProductDetails();
-            if (table.Rows.Count > 0)
-            {
-                // get the first table row
-                DataRow dr = table.Rows[0];
-                // get product details
-                details.product_id = int.Parse(product_id);
-                details.name = dr["name"].ToString();
-                details.description = dr["description"].ToString();
-                details.price = Decimal.Parse(dr["price"].ToString());
-                details.thumbnail = dr["thumbnail"].ToString();
-                details.image = dr["image"].ToString();
-                details.promofront = bool.Parse(dr["promofront"].ToString());
-                details.promodept = bool.Parse(dr["promodept"].ToString());
-            }
+             
+            ProductService _productService = new ProductService();
+            Products dr =_productService.GetProduct(product_id);
+
+            details.product_id = int.Parse(product_id);
+            details.name = dr.name.ToString();
+            details.description = dr.description.ToString();
+            details.price = Decimal.Parse(dr.price.ToString());
+            details.thumbnail = dr.thumbnail.ToString();
+            details.image = dr.image.ToString();
+            details.promofront = bool.Parse(dr.promofront.ToString());
+            details.promodept = bool.Parse(dr.promodept.ToString());
+
             // return department details
             return details;
         }

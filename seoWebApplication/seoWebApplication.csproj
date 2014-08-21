@@ -1439,7 +1439,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\Images.cs" />
-    <Compile Include="Models\Products.cs" />
     <Compile Include="Models\Comments.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Categories.cs" />
@@ -1451,6 +1450,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\Products.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Results.cs" />
     <Compile Include="Models\Subscribe.cs" />
