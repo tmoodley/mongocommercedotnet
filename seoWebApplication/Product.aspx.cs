@@ -40,12 +40,12 @@ namespace seoWebApplication
             if (!IsPostBack)
             {
                 // Retrieve product_id from the query string
-                string product_id = Request.QueryString["product_id"];
+                string product_id = Request.QueryString["idproduct"];
 
                 try
                 {
-                    this.Pictures.LoadProductPictures(Convert.ToInt32(product_id));
-                    this.PicturesModals.LoadProductModals(Convert.ToInt32(product_id));
+                    //this.Pictures.LoadProductPictures(Convert.ToInt32(product_id));
+                    //this.PicturesModals.LoadProductModals(Convert.ToInt32(product_id));
                     webstoreId = seoWebAppConfiguration.IdWebstore;
                     url = seoWebApplication.Linkor.ToProduct(product_id).ToString();
                     host = HttpContext.Current.Request.Url.Host;

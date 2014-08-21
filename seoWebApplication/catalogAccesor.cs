@@ -181,6 +181,7 @@ namespace seoWebApplication
             details.image = dr.image.ToString();
             details.promofront = bool.Parse(dr.promofront.ToString());
             details.promodept = bool.Parse(dr.promodept.ToString());
+          
 
             // return department details
             return details;
