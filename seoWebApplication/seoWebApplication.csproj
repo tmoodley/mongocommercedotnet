@@ -890,6 +890,7 @@
     <Content Include="font\FontAwesome.otf" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="app.config" />
+    <Content Include="defaultproduct.master" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1425,6 +1426,13 @@
     </Compile>
     <Compile Include="default2.master.designer.cs">
       <DependentUpon>default2.master</DependentUpon>
+    </Compile>
+    <Compile Include="defaultproduct.master.cs">
+      <DependentUpon>defaultproduct.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="defaultproduct.master.designer.cs">
+      <DependentUpon>defaultproduct.master</DependentUpon>
     </Compile>
     <Compile Include="FBHandler.ashx.cs">
       <DependentUpon>FBHandler.ashx</DependentUpon>

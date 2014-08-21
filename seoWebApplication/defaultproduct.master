@@ -1,0 +1,163 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="defaultproduct.master.cs" Inherits="seoWebApplication._defaultproduct" %>
+<%@ Register Src="UserControls/SearchBox.ascx" TagName="SearchBox" TagPrefix="uc3" %>
+<%@ Register Src="UserControls/CartSummary.ascx" TagName="CartSummary" TagPrefix="uc4" %>
+<%@ Register Src="~/UserControls/DepartmentsList.ascx" TagPrefix="uc3" TagName="DepartmentsList" %>
+<%@ Register Src="~/UserControls/SearchBox.ascx" TagPrefix="uc4" TagName="SearchBox" %>
+<%@ Register Src="~/UserControls/CartSummary.ascx" TagPrefix="uc3" TagName="CartSummary" %>
+<%@ Register Src="~/UserControls/CategoriesList.ascx" TagPrefix="uc3" TagName="CategoriesList" %>
+<%@ Register Src="~/UserControls/DeptCategoriesList.ascx" TagPrefix="uc3" TagName="DeptCategoriesList" %>
+<%@ Register Src="~/UserControls/ProductSpecials.ascx" TagPrefix="uc3" TagName="ProductSpecials" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head id="Head1" runat="server">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><%=seoTitle + " at " + storeName%></title>
+    <meta name="description" content="<%= "" + seoDesc %>">
+    <meta name="keywords" content="<%= "" + seoKeywords %>">
+    
+	
+    <meta name="robots" content="INDEX,FOLLOW">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=McLaren">
+    <link href="style.css" rel="stylesheet" />
+    <link href="Styles/bootstrap-responsive.css" rel="stylesheet" /> 
+    <link rel='stylesheet prefetch' href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+    <script src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'>
+    <script src="Styles/modernizr-2.6.2.min.js"></script> 
+    <script src="Styles/respond.min.js"></script>
+     <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.rtl.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.silver.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.silver.mobile.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.dataviz.silver.min.css" rel="stylesheet" />
+
+   
+    <script src="http://cdn.kendostatic.com/2014.1.416/js/kendo.all.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2014.1.416/js/kendo.timezones.min.js"></script>
+
+
+     <!--[if IE 7]>
+<link href="http://www.shoppersparadisezim.com/Themes/Bootstrap/Styles/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+   
+    <!--[if lt IE 9]>
+<script src="http://www.shoppersparadisezim.com/Themes/Bootstrap/scripts/html5shiv.js" type="text/javascript"></script>
+<![endif]-->
+    <!--[if lt IE 9]>
+<script src="http://www.shoppersparadisezim.com/Themes/Bootstrap/scripts/respond.min.js" type="text/javascript"></script>
+<![endif]-->
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <!-- Facebook div for like button -->
+         
+            <div id="fb-root"></div>
+<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=741995452511167";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+            
+       
+
+        <!-- Div for shade line -->
+        <div class="header-shadow"></div>
+
+        <!-- Use class "container-fluid" on the following div for making complete website fluid -->
+        <div class="container">
+
+            <div class="row-fluid print-show">
+                <div class="span12">
+                    Alternate header for print version
+                </div>
+            </div>
+
+            <div class="row-fluid print-hide">
+                <div class="span3">
+                    <div class="header-action">
+                        <span class="label label-info"><%=address%>, <%=city2%> Phone: <%=phone%></span>
+                    </div>
+                </div>
+                <div class="span5"><uc4:SearchBox runat="server" ID="SearchBox" /></div>
+                <div class="span1"> 
+                            <div class="social-icons pull-right">
+                                <asp:ContentPlaceHolder ID="ContentPlaceHolderSoMed" runat="server">
+                                </asp:ContentPlaceHolder> 
+                            </div> 
+                </div>
+            </div>
+             
+            <div class="row-fluid print-hide"> 
+                    <ul class="navbar main-nav" role="navigation">
+                    <ul class="nav navbar-nav">
+                        <li>
+                     <%if(imgLogo.Length > 0) %>
+                     <%{%>
+                   <img src="<%=imgLogo%>" alt="<%=seoTitle%> at <%=storeName %>" style="width: 200px;"/>    
+                     <%}%>  
+                    <%else%>  
+                     <%{%> 
+                   <span class="label label-info"><h1><%=storeName %> </h1> </span>
+                   <span class="label label-info"><%=seoTitle%></span>
+                     <%}%> 
+                    </li>
+                    <uc3:DepartmentsList runat="server" ID="DepartmentsList1" />
+                   
+                   </ul>  
+                   </div>
+               
+            </div>
+             
+
+            <hr>
+            
+            <div class="row-fluid print-hide">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            </div>
+            <div class="row-fluid"> 
+                <div class="span2"></div>
+                 <div class="span5">
+                    <div class="fb-comments" data-href="<%= "" + url %>" data-numposts="5" data-colorscheme="light"></div>
+                </div>
+                
+            </div>
+           
+             
+                 <div class="row-fluid">
+                <div class="span12 well well-small">
+                    &copy;
+                    <script>document.write(new Date().getFullYear());</script>
+                    - Powered By - <a href="http://www.Shoppersparadise.co.zw">Shoppersparadise.co.zw <i class="icon-chevron-right"></i></a>
+                </div>
+            </div>
+
+            <div class="footer">
+
+                <div class="row-fluid print-hide">
+                     
+
+                </div>
+
+                <div class="row-fluid print-show">
+                    <div class="span12">
+           <%--             Alternate footer for print version--%>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</body>
+</html>
