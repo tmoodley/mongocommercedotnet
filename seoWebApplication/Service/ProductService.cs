@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
-using MongoDB.Driver.Builders;
+using MongoDB.Driver.Builders; 
+using MongoDB.Driver.Linq;
 using seoWebApplication.DAL;
 using seoWebApplication.Models;
 using System;
@@ -69,8 +70,12 @@ namespace seoWebApplication.Service
 
          public Products GetProduct(string Id)
          {
-             var post = _product.Collection.Find(Query.EQ("product_id", Id)).Single();
-             return post;
+             int _Id = Convert.ToInt32(Id);
+             seoWebApplication.Models.Products query = (from e in _product.Collection.AsQueryable<Products>()
+                                                        where e.product_id == _Id
+                                                        select e).First();
+
+             return query;
          }
     }
 }
