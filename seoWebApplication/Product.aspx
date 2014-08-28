@@ -47,7 +47,7 @@
             <asp:Label ID="descriptionLabel" runat="server" Text="Label"></asp:Label> <br />
                 <br />
                 <br />
-                   
+            <asp:CheckBox ID="isActive" runat="server" />       
             <right><asp:Label CssClass="ProductPrice" ID="priceLabel" runat="server" Text=""></asp:Label></right>
             <br />  
             <uc4:ProductCustomAttributes ID="ProductCustomAttributes1" runat="server" />

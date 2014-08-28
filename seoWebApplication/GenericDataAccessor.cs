@@ -57,6 +57,7 @@ namespace seoWebApplication
             public string image;
             public bool promofront;
             public bool promodept;
+            public bool isActive;
         }
         public class GenericDataAccessor
             

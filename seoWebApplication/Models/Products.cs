@@ -31,6 +31,8 @@ namespace seoWebApplication.Models
         public bool promofront { get; set; }
          [BsonElement("promodept")]
         public bool promodept { get; set; }
+         [BsonElement("IsActive")]
+         public bool IsActive { get; set; }
          [BsonElement("defaultAttribute")]
         public bool defaultAttribute { get; set; }
          [BsonElement("defaultAttCat")]

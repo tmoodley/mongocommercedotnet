@@ -6,7 +6,9 @@
 <%@ Register Src="~/UserControls/CartSummary.ascx" TagPrefix="uc3" TagName="CartSummary" %>
 <%@ Register Src="~/UserControls/CategoriesList.ascx" TagPrefix="uc3" TagName="CategoriesList" %>
 <%@ Register Src="~/UserControls/DeptCategoriesList.ascx" TagPrefix="uc3" TagName="DeptCategoriesList" %>
- 
+<%@ Register Src="~/UserControls/CustomerDetailsEdit.ascx" TagPrefix="uc3" TagName="CustomerDetailsEdit" %>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head id="Head1" runat="server">
@@ -210,6 +212,7 @@
                             <uc3:CategoriesList runat="server" ID="CategoriesList" />
 						</div>
 					</div>
+ 
 
 					
 

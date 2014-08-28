@@ -97,7 +97,7 @@ namespace seoWebApplication
         descriptionLabel.Text = pd.description;
         priceLabel.Text += String.Format("{0:c}", pd.price);
         price = String.Format("{0:c}", pd.price);
-
+        this.isActive.Checked = pd.isActive;
         string fileName = pd.image;
         if (fileName.Length <= 0)
         {
