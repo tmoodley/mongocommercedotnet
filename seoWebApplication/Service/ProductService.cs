@@ -12,6 +12,7 @@ namespace seoWebApplication.Service
 {
     public class ProductService
     {
+        
         private readonly MongoHelper<Products> _product;
          public ProductService()
         {
@@ -19,7 +20,7 @@ namespace seoWebApplication.Service
         }
 
          public void Create(Products product)
-        {
+        { 
             _product.Collection.Insert(product);
         }
 

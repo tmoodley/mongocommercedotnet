@@ -7,9 +7,17 @@
     public static class seoWebAppConfiguration
     {
         // Caches the connection string
-        private static string dbConnectionString;
+        private readonly static bool useDocumentDb;
+        // Caches the connection string
+        private readonly static bool useRavenDb;
+        // Caches the connection string
+        private readonly static bool useMongoDb;
+        // Caches the connection string
+        private readonly static bool useSqlServerDb;
+        // Caches the connection string
+        private readonly static string dbConnectionString;
         // Caches the data provider name
-        private static string dbProviderName;
+        private readonly static string dbProviderName;
         // Store the number of products per page
         private readonly static int productsPerPage;
         // Store the product description length for product lists
@@ -20,6 +28,11 @@
         private readonly static string siteName;
         static seoWebAppConfiguration()
         {
+            useDocumentDb = System.Boolean.Parse(ConfigurationManager.AppSettings["UseDocumentDb"]);
+            useRavenDb = System.Boolean.Parse(ConfigurationManager.AppSettings["UseRavenDb"]);
+            useMongoDb = System.Boolean.Parse(ConfigurationManager.AppSettings["UseMongoDb"]);
+            useSqlServerDb = System.Boolean.Parse(ConfigurationManager.AppSettings["UseSqlServerDb"]);
+            
             idWebstore = System.Int32.Parse(ConfigurationManager.AppSettings["idSeoWebstore"]);
             dbConnectionString = ConfigurationManager.ConnectionStrings["SeoWebAppConnString"].ConnectionString;
             dbProviderName = ConfigurationManager.ConnectionStrings["SeoWebAppConnString"].ProviderName;
@@ -27,7 +40,34 @@
             productDescriptionLength = System.Int32.Parse(ConfigurationManager.AppSettings["ProductDescriptionLength"]);
             siteName = ConfigurationManager.AppSettings["SiteName"];
         }
-        // Returns the connection string for the BalloonShop database
+        public static bool UseDocumentDb
+        {
+            get
+            {
+                return useDocumentDb;
+            }
+        }
+        public static bool UseRavenDb
+        {
+            get
+            {
+                return useRavenDb;
+            }
+        }
+        public static bool UseMongoDb
+        {
+            get
+            {
+                return useMongoDb;
+            }
+        }
+        public static bool UseSqlServerDb
+        {
+            get
+            {
+                return useSqlServerDb;
+            }
+        }
         public static int IdWebstore
         {
             get

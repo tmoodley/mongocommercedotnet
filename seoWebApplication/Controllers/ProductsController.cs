@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using seoWebApplication.Data;
+using seoWebApplication.DocumentDbServices;
 
 namespace seoWebApplication.Controllers
 {
@@ -17,7 +18,16 @@ namespace seoWebApplication.Controllers
         // GET: /Products/
         public ActionResult Index()
         {
-            return View(db.products.ToList());
+            List<seoWebApplication.Data.product> list = new List<seoWebApplication.Data.product>();
+            if (seoWebAppConfiguration.UseDocumentDb)
+            {
+               list = ProductsService.GetProducts();
+            }
+            else if (seoWebAppConfiguration.UseSqlServerDb)
+            {
+                list = db.products.ToList();
+            }
+            return View(list);
         }
         
 
@@ -51,8 +61,14 @@ namespace seoWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (seoWebAppConfiguration.UseDocumentDb) {
+                      ProductsService.CreateItemAsync(product);
+                }
+                else if (seoWebAppConfiguration.UseSqlServerDb) { 
                 db.products.Add(product);
                 db.SaveChanges();
+                }
+                
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +82,16 @@ namespace seoWebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            seoWebApplication.Data.product product = db.products.Find(id);
+            seoWebApplication.Data.product product = new seoWebApplication.Data.product();
+            if (seoWebAppConfiguration.UseDocumentDb)
+            {
+                product = ProductsService.GetProduct(product.product_id.ToString());
+            }
+            else if (seoWebAppConfiguration.UseSqlServerDb)
+            {
+                product = db.products.Find(id);
+           
+            }
             if (product == null)
             {
                 return HttpNotFound();
@@ -83,8 +108,16 @@ namespace seoWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                if (seoWebAppConfiguration.UseDocumentDb)
+                {
+                    ProductsService.UpdateProductAsync(product);
+                }
+                else if (seoWebAppConfiguration.UseSqlServerDb)
+                {
+                    db.Entry(product).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+               
                 return RedirectToAction("Index");
             }
             return View(product);

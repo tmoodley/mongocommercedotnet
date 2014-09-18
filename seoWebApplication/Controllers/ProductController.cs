@@ -15,24 +15,50 @@ namespace seoWebApplication.Controllers
     {
         private SeoWebAppEntities db = new SeoWebAppEntities();
         private ProductService _productService = new ProductService();
+        private seoWebApplication.DocumentDbServices.ProductService pDService = new seoWebApplication.DocumentDbServices.ProductService();
+        
+                // GET: /Product/
+        
         // GET: /Product/
         public ActionResult Index()
         {
+            pDService.GetProducts();
+
             foreach (seoWebApplication.Data.product prod in db.products)
             {
-                Models.Products prods = new Models.Products();
-                prods.product_id = prod.product_id;
-                prods.name = prod.name;
-                prods.description = prod.description;
-                prods.defaultAttCat = prod.defaultAttCat;
-                prods.defaultAttribute = prod.defaultAttribute;
-                prods.image = prod.image;
-                prods.price = prod.price;
-                prods.promodept = prod.promodept;
-                prods.promofront = prod.promofront;
-                prods.thumbnail = prod.thumbnail;
-                prods.webstore_id = prod.webstore_id;
-                _productService.Create(prods);
+                if (seoWebAppConfiguration.UseMongoDb)
+                {
+                    Models.Products prods = new Models.Products();
+                    prods.product_id = prod.product_id;
+                    prods.name = prod.name;
+                    prods.description = prod.description;
+                    prods.defaultAttCat = prod.defaultAttCat;
+                    prods.defaultAttribute = prod.defaultAttribute;
+                    prods.image = prod.image;
+                    prods.price = prod.price;
+                    prods.promodept = prod.promodept;
+                    prods.promofront = prod.promofront;
+                    prods.thumbnail = prod.thumbnail;
+                    prods.webstore_id = prod.webstore_id;               
+                     _productService.Create(prods);
+                }
+
+                if (seoWebAppConfiguration.UseDocumentDb)
+                {
+                    seoWebApplication.DocumentDbModels.Products prods = new seoWebApplication.DocumentDbModels.Products();
+                    prods.product_id = prod.product_id;
+                    prods.name = prod.name;
+                    prods.description = prod.description;
+                    prods.defaultAttCat = prod.defaultAttCat;
+                    prods.defaultAttribute = prod.defaultAttribute;
+                    prods.image = prod.image;
+                    prods.price = prod.price;
+                    prods.promodept = prod.promodept;
+                    prods.promofront = prod.promofront;
+                    prods.thumbnail = prod.thumbnail;
+                    prods.webstore_id = prod.webstore_id;
+                    pDService.Create(prods);
+                }
             }
             return View(db.products.ToList());
         }

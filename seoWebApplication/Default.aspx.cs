@@ -14,6 +14,7 @@ using System.Xml.Linq;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.Framework;
+using seoWebApplication.DAL;
 
 
 namespace seoWebApplication
@@ -22,6 +23,8 @@ namespace seoWebApplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CreateDocumentDb.CreateDb();
+
             this.Title = seoWebAppConfiguration.SiteName;
 
             // Retrieve Page from the query string

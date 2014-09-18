@@ -95,6 +95,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Azure.Documents.Client">
+      <HintPath>..\packages\Microsoft.Azure.Documents.Client.0.9.0-preview\lib\net40\Microsoft.Azure.Documents.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -891,6 +894,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="app.config" />
     <Content Include="defaultproduct.master" />
+    <Content Include="packages.config" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1386,6 +1390,7 @@
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\DeviceLogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuItemController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
@@ -1402,7 +1407,13 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ViewBindRouteController.cs" />
     <Compile Include="Controllers\WebstoreController.cs" />
+    <Compile Include="DAL\DocumentDBRepository.cs" />
+    <Compile Include="DAL\GetDocumentDb.cs" />
+    <Compile Include="DAL\CreateDocumentDb.cs" />
+    <Compile Include="DAL\CreateDocumentDbConn.cs" />
     <Compile Include="DAL\GenerateSlug.cs" />
+    <Compile Include="DAL\DocumentDBHelper.cs" />
+    <Compile Include="DAL\GetOrCreateCollection.cs" />
     <Compile Include="DAL\MongoHelper.cs" />
     <Compile Include="DAL\NoteDal.cs" />
     <Compile Include="DAL\SubscriberDal.cs" />
@@ -1435,6 +1446,11 @@
     <Compile Include="defaultproduct.master.designer.cs">
       <DependentUpon>defaultproduct.master</DependentUpon>
     </Compile>
+    <Compile Include="DocumentDbModels\Products.cs" />
+    <Compile Include="DocumentDbModels\Item.cs" />
+    <Compile Include="DocumentDbServices\DocumentDBFactory.cs" />
+    <Compile Include="DocumentDbServices\ProductService.cs" />
+    <Compile Include="DocumentDbServices\ProductsService.cs" />
     <Compile Include="FBHandler.ashx.cs">
       <DependentUpon>FBHandler.ashx</DependentUpon>
     </Compile>
@@ -2223,6 +2239,9 @@
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Item\Create.cshtml" />
+    <Content Include="Views\Item\Edit.cshtml" />
+    <Content Include="Views\Item\Index.cshtml" />
     <None Include="Web References\com.shade4sale\authenticateUser.disco" />
     <None Include="Web References\com.shade4sale\authenticateUser.wsdl" />
     <None Include="Web References\com.shade4sale\Product.datasource">
