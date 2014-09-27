@@ -10,7 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head id="Head1" runat="server">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title><%=seoTitle + " at " + storeName%></title>
     <meta name="description" content="<%= "" + seoDesc %>">
@@ -18,44 +18,52 @@
     
 	
     <meta name="robots" content="INDEX,FOLLOW">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=McLaren">
-    <link href="style.css" rel="stylesheet" />
-    <link href="Styles/bootstrap-responsive.css" rel="stylesheet" /> 
-    <link rel='stylesheet prefetch' href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'>
-    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
-    <script src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js'>
-    <script src="Styles/modernizr-2.6.2.min.js"></script> 
-    <script src="Styles/respond.min.js"></script>
-     <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.common.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.rtl.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.silver.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.silver.mobile.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.dataviz.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.dataviz.silver.min.css" rel="stylesheet" />
-
-   
-    <script src="http://cdn.kendostatic.com/2014.1.416/js/kendo.all.min.js"></script>
-    <script src="http://cdn.kendostatic.com/2014.1.416/js/kendo.timezones.min.js"></script>
-
-
-     <!--[if IE 7]>
-<link href="http://www.shoppersparadisezim.com/Themes/Bootstrap/Styles/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
-<![endif]-->
-   
-    <!--[if lt IE 9]>
-<script src="http://www.shoppersparadisezim.com/Themes/Bootstrap/scripts/html5shiv.js" type="text/javascript"></script>
-<![endif]-->
-    <!--[if lt IE 9]>
-<script src="http://www.shoppersparadisezim.com/Themes/Bootstrap/scripts/respond.min.js" type="text/javascript"></script>
-<![endif]-->
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/flexslider.css">
+    <link rel="stylesheet" href="css/typicons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Petrona' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,100,300,400,700,900' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="images/page_images/haletabimage.ico">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
 
-        <!-- Facebook div for like button -->
+        <div id="loader">
+            <div id="progress-bar"></div>
+        </div>
+        <a id="home-nav"></a>
+        <section id="nav">
+
+	<div class="row">
+		<div class="large-4 columns text-right width375">
+              <%if(imgLogo.Length > 0) %>
+                     <%{%>
+                   <img src="<%=imgLogo%>" alt="<%=seoTitle%> at <%=storeName %>" style="width: 200px;"/>    
+                     <%}%>  
+                    <%else%>  
+                     <%{%> 
+                   <span class="label label-info"><h1><%=storeName %> </h1> </span>
+                   <span class="label label-info"><%=seoTitle%></span>
+                     <%}%> 
+			<ul class="navigation hide-for-small">
+				<li><a class="scroll" href="#highlights-nav">KEEP HEALTHY</a></li>
+                <li><a class="scroll" href="#info-nav">HOW</a></li>
+                <!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> -->
+                
+			</ul>
+             <div class="span5"><uc4:SearchBox runat="server" ID="SearchBox" /></div>
+                <div class="span1"> 
+                            <div class="social-icons pull-right">
+                                <asp:ContentPlaceHolder ID="ContentPlaceHolderSoMed" runat="server">
+                                </asp:ContentPlaceHolder> 
+                            </div> 
+                </div>
+               <!-- Facebook div for like button -->
          
             <div id="fb-root"></div>
 <script>(function (d, s, id) {
@@ -65,61 +73,42 @@
     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=741995452511167";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-            
+		</div>
+		
+		<div class="large-3 columns text-center">
+			<a class="home-link scroll" href="#home-nav"><div id="hale-logo">Hale</div></a>
+		</div>
+		
+		<div class="large-4 columns text-left width375">
+			<ul class="navigation hide-for-small">
+				<li><a class="scroll" href="#work-nav">FLAVORS</a></li>
+                <li><a class="scroll" href="#pricing-nav">PRICES</a></li>
+			</ul>
+		</div>
+		
+		<div class="open-menu show-for-small right"><i class="typcn typcn-th-menu"></i></div>
+	</div>
+	
+	<div class="row">
+		<div class="large-12 columns mobile-nav">
+			<ul class="navigation">
+				<!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> -->
+				<li><a class="scroll" href="#highlights-nav">KEEP HEALTHY</a></li>
+				<li><a class="scroll" href="#info-nav">HOW</a></li>
+				<li><a class="scroll" href="#work-nav">FLAVORS</a></li>
+                <li><a class="scroll" href="#pricing-nav">PRICES</a></li>
+			</ul>
+		</div>
+	</div>
+
+</section> 
+           
+        <br>
        
 
-        <!-- Div for shade line -->
-        <div class="header-shadow"></div>
-
-        <!-- Use class "container-fluid" on the following div for making complete website fluid -->
-        <div class="container">
-
-            <div class="row-fluid print-show">
-                <div class="span12">
-                    Alternate header for print version
-                </div>
-            </div>
-
-            <div class="row-fluid print-hide">
-                <div class="span3">
-                    <div class="header-action">
-                        <span class="label label-info"><%=address%>, <%=city2%> Phone: <%=phone%></span>
-                    </div>
-                </div>
-                <div class="span5"><uc4:SearchBox runat="server" ID="SearchBox" /></div>
-                <div class="span1"> 
-                            <div class="social-icons pull-right">
-                                <asp:ContentPlaceHolder ID="ContentPlaceHolderSoMed" runat="server">
-                                </asp:ContentPlaceHolder> 
-                            </div> 
-                </div>
-            </div>
-             
-            <div class="row-fluid print-hide"> 
-                    <ul class="navbar main-nav" role="navigation">
-                    <ul class="nav navbar-nav">
-                        <li>
-                     <%if(imgLogo.Length > 0) %>
-                     <%{%>
-                   <img src="<%=imgLogo%>" alt="<%=seoTitle%> at <%=storeName %>" style="width: 200px;"/>    
-                     <%}%>  
-                    <%else%>  
-                     <%{%> 
-                   <span class="label label-info"><h1><%=storeName %> </h1> </span>
-                   <span class="label label-info"><%=seoTitle%></span>
-                     <%}%> 
-                    </li>
-                    <uc3:DepartmentsList runat="server" ID="DepartmentsList1" />
-                   
-                   </ul>  
-                   </div>
-               
-            </div>
-             
-
-            <hr>
-            
-            <div class="row-fluid print-hide">
+        <a id="work-nav">&nbsp;</a>
+        <section id="work" class="pad-large">
+ 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
             </div>
@@ -130,32 +119,133 @@
                 </div>
                 
             </div>
-           
-             
-                 <div class="row-fluid">
-                <div class="span12 well well-small">
-                    &copy;
+	
+</section>
+
+        <a id="pricing-nav"></a>
+        <section id="pricing">
+
+<div class="row pad-small">
+<div class="columns large-12">
+
+	<div class="page-header pad-small-bottom-2">
+		<h2 class="text-center">PRICES</h2>
+		<div class="hr large-1 small-3"></div>
+	</div>
+
+<div class="text-center pad-small2">
+<img src="images/page_images/buy_images/medium_paypalg.png" height="45" width="45" align="absmiddle"/>
+<br>
+<font size="-3">Account not required</font>
+</div>
+
+<div class="pricing-text" style="display:">
+
+
+<h4>Packet Pricing</h4>
+
+<p>Single packet: $3.99
+<br>
+Addtional fruit or nut: +50¢
+<br>
+Added Flaxseed: +10¢</p>
+
+
+<h4>Shipping</h4>
+
+<p>
+1-7 Packets: $5.00
+<br>
+8-16 Packets: $10.00
+<br>
+17-24 Packets: $15.00
+<br>
+25+ Packets <b>ships free</b>
+<br>
+*<font size="-3">Residents local to Raleigh, NC are eliable for refunded shipping. Please indicate "pick-up" in the Paypal order form to request hand delivery.</font>
+
+</p>
+</div>
+
+</div>
+</div>
+
+</section>
+
+        <a id="contact-nav"></a>
+        <section id="contact">
+
+	<div id="contact-holder">
+		<div class="row">
+			<div class="large-12 columns text-center">
+				<div class="page-header pad-small-bottom">
+					<h2>Be Hale</h2>
+				</div>
+			<a href="mailto:support@livinghale.com"><img src="images/page_images/footer_images/email2.png" height="32" width="32" /></a></div>
+		</div>
+		
+		<!-- <div class="row">
+			<div class="large-10 columns">
+				 <div id="contact-form">
+					<div id="name">
+						<input id="form-name" type="text" placeholder="Name" />
+					</div>
+					
+					<div id="email">
+						<input id="form-email" type="email" placeholder="Email" />
+					</div>
+					<div class="btn-wrapper"><div class="btn">SIGN UP</div></div>
+					
+					<div id="details-error" class="text-white"><i class="typcn typcn-warning">&nbsp;</i>Error: Please ensure all fields are completed correctly.</div>
+					<div id="form-sent" class="text-white"><i class="typcn typcn-thumbs-up">&nbsp;</i>You are now on the list! Stay tuned for some exciting updates.</div>
+				</div>
+			</div>-->
+  </div>
+		
+		<div class="row">
+			<div class="large-12 columns text-center">
+				<div id="footer">
+					 <ul id="footer-social">
+						<li><a href="http://instagram.com/madewithfaded" target="_blank"><i class="myicon myicon-instagram"></i></a></li>
+						<li><a href="http://facebook.com/madewithfaded" target="_blank"><i class="myicon myicon-facebook"></i></a></li>
+						<li><a href="http://twitter.com/madewithfaded" target="_blank"><i class="myicon myicon-twitter"></i></a></li>
+						<li><a href="mailto:support@livinghale.com"><i class="myicon myicon-email"></i></a></li>
+					</ul>
+					<div id="copy-text" &copy;
                     <script>document.write(new Date().getFullYear());</script>
                     - Powered By - <a href="http://www.Shoppersparadise.co.zw">Shoppersparadise.co.zw <i class="icon-chevron-right"></i></a>
-                </div>
-            </div>
+                        <span class="logo-text">Hale</span>&nbsp;&nbsp;2014     <span class="label label-info"><%=address%>, <%=city2%> Phone: <%=phone%></span></div>
+				</div>
+			</div>
+		</div>
+		
+	</div><!-- end of contact holder -->
+	
+	
+	
 
-            <div class="footer">
+</section>
 
-                <div class="row-fluid print-hide">
-                     
 
-                </div>
+        <script src="/js/custom.modernizr.js"></script>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/foundation.min.js"></script>
+        <script src="/js/foundation.reveal.js"></script>
+        <script src="/js/jquery.flexslider.js"></script>
+        <script src="/js/smooth-scroll.js"></script>
+        <script src="/js/scripts.js"></script>
+        <!-- <script>
+  var video_link = 'http://player.vimeo.com/video/80870342?title=0&amp;byline=0&amp;portrait=0&amp;color=64b0af;autoplay=1';
+  </script> -->
 
-                <div class="row-fluid print-show">
-                    <div class="span12">
-           <%--             Alternate footer for print version--%>
-                    </div>
-                </div>
+        <script>
+            $(document).foundation();
+  </script>
+     
+            
+       
 
-            </div>
-
-        </div>
+     
 
     </form>
 

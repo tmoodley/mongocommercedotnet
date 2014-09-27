@@ -1,6 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="default2.master.cs" Inherits="seoWebApplication._default2" %>
-<%@ Register src="UserControls/SearchBox.ascx" tagname="SearchBox" tagprefix="uc3" %>  
-<%@ Register src="UserControls/CartSummary.ascx" tagname="CartSummary" tagprefix="uc4" %>
+
+<%@ Register Src="UserControls/SearchBox.ascx" TagName="SearchBox" TagPrefix="uc3" %>
+<%@ Register Src="UserControls/CartSummary.ascx" TagName="CartSummary" TagPrefix="uc4" %>
 <%@ Register Src="~/UserControls/DepartmentsList.ascx" TagPrefix="uc3" TagName="DepartmentsList" %>
 <%@ Register Src="~/UserControls/SearchBox.ascx" TagPrefix="uc4" TagName="SearchBox" %>
 <%@ Register Src="~/UserControls/CartSummary.ascx" TagPrefix="uc3" TagName="CartSummary" %>
@@ -12,338 +13,347 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head id="Head1" runat="server">
-<meta name="viewport" content="width=device-width">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="description" content="Shopping Paradise Zim">
-<meta name="keywords" content="Shopping Paradise Zim">
-<meta name="robots" content="INDEX,FOLLOW">
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu">
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=McLaren">   
-<link href="style.css" rel="stylesheet" />
-    <link href="Styles/bootstrap-responsive.css" rel="stylesheet" />
-    <link href="Styles/boostrap.css" rel="stylesheet" />
-    <script src="Styles/bootstrap.min.js"></script> 
-		<script src="Styles/modernizr-2.6.2.min.js"></script>
-		<script src="Styles/jquery-1.8.1.min.js"></script>
-		<script src="Styles/bootstrap.min.js"></script> 
-		<script src="Styles/respond.min.js"></script> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Live Hale</title>
 
-<link href="http://www.shoppersparadisezim.com/Themes/Bootstrap/Styles/overwrite.css" rel="stylesheet" type="text/css" />
-<link href="http://www.shoppersparadisezim.com/Themes/Bootstrap/Styles/font-awesome.min.css" rel="stylesheet" type="text/css" />
- <!--[if IE 7]>
-<link href="http://www.shoppersparadisezim.com/Themes/Bootstrap/Styles/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
-<![endif]-->
-<script src="http://www.shoppersparadisezim.com/Modules/Orchard.jQuery/scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-<!--[if lt IE 9]>
-<script src="http://www.shoppersparadisezim.com/Themes/Bootstrap/scripts/html5shiv.js" type="text/javascript"></script>
-<![endif]-->
-<!--[if lt IE 9]>
-<script src="http://www.shoppersparadisezim.com/Themes/Bootstrap/scripts/respond.min.js" type="text/javascript"></script>
-<![endif]-->
- <asp:ContentPlaceHolder id="head" runat="server">
-</asp:ContentPlaceHolder>
+
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/flexslider.css">
+    <link rel="stylesheet" href="css/typicons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Petrona' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,100,300,400,700,900' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="images/page_images/haletabimage.ico">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
-<form id="form1" runat="server"> 
+    <form id="form1" runat="server">
 
-		<!-- Facebook div for like button -->
-		<div id="fb-root"></div>
+        <div id="loader">
+            <div id="progress-bar"></div>
+        </div>
+        <a id="home-nav"></a>
+        <section id="nav">
 
-		<!-- Div for shade line -->
-		<div class="header-shadow"></div>
-
-		<!-- Use class "container-fluid" on the following div for making complete website fluid -->
-		<div class="container">
-
-			<div class="row-fluid print-show">
-				<div class="span12">
-					Alternate header for print version
-				</div>
-			</div>
-
-			<div class="row-fluid print-hide">
-				<div class="span4">
-					<div class="header-action">
-						<span class="label label-info">Check our weekly specials for new inventory</span>
-					</div>
-				</div>
-				<div class="span8">
-					<div class="navbar pull-right header-nav">
-						<ul class="nav">
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">account</a>
-								<ul class="dropdown-menu">
-									<li>
-										<div class="dropdown-content">
-											<br>
-											<form>
-												<input type="text" class="input-medium" placeholder="Username"><br>
-												<input type="password" class="input-medium" placeholder="Password"><br>
-												<button class="btn">reset</button>
-												<button class="btn btn-primary">login</button>
-											</form> 
-											<br>
-										</div>
-									</li>
-								</ul>
-							</li>
-							<li><a href="column1.html">orders</a></li>
-							<li><a href="column1.html">customer service</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<div class="row-fluid print-hide">
-				<div class="span3">
-					<img src="Images/shoppersZimLogo.png" />
-				</div>
-				<div class="span4">
-					<div class="row-fluid print-hide">
-						<div class="span12">
-							 
-						</div>
-					</div>
-					<div class="row-fluid print-hide">
-						<div class="span12">
-							 
-						</div>
-					</div>
-					<br>
-				</div>
-				<div class="span5">
-                    <uc4:SearchBox runat="server" ID="SearchBox" />
-				</div>
-			</div>
-
-			<div class="row-fluid print-hide">
-				<div class="span12">
-					<div class="navbar main-nav">
-						<div class="navbar-inner">
-							<div class="container">
-								<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">menu</a>
-								<div class="nav-collapse">
-									<ul class="nav">
-										<li class="active"><a href="/">Home</a></li>
-										<li class="divider-vertical"></li>
-										<li><a href="category.html">category page</a></li>
-										<li><a href="products.html">products</a></li>
-										<li><a href="detail.html">product detail</a></li>
-										<li><a href="contact.html">contact</a></li>
-										<li><a href="sitemap.html">sitemap</a></li>
-										<li><a href="order.html">order</a></li>
-										<li class="dropdown">
-											<a class="dropdown-toggle" data-toggle="dropdown" href="#">other pages <span class="caret"></span></a>
-											<ul class="dropdown-menu">
-												<li><a href="column1.html">1 column page</a></li>
-												<li><a href="column2.html">2 column page</a></li>
-												<li><a href="column3.html">3 column page</a></li>
-											</ul>
-										</li>
-									</ul>
-									 
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> 
-             
-			<div class="row-fluid">
-				<div class="span8">
-
-					<div class="row-fluid">
-						<div class="span9">
-							<h2>Special selection</h2>
-						</div>
-						<div class="span3">
-							<div class="social-icons pull-right">
-								<a href="#"><img src="images/icon-facebook.png" alt="facebook"></a>
-								<a href="#"><img src="images/icon-twitter.png" alt="twitter"></a>
-								<a href="#"><img src="images/icon-linkedin.png" alt="linkedin"></a>
-								<a href="#"><img src="images/icon-rss.png" alt="rss"></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="row-fluid">
-						<div class="span12">
-							<ul class="thumbnails product-list-inline-small">
-								<li class="span4">
-									<div class="thumbnail">
-										<a href="detail.html"><img src="img/product_01.jpg" alt=""></a>
-										<div class="caption">
-											<a href="detail.html">Product A</a>
-											<p>Lorem ipsum dolor sit amet <span class="label label-info price pull-right">USD$ 13.44</span></p>
-										</div>
-									</div>
-								</li>
-								<li class="span4">
-									<div class="thumbnail">
-										<a href="detail.html"><img src="img/product_02.jpg" alt=""></a>
-										<div class="caption">
-											<a href="detail.html">Product B</a>
-											<p>Lorem ipsum dolor sit amet <span class="label label-info price pull-right">USD$ 13.44</span></p>
-										</div>
-									</div>
-								</li>
-								<li class="span4">
-									<div class="thumbnail">
-										<a href="detail.html"><img src="img/product_03.jpg" alt=""></a>
-										<div class="caption">
-											<a href="detail.html">Product C</a>
-											<p>Lorem ipsum dolor sit amet <span class="label label-important price pull-right">USD$ 13.44</span></p>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-
-					
-
-				</div>
-				<div class="span4">
-
-					<br>
-					<div class="row-fluid">
-						<div class="span12 well well-small">
-                            <uc3:DepartmentsList runat="server" ID="DepartmentsList" />
-                            <uc3:CategoriesList runat="server" ID="CategoriesList" />
-						</div>
-					</div>
- 
-
-					
-
-				</div>
-			</div>
-
-			<hr>
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder> 
-        <div class="row-fluid">
-				<div class="span12 well well-small">
-						&copy; <script>document.write(new Date().getFullYear());</script> - All taxes are excluded - shipping costs depends on location - <a href="column3.html">more info <i class="icon-chevron-right"></i></a>
-				</div>
-			</div>
-
-			<div class="footer">
-
-				<div class="row-fluid print-hide">
-
-					<div class="span2">
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 1</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-							<li><a href="detail.html">Large product C</a></li>
-						</ul>
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 2</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-							<li><a href="detail.html">Large product C</a></li>
-							<li><a href="detail.html">Product D</a></li>
-							<li><a href="detail.html">Short E</a></li>
-						</ul>
-					</div>
-
-					<div class="span2">
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 3</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-							<li><a href="detail.html">Large product C</a></li>
-							<li><a href="detail.html">Product D</a></li>
-						</ul>
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 4</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-						</ul>
-					</div>
-
-					<div class="span2">
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 5</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-							<li><a href="detail.html">Large product C</a></li>
-						</ul>
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 6</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-							<li><a href="detail.html">Large product C</a></li>
-							<li><a href="detail.html">Product D</a></li>
-						</ul>
-					</div>
-
-					<div class="span2">
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 7</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-							<li><a href="detail.html">Large product C</a></li>
-							<li><a href="detail.html">Product D</a></li>
-							<li><a href="detail.html">Short E</a></li>
-						</ul>
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 8</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-							<li><a href="detail.html">Large product C</a></li>
-							<li><a href="detail.html">Product D</a></li>
-							<li><a href="detail.html">Short E</a></li>
-						</ul>
-					</div>
-
-					<div class="span2">
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 9</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-							<li><a href="detail.html">Large product C</a></li>
-							<li><a href="detail.html">Product D</a></li>
-							<li><a href="detail.html">Short E</a></li>
-						</ul>
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 10</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-							<li><a href="detail.html">Large product C</a></li>
-							<li><a href="detail.html">Product D</a></li>
-						</ul>
-					</div>
-
-					<div class="span2">
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 11</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-						</ul>
-						<ul class="unstyled">
-							<li class="footer-title"><a href="category.html">Category 12</a></li>
-							<li><a href="detail.html">Product item A</a></li>
-							<li><a href="detail.html">Product B</a></li>
-							<li><a href="detail.html">Large product C</a></li>
-						</ul>
-					</div>
-
-				</div>
-
-				<div class="row-fluid print-show">
-					<div class="span12">
-						Alternate footer for print version
-					</div>
-				</div>
-
-			</div>
-
+	<div class="row">
+		<div class="large-4 columns text-right width375">
+			<ul class="navigation hide-for-small">
+				<li><a class="scroll" href="#highlights-nav">KEEP HEALTHY</a></li>
+                <li><a class="scroll" href="#info-nav">HOW</a></li>
+                <!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> -->
+			</ul>
 		</div>
+		
+		<div class="large-3 columns text-center">
+			<a class="home-link scroll" href="#home-nav"><div id="hale-logo">Hale</div></a>
+		</div>
+		
+		<div class="large-4 columns text-left width375">
+			<ul class="navigation hide-for-small">
+				<li><a class="scroll" href="#work-nav">FLAVORS</a></li>
+                <li><a class="scroll" href="#pricing-nav">PRICES</a></li>
+			</ul>
+		</div>
+		
+		<div class="open-menu show-for-small right"><i class="typcn typcn-th-menu"></i></div>
+	</div>
+	
+	<div class="row">
+		<div class="large-12 columns mobile-nav">
+			<ul class="navigation">
+				<!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> -->
+				<li><a class="scroll" href="#highlights-nav">KEEP HEALTHY</a></li>
+				<li><a class="scroll" href="#info-nav">HOW</a></li>
+				<li><a class="scroll" href="#work-nav">FLAVORS</a></li>
+                <li><a class="scroll" href="#pricing-nav">PRICES</a></li>
+			</ul>
+		</div>
+	</div>
 
-</form>
+</section>
+
+        <div id="myModal" class="reveal-modal large" style="padding: 0;">
+            <div class="flex-video" style="-webkit-transform-origin: 0px 0px; opacity: 1; -webkit-transform: scale(1, 1);">
+                <iframe id="video_frame" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <section id="home">
+	        <div id="home-bg">
+		        <div class="row">
+			        <!-- <div class="large-7 large-centered columns text-center">
+				        It's a lifestyle
+				        <br />
+				        <!--<a href="#" data-reveal-id="myModal" class="play_btn"><img src="img/play_icon.png" /></a> -->
+			        </div>
+		        </div>
+	        </div>
+	        <!--<img class="slider-bg" alt="Slider Image" src="img/big_pic/home1.jpg" />-->
+        </section> 
+         
+        <br>
+        <a id="highlights-nav"></a>
+        <section id="highlights" class="pad-large">
+	        <div class="row">
+		        <div class="large-12 columns text-center">
+			        <div class="page-header pad-small-bottom2">
+			          <h2>KEEP HEALTHY</h2>
+				        <div class="hr large-1 small-3"></div>
+			        </div>
+		        </div>
+	        </div>
+	        <!-- hightlights slider for medium-up -->
+	        <div class="hide-for-small">
+		        <div class="row">
+			        <div id="highlights-text" class="large-8 large-centered columns text-center">
+				        Hale is gluten free.
+		          </div>
+		        </div>
+		        <div class="text-center">
+			        <div id="highlights-slider">
+				        <ul class="my-direction-nav">
+					        <li><a class="my-prev" href="#"></a></li>
+					        <li><a class="my-next" href="#"></a></li>
+				        </ul>
+				        <ul class="slides">
+                            <li>
+						        <a href="#glutenfree-text" class="highlights-link"><img src="images/page_images/highlights/glutenfree.png" height="180" width="150"/></a>
+				            <div class="selectbar active"></div>
+						        <div class="hide" id="glutenfree-text">
+							        Hale is gluten free.
+					          </div>
+					        </li>
+					        <li>
+						        <a href="#nutrition-text" class="highlights-link"><img src="images/page_images/highlights/pyramid.png" height="180" width="150"/></a>
+						        <div class="selectbar"></div>
+						        <div id="nutrition-text" class="hide">
+							        Hale: High protein, low sugar, sufficient calories, healthy fats, balanced and complete nutrition.
+					          </div>
+					        </li>
+                            <li>
+						        <a href="#battery-text" class="highlights-link"><img src="images/page_images/highlights/battery.png" height="180" width="150"/></a>
+						        <div class="selectbar"></div>
+						        <div id="battery-text" class="hide">
+							        Hale will leave you full, often up to 4+ hours.
+					          </div>
+					        </li>   
+                            <li>
+						        <a href="#time-text" class="highlights-link"><img src="images/page_images/highlights/time.png" height="180" width="150"/></a>
+						        <div class="selectbar"></div>
+						        <div id="time-text" class="hide">
+							        Hale is quick: Ready in under two minutes!
+						        </div>
+					        </li>
+					        <li>
+						        <a href="#aminoacid-text" class="highlights-link"><img src="images/page_images/highlights/aminoacid.png" height="180" width="150"/></a>
+						        <div class="selectbar"></div>
+						        <div id="aminoacid-text" class="hide">
+							        Hale provides a full serving of the complete amino acid complex.
+					          </div>
+					        </li>
+                             <li>
+						        <a href="#gmofree-text" class="highlights-link"><img src="images/page_images/highlights/gmofree.png" height="180" width="150"/></a>
+				            <div class="selectbar"></div>
+						        <div id="gmofree-text" class="hide">
+							        Hale fruits and nuts are <b>100%</b> natural: GMO free with no sulfites or infused sugar.
+					          </div>
+					        </li>
+				        </ul>
+			        </div>
+		        </div>
+	        </div><!-- highlights slider for medium-up -->
+	        <div class="show-for-small-only row pad-top">
+		        <div class="text-center columns">
+			        <div id="highlights-slider-2">
+				        <ul class="slides">
+					        <li>
+						        <img src="images/page_images/highlights/glutenfree.png" height="180" width="150"/>
+						        <div class="pad-bottom">Hale is gluten free.</div>
+					        </li>
+                            <li>
+						        <img src="images/page_images/highlights/time.png" height="180" width="150"/>
+						        <div class="pad-bottom">Hale is quick: Ready in under 2 minutes!</div>
+					        </li>
+					        <li>
+						        <img src="images/page_images/highlights/aminoacid.png" height="180" width="150"/>
+						        <div class="pad-bottom">
+							        Hale provides a full serving of the complete amino acid complex.
+						        </div>
+					        </li>
+					        <li>
+						        <img src="images/page_images/highlights/gmofree.png" height="180" width="150"/>
+						        <div class="pad-bottom">
+							        Hale fruits and nuts are <b>100%</b> natural: GMO free with no sulfites or infused sugar.
+						        </div>
+					        </li>
+					        <li>
+						        <img src="images/page_images/highlights/pyramid.png" height="180" width="150"/>
+						        <div class="selectbar"></div>
+						        <div class="pad-bottom">
+							        Hale: High protein, low sugar, sufficient calories, healthy fats, balanced and complete nutrition.
+						        </div>
+					        </li>
+                            <li>
+						        <img src="images/page_images/highlights/battery.png" height="180" width="150"/>
+						        <div class="selectbar"></div>
+						        <div class="pad-bottom">
+							        Hale will leave you full, often up to 4+ hours.
+						        </div>
+					        </li>
+				        </ul>
+			        </div>
+		        </div>
+	        </div>
+        </section>
+
+        <a id="info-nav"></a>
+        <section id="info">
+<!--<img id="big_image" src="img/video_player.jpg" />-->
+<div class="video-container">
+	<iframe src="https://www.youtube.com/v/kRPUxNQTMUo&vq=hd1080?rel=0&showinfo=0&autohide=1&controls=0&disablekb=1&enablejsapi=1&fs=0&iv_load_policy=3&theme=dark&wmode=opaque" width="500" height="281" frameborder="0" allowfullscreen="1"></iframe>
+   <div class="show-for-small-only row pad-top"> <iframe src="//www.dailymotion.com/embed/video/x20incl" width="560" height="315" frameborder="0" allowfullscreen marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
+</div>
+</section>
+
+        <a id="work-nav">&nbsp;</a>
+        <section id="work" class="pad-large">
+
+	<div class="row">
+		<div class="large-12 columns text-center">
+			<div class="page-header pad-bottom">
+				<h2>Live Hale</h2>
+				<div class="hr large-1 small-3"></div>
+			</div>
+		</div>
+	</div>
+	<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>  
+	
+</section>
+
+        <a id="pricing-nav"></a>
+        <section id="pricing">
+
+<div class="row pad-small">
+<div class="columns large-12">
+
+	<div class="page-header pad-small-bottom-2">
+		<h2 class="text-center">PRICES</h2>
+		<div class="hr large-1 small-3"></div>
+	</div>
+
+<div class="text-center pad-small2">
+<img src="images/page_images/buy_images/medium_paypalg.png" height="45" width="45" align="absmiddle"/>
+<br>
+<font size="-3">Account not required</font>
+</div>
+
+<div class="pricing-text" style="display:">
+
+
+<h4>Packet Pricing</h4>
+
+<p>Single packet: $3.99
+<br>
+Addtional fruit or nut: +50¢
+<br>
+Added Flaxseed: +10¢</p>
+
+
+<h4>Shipping</h4>
+
+<p>
+1-7 Packets: $5.00
+<br>
+8-16 Packets: $10.00
+<br>
+17-24 Packets: $15.00
+<br>
+25+ Packets <b>ships free</b>
+<br>
+*<font size="-3">Residents local to Raleigh, NC are eliable for refunded shipping. Please indicate "pick-up" in the Paypal order form to request hand delivery.</font>
+
+</p>
+</div>
+
+</div>
+</div>
+
+</section>
+
+        <a id="contact-nav"></a>
+        <section id="contact">
+
+	<div id="contact-holder">
+		<div class="row">
+			<div class="large-12 columns text-center">
+				<div class="page-header pad-small-bottom">
+					<h2>Be Hale</h2>
+				</div>
+			<a href="mailto:support@livinghale.com"><img src="images/page_images/footer_images/email2.png" height="32" width="32" /></a></div>
+		</div>
+		
+		<!-- <div class="row">
+			<div class="large-10 columns">
+				 <div id="contact-form">
+					<div id="name">
+						<input id="form-name" type="text" placeholder="Name" />
+					</div>
+					
+					<div id="email">
+						<input id="form-email" type="email" placeholder="Email" />
+					</div>
+					<div class="btn-wrapper"><div class="btn">SIGN UP</div></div>
+					
+					<div id="details-error" class="text-white"><i class="typcn typcn-warning">&nbsp;</i>Error: Please ensure all fields are completed correctly.</div>
+					<div id="form-sent" class="text-white"><i class="typcn typcn-thumbs-up">&nbsp;</i>You are now on the list! Stay tuned for some exciting updates.</div>
+				</div>
+			</div>-->
+  </div>
+		
+		<div class="row">
+			<div class="large-12 columns text-center">
+				<div id="footer">
+					<!-- <ul id="footer-social">
+						<li><a href="http://instagram.com/madewithfaded" target="_blank"><i class="myicon myicon-instagram"></i></a></li>
+						<li><a href="http://facebook.com/madewithfaded" target="_blank"><i class="myicon myicon-facebook"></i></a></li>
+						<li><a href="http://twitter.com/madewithfaded" target="_blank"><i class="myicon myicon-twitter"></i></a></li>
+						<li><a href="mailto:support@livinghale.com"><i class="myicon myicon-email"></i></a></li>
+					</ul>-->
+					<div id="copy-text">&copy;&nbsp;&nbsp;<span class="logo-text">Hale</span>&nbsp;&nbsp;2014</div>
+				</div>
+			</div>
+		</div>
+		
+	</div><!-- end of contact holder -->
+	
+	
+	
+
+</section>
+
+
+        <script src="/js/custom.modernizr.js"></script>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/foundation.min.js"></script>
+        <script src="/js/foundation.reveal.js"></script>
+        <script src="/js/jquery.flexslider.js"></script>
+        <script src="/js/smooth-scroll.js"></script>
+        <script src="/js/scripts.js"></script>
+        <!-- <script>
+  var video_link = 'http://player.vimeo.com/video/80870342?title=0&amp;byline=0&amp;portrait=0&amp;color=64b0af;autoplay=1';
+  </script> -->
+
+        <script>
+            $(document).foundation();
+  </script>
+
+
+    </form>
 
 </body>
 </html>

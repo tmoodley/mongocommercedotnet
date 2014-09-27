@@ -143,7 +143,14 @@
     <Reference Include="ProMongoRepository">
       <HintPath>..\packages\ProMongoRepository.2.2.2\lib\net40\ProMongoRepository.dll</HintPath>
     </Reference>
+    <Reference Include="Raven.Abstractions">
+      <HintPath>..\packages\RavenDB.Client.2.5.2916\lib\net45\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\packages\RavenDB.Client.2.5.2916\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -604,13 +611,21 @@
     <Content Include="css\base-admin-2.css" />
     <Content Include="css\bootstrap-responsive.min.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\css.css" />
+    <Content Include="css\css_002.css" />
+    <Content Include="css\css_003.css" />
     <Content Include="css\custom.css" />
+    <Content Include="css\flexslider.css" />
     <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\foundation.css" />
     <Content Include="css\pages\dashboard.css" />
     <Content Include="css\pages\plans.css" />
     <Content Include="css\pages\pricing.css" />
     <Content Include="css\pages\reports.css" />
     <Content Include="css\pages\signin.css" />
+    <Content Include="css\responsive.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\typicons.css" />
     <Content Include="css\ui-lightness\images\animated-overlay.gif" />
     <Content Include="css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -654,6 +669,53 @@
     <Content Include="Images\main-bg.gif" />
     <Content Include="Images\my-dinner-2go.png" />
     <Content Include="Images\nav-bg.png" />
+    <Content Include="Images\order_images\order%2520almond%2520pecan.jpg" />
+    <Content Include="Images\order_images\order%2520almond%2520walnut.jpg" />
+    <Content Include="Images\order_images\order%2520almond.jpg" />
+    <Content Include="Images\order_images\order%2520apple%2520almond.jpg" />
+    <Content Include="Images\order_images\order%2520apple%2520banana.jpg" />
+    <Content Include="Images\order_images\order%2520apple%2520blueberry.jpg" />
+    <Content Include="Images\order_images\order%2520apple%2520pecan.jpg" />
+    <Content Include="Images\order_images\order apple raspberry.jpg" />
+    <Content Include="Images\order_images\order%2520apple%2520strawberry.jpg" />
+    <Content Include="Images\order_images\order%2520apple%2520walnut.jpg" />
+    <Content Include="Images\order_images\order%2520apple.jpg" />
+    <Content Include="Images\order_images\order%2520banana%2520almond.jpg" />
+    <Content Include="Images\order_images\order%2520banana%2520blueberry.jpg" />
+    <Content Include="Images\order_images\order%2520banana%2520pecan.jpg" />
+    <Content Include="Images\order_images\order%2520banana%2520raspberry.jpg" />
+    <Content Include="Images\order_images\order%2520banana%2520strawberry.jpg" />
+    <Content Include="Images\order_images\order%2520banana%2520walnut.jpg" />
+    <Content Include="Images\order_images\order%2520banana.jpg" />
+    <Content Include="Images\order_images\order%2520blueberry%2520almond.jpg" />
+    <Content Include="Images\order_images\order%2520blueberry%2520pecan.jpg" />
+    <Content Include="Images\order_images\order%2520blueberry%2520raspberry.jpg" />
+    <Content Include="Images\order_images\order%2520blueberry%2520strawberry.jpg" />
+    <Content Include="Images\order_images\order%2520blueberry%2520walnut.jpg" />
+    <Content Include="Images\order_images\order%2520blueberry.jpg" />
+    <Content Include="Images\order_images\order%2520pecan%2520walnut.jpg" />
+    <Content Include="Images\order_images\order%2520pecan.jpg" />
+    <Content Include="Images\order_images\order%2520raspberry%2520almond.jpg" />
+    <Content Include="Images\order_images\order%2520raspberry%2520pecan.jpg" />
+    <Content Include="Images\order_images\order%2520raspberry%2520strawberry.jpg" />
+    <Content Include="Images\order_images\order%2520raspberry%2520walnut.jpg" />
+    <Content Include="Images\order_images\order%2520raspberry.jpg" />
+    <Content Include="Images\order_images\order%2520strawberry%2520almond.jpg" />
+    <Content Include="Images\order_images\order%2520strawberry%2520pecan.jpg" />
+    <Content Include="Images\order_images\order%2520strawberry%2520walnut.jpg" />
+    <Content Include="Images\order_images\order%2520strawberry.jpg" />
+    <Content Include="Images\order_images\order%2520walnut.jpg" />
+    <Content Include="Images\page_images\buy_images\medium_paypalg.png" />
+    <Content Include="Images\page_images\footer_images\email2.png" />
+    <Content Include="Images\page_images\highlights\aminoacid.png" />
+    <Content Include="Images\page_images\highlights\battery.png" />
+    <Content Include="Images\page_images\highlights\email2.png" />
+    <Content Include="Images\page_images\highlights\glutenfree.png" />
+    <Content Include="Images\page_images\highlights\gmofree.png" />
+    <Content Include="Images\page_images\highlights\medium_paypalg.png" />
+    <Content Include="Images\page_images\highlights\pyramid.png" />
+    <Content Include="Images\page_images\highlights\time.png" />
+    <Content Include="Images\page_images\main_images\mainimage.jpg" />
     <Content Include="Images\pattern.jpg" />
     <Content Include="Images\shoppersZimLogo.png" />
     <Content Include="Images\TXMAS_logo.jpg" />
@@ -725,13 +787,18 @@
     <Content Include="js\charts\donut.js" />
     <Content Include="js\charts\line.js" />
     <Content Include="js\charts\pie.js" />
+    <Content Include="js\custom.js" />
     <Content Include="js\demo\faq.js" />
     <Content Include="js\demo\gallery.js" />
     <Content Include="js\demo\notifications.js" />
     <Content Include="js\demo\signin.js" />
     <Content Include="js\demo\sliders.js" />
     <Content Include="js\demo\validation.js" />
+    <Content Include="js\foundation.js" />
+    <Content Include="js\foundation_002.js" />
+    <Content Include="js\jquery.js" />
     <Content Include="js\jquery.ui.bmap.js" />
+    <Content Include="js\jquery.flexslider.js" />
     <Content Include="js\libs\bootstrap.min.js" />
     <Content Include="js\libs\jquery-1.8.3.min.js" />
     <Content Include="js\libs\jquery-1.9.1.min.js" />
@@ -825,6 +892,8 @@
     <Content Include="js\plugins\msgGrowl\js\msgGrowl.pack.js" />
     <Content Include="js\plugins\uiToTop\jquery.ui.totop.js" />
     <Content Include="js\plugins\validate\jquery.validate.js" />
+    <Content Include="js\scripts.js" />
+    <Content Include="js\smooth-scroll.js" />
     <Content Include="myaccount.aspx" />
     <Content Include="product_view.aspx" />
     <Content Include="assets\ajax.css" />
@@ -1400,6 +1469,7 @@
     <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RavenController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SubscribeController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -2275,7 +2345,9 @@
   <ItemGroup>
     <Folder Include="admin\ajax\" />
     <Folder Include="factoryClasses\" />
+    <Folder Include="Images\page_images\NewFolder2\" />
     <Folder Include="js\libs\bootstrap\" />
+    <Folder Include="Views\Raven\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="st.SharkTankDAL\seowebappDataContext.dbml.layout">

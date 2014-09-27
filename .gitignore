@@ -155,4 +155,6 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 /seoWebApplication/Models/Products.cs
-/seoWebApplication/Views/Category/Index.cshtml packages/
+/seoWebApplication/Views/Category/Index.cshtml 
+packages/ 
+packages.config

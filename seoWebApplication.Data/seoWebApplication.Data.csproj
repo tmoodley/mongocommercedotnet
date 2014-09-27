@@ -239,6 +239,7 @@
     <Compile Include="departmentSelectByWId_Result.cs">
       <DependentUpon>SeoWebAppModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DocumentDbModels\Products.cs" />
     <Compile Include="GetProductCategories_Result.cs">
       <DependentUpon>SeoWebAppModel.tt</DependentUpon>
     </Compile>

@@ -27,6 +27,10 @@ namespace seoWebApplication.Controllers
             {
                 list = db.products.ToList();
             }
+            else if (seoWebAppConfiguration.UseRavenDb)
+            {
+                list = db.products.ToList();
+            }
             return View(list);
         }
         
