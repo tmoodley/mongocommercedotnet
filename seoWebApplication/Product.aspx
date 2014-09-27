@@ -31,19 +31,17 @@
 <div class="fb-like" data-href="<%= "" + fbUrl %>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server"> 
-     <div class="row-fluid"> 
-        <div class="span2">
-         
-        </div> 
-        <div class="span2 img-thumbnail" style="width: 550px"><div class="paperShadow shadow-left">
-            <asp:Image ID="productImage" runat="server" Height="75%" Width="100%" CssClass="img-thumbnail" /></div> 
-       </div> 
-        <div class="span4">
+
+    <section class="small-12 columns" data-id="1" id="explore">
+        <header class="text-center">
+        <h1><asp:Label CssClass="ProductTitle" ID="titleLabel" runat="server" Text="Label"></asp:Label></h1> 
+        </header>
+    <section class="row">
+            <div style="width:50%;float:left;">
             <div class="fb-like" data-href="<%= "" + url %>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-            <div class="paperShadow shadow-bottom" style="text-align:center;">
-            <h1><asp:Label CssClass="ProductTitle" ID="titleLabel" runat="server" Text="Label"></asp:Label></h1>
+            <asp:Image ID="productImage" runat="server" Height="75%" Width="100%" CssClass="img-thumbnail" />
             </div>
-            <div class="paperShadow shadow-right">
+            <div style="width:50%;float:right;">
             <asp:Label ID="descriptionLabel" runat="server" Text="Label"></asp:Label> <br />
                 <br />
                 <br />
@@ -56,11 +54,11 @@
             <br />
             <uc3:ProductAttributesRadio ID="ProductAttributesRadio1" runat="server" /> 
             </div>  
-            
-        </div>       
-     </div> 
-    <div class="row-fluid"> 
+            <uc1:PicturesModals runat="server" id="PicturesModals" />
+    </section>
+     
+
+    </section>
    
-    </div>
-    <uc1:PicturesModals runat="server" id="PicturesModals" />
+   
 </asp:Content>

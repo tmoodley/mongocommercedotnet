@@ -51,18 +51,14 @@
                    <span class="label label-info"><%=seoTitle%></span>
                      <%}%> 
 			<ul class="navigation hide-for-small">
-				<li><a class="scroll" href="#highlights-nav">KEEP HEALTHY</a></li>
-                <li><a class="scroll" href="#info-nav">HOW</a></li>
+				<li><uc4:SearchBox runat="server" ID="SearchBox" /></li>
+                <li> <asp:ContentPlaceHolder ID="ContentPlaceHolderSoMed" runat="server">
+                                </asp:ContentPlaceHolder> </li>
                 <!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> -->
                 
 			</ul>
-             <div class="span5"><uc4:SearchBox runat="server" ID="SearchBox" /></div>
-                <div class="span1"> 
-                            <div class="social-icons pull-right">
-                                <asp:ContentPlaceHolder ID="ContentPlaceHolderSoMed" runat="server">
-                                </asp:ContentPlaceHolder> 
-                            </div> 
-                </div>
+              
+                 
                <!-- Facebook div for like button -->
          
             <div id="fb-root"></div>
@@ -73,33 +69,10 @@
     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=741995452511167";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-		</div>
-		
-		<div class="large-3 columns text-center">
-			<a class="home-link scroll" href="#home-nav"><div id="hale-logo">Hale</div></a>
-		</div>
-		
-		<div class="large-4 columns text-left width375">
-			<ul class="navigation hide-for-small">
-				<li><a class="scroll" href="#work-nav">FLAVORS</a></li>
-                <li><a class="scroll" href="#pricing-nav">PRICES</a></li>
-			</ul>
-		</div>
-		
-		<div class="open-menu show-for-small right"><i class="typcn typcn-th-menu"></i></div>
+		</div> 
 	</div>
 	
-	<div class="row">
-		<div class="large-12 columns mobile-nav">
-			<ul class="navigation">
-				<!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> -->
-				<li><a class="scroll" href="#highlights-nav">KEEP HEALTHY</a></li>
-				<li><a class="scroll" href="#info-nav">HOW</a></li>
-				<li><a class="scroll" href="#work-nav">FLAVORS</a></li>
-                <li><a class="scroll" href="#pricing-nav">PRICES</a></li>
-			</ul>
-		</div>
-	</div>
+	 
 
 </section> 
            
@@ -110,17 +83,14 @@
         <section id="work" class="pad-large">
  
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
-            </div>
-            <div class="row-fluid"> 
-                <div class="span2"></div>
-                 <div class="span5">
-                    <div class="fb-comments" data-href="<%= "" + url %>" data-numposts="5" data-colorscheme="light"></div>
-                </div>
-                
-            </div>
+            </asp:ContentPlaceHolder> 
 	
-</section>
+        </section>
+        <section class="row">
+             <div style="width:50%;float:left;">
+                  <div class="fb-comments" data-href="<%= "" + url %>" data-numposts="5" data-colorscheme="light"></div>
+             </div>
+        </section>
 
         <a id="pricing-nav"></a>
         <section id="pricing">
