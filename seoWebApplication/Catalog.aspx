@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/defaultproduct.Master" AutoEventWireup="true" CodeBehind="Catalog.aspx.cs" Inherits="seoWebApplication.Catalog" Title="MyDinner2Go: Online Ordering" %>
 
 <%@ Register Src="UserControls/ProductsList.ascx" TagName="ProductsList" TagPrefix="uc1" %> 
-
 <%@ Register Src="UserControls/DeptCategoriesList.ascx" TagName="DeptCategoriesList" TagPrefix="uc3" %>
 <%@ Register Src="~/UserControls/Pager.ascx" TagPrefix="uc1" TagName="Pager" %>
 

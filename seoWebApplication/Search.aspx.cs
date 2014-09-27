@@ -146,50 +146,32 @@ namespace seoWebApplication
 
             }
 
-            // Display pager controls
-            Pager1.Show(int.Parse(page), howManyPages, firstPageUrl, pagerFormat, false);
+            // Display pager controls 
             Pager2.Show(int.Parse(page), howManyPages, firstPageUrl, pagerFormat, true);
 
         }
 
-        protected void list_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        
 
-        }
-
-        protected void list_ItemDataBound(object sender, DataListItemEventArgs e)
+        protected void R1_ItemCreated(Object Sender, RepeaterItemEventArgs e)
         {
-            // obtain the attributes of the product
-            DataRowView dataRow = (DataRowView)e.Item.DataItem;
-            string product_id = dataRow["product_id"].ToString();
-            DataTable attrTable = catalogAccesor.GetProductAttributes(product_id);
-            // get the attribute placeholder
-            PlaceHolder attrPlaceHolder = (PlaceHolder)e.Item.FindControl("attrPlaceHolder");
-            // temp variables
-            string prevAttributeName = "";
-            string attributeName, attributeValue, attributeValueId;
-            // current DropDown for attribute values
-            Label attributeNameLabel;
-            DropDownList attributeValuesDropDown = new DropDownList();
-            // read the list of attributes
-            foreach (DataRow r in attrTable.Rows)
+            int i = 0;
+            if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
             {
-                // get attribute data
-                attributeName = r["AttributeName"].ToString();
-                attributeValue = r["AttributeValue"].ToString();
-                attributeValueId = r["AttributeValueID"].ToString();
-                // if starting a new attribute (e.g. Color, Size)
-                if (attributeName != prevAttributeName)
+                if (e.Item.ItemIndex % 3 == 0)
                 {
-                    prevAttributeName = attributeName;
-                    attributeNameLabel = new Label();
-                    attributeNameLabel.Text = attributeName + ": ";
-                    attributeValuesDropDown = new DropDownList();
-                    attrPlaceHolder.Controls.Add(attributeNameLabel);
-                    attrPlaceHolder.Controls.Add(attributeValuesDropDown);
+                    Literal lblDivStart = (Literal)e.Item.FindControl("lblDivStart");
+                    Literal lblDivEnd = (Literal)e.Item.FindControl("lblDivEnd");
+
+                    lblDivStart.Text = "<div class=row work-row'>";
+                    i++;
+                    if (i == 3)
+                    {
+                        lblDivEnd.Text = "</div>";
+                        i = 0;
+                    }
                 }
-                // add a new attribute value to the DropDownList
-                attributeValuesDropDown.Items.Add(new ListItem(attributeValue, attributeValueId));
+
             }
         }
     }
