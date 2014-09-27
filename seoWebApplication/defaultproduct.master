@@ -38,10 +38,9 @@
         </div>
         <a id="home-nav"></a>
         <section id="nav">
-
-	<div class="row">
-		<div class="large-4 columns text-right width375">
-              <%if(imgLogo.Length > 0) %>
+            <div class="row">
+		    <div class="large-3 columns text-right width200">
+             <%if(imgLogo.Length > 0) %>
                      <%{%>
                    <img src="<%=imgLogo%>" alt="<%=seoTitle%> at <%=storeName %>" style="width: 200px;"/>    
                      <%}%>  
@@ -50,30 +49,35 @@
                    <span class="label label-info"><h1><%=storeName %> </h1> </span>
                    <span class="label label-info"><%=seoTitle%></span>
                      <%}%> 
-			<ul class="navigation hide-for-small">
-				<li><uc4:SearchBox runat="server" ID="SearchBox" /></li>
-                <li> <asp:ContentPlaceHolder ID="ContentPlaceHolderSoMed" runat="server">
-                                </asp:ContentPlaceHolder> </li>
-                <!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> -->
-                
-			</ul>
-              
-                 
-               <!-- Facebook div for like button -->
-         
-            <div id="fb-root"></div>
-<script>(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=741995452511167";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-		</div> 
-	</div>
-	
-	 
+            </div>
 
+            <div class="large-6 columns text-right width600">
+                <uc4:SearchBox runat="server" ID="SearchBox" />
+            </div>
+
+            <div class="large-3 columns text-right width200">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolderSoMed" runat="server">
+                                                </asp:ContentPlaceHolder> 
+                              <!-- Facebook div for like button -->
+         
+                            <div id="fb-root"></div>
+                <script>(function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=741995452511167";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+            </div> 
+          </div> 
+	    <div class="row">
+		<div class="large-12 columns text-right width100"> 
+			<ul class="navigation hide-for-small">
+                <uc3:DepartmentsList runat="server" id="DepartmentsList" /> 
+                <!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> --> 
+			</ul> 
+		</div> 
+	    </div> 
 </section> 
            
         <br>

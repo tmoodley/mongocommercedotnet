@@ -44,7 +44,7 @@
                  <asp:Literal ID="lblDivEnd" runat="server"></asp:Literal>
             </itemtemplate>
          </asp:Repeater> 
-	</div>
+	 
 <asp:Label ID="catalogDescriptionLabel" CssClass="CatalogDescription" runat="server" /> 
      
 </asp:Content>
