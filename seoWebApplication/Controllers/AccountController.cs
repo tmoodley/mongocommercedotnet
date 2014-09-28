@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using seoWebApplication.st.SharkTankDAL;
 
 namespace seoWebApplication.Controllers
 {
@@ -163,9 +164,10 @@ namespace seoWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            int idWeb = dBHelper.GetWebstoreId();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Address1 = model.Address1, Address2 = model.Address2, City = model.City, State = model.State, Zip = model.Zip, Country = model.Country, DayPhone = model.DayPhone, EvePhone = model.EvePhone, CellPhone = model.CellPhone, Newsletter = model.Newsletter, WebstoreId = idWeb };
                 var result = await UserManager.CreateAsync(user, model.Password);
                  
                 if (result.Succeeded)

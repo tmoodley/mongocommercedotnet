@@ -17,6 +17,7 @@ namespace seoWebApplication.Framework
             emailSend.send(message.Destination, message.Subject, message.Body);
 
             return Task.FromResult(0);
-        } 
+        }
+ 
     }
 }

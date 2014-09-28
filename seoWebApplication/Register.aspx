@@ -1,9 +1,10 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/default2.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="seoWebApplication.Register" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/defaultproduct.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="seoWebApplication.Register" %>
 
  <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<section class="row">
 <center>
 <div>
 <div id="steps">
@@ -823,7 +824,7 @@
 
   </div>
 </center>
-
+</section>
 
  
  
