@@ -55,23 +55,9 @@
                 <uc4:SearchBox runat="server" ID="SearchBox" />
             </div>
 
-            <div class="large-3 columns text-right width200">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolderSoMed" runat="server">
-                                                </asp:ContentPlaceHolder> 
-                              <!-- Facebook div for like button -->
-         
-                            <div id="fb-root"></div>
-                <script>(function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
-                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=741995452511167";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));</script>
-               
+            <div class="large-3 columns text-right width200"> 
                 <a class="scroll" href="/shoppingcart.aspx">Cart</a>   
-                <a class="scroll" href="/Account/Register">Register</a> 
-              
+                <a class="scroll" href="/Account/Register">Register</a>  
             </div> 
           </div>  
 </section> 
@@ -89,8 +75,7 @@
        
 
         <a id="work-nav">&nbsp;</a>
-        <section id="work" class="pad-large">
- 
+        <section id="work" class="pad-large"> 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder> 
 	
@@ -106,7 +91,18 @@
 
 <div class="row pad-small">
 <div class="columns large-12">
-
+     <asp:ContentPlaceHolder ID="ContentPlaceHolderSoMed" runat="server">
+                                                </asp:ContentPlaceHolder> 
+                              <!-- Facebook div for like button -->
+         
+                            <div id="fb-root"></div>
+                <script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=741995452511167";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<div class="page-header pad-small-bottom-2">
 		<h2 class="text-center">PRICES</h2>
 		<div class="hr large-1 small-3"></div>

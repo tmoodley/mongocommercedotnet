@@ -49,15 +49,6 @@ namespace seoWebApplication {
         protected global::seoWebApplication.SearchBox SearchBox;
         
         /// <summary>
-        /// ContentPlaceHolderSoMed control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderSoMed;
-        
-        /// <summary>
         /// DepartmentsList control.
         /// </summary>
         /// <remarks>
@@ -74,5 +65,14 @@ namespace seoWebApplication {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        
+        /// <summary>
+        /// ContentPlaceHolderSoMed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderSoMed;
     }
 }
