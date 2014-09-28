@@ -121,11 +121,13 @@ namespace seoWebApplication
 
         }
 
-        protected void AddToCartButton_Click(object sender, EventArgs e)
+        
+
+        protected void btnAdd_Click(object sender, EventArgs e)
         {
             // Retrieve ProductID from the query string
             string pid = Request.QueryString["idProduct"];
-             
+
             string[] words = pid.Split(',');
 
             string productId = words[1];
@@ -135,7 +137,7 @@ namespace seoWebApplication
             string options = "";
             //add dropdown attributes
             foreach (Control cnt in this.ProductAttributes1.Controls)
-            {  
+            {
                 if (cnt is PlaceHolder)
                 {
                     PlaceHolder placeHolder1 = (PlaceHolder)ProductAttributes1.FindControl("attrPlaceHolder");
@@ -146,10 +148,10 @@ namespace seoWebApplication
                         {
                             Literal attrLabel = (Literal)cnt2;
                             if (!attrLabel.Text.Contains("<"))
-                            { 
-                            options += attrLabel.Text;
+                            {
+                                options += attrLabel.Text;
                             }
-                            
+
                         }
                         if (cnt2 is DropDownList)
                         {
@@ -157,7 +159,7 @@ namespace seoWebApplication
                             options += attrDropDown.Items[attrDropDown.SelectedIndex] + "; ";
                         }
                     }
-                
+
                 }
             }
 

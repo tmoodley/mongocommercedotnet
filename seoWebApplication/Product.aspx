@@ -54,8 +54,8 @@
             <br />
             <uc3:ProductAttributesRadio ID="ProductAttributesRadio1" runat="server" /> 
             </div>  
-            <uc1:PicturesModals runat="server" id="PicturesModals" />
-            <asp:Button ID="btnAddToCart" runat="server" Text="Add"></asp:Button>
+            <uc1:PicturesModals runat="server" id="PicturesModals" /> 
+            <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click"></asp:Button>
     </section>
      
 
