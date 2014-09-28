@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using seoWebApplication.Data;
 using seoWebApplication.Service;
+using seoWebApplication.st.SharkTankDAL;
 
 namespace seoWebApplication.Controllers
 {
@@ -27,6 +28,10 @@ namespace seoWebApplication.Controllers
                 _departmentService.Create(depts);
             }
             return View(db.departments.ToList());
+        }
+
+        public ActionResult Menu(string Id) { 
+            return PartialView(_departmentService.GetDepartmentsById(dBHelper.GetWebstoreId()));
         }
 
         // GET: /Departments/Details/5

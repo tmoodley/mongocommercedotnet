@@ -68,10 +68,9 @@
                     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=741995452511167";
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));</script>
-                <br />
-                
+                <br /><br /><br /><br /><br /><br /><br /><br />
                 <a class="scroll" href="/shoppingcart.aspx">Cart</a>   
-                <a class="scroll" href="/register.aspx">Register</a> 
+                <a class="scroll" href="/Account/Register">Register</a> 
               
             </div> 
           </div> 

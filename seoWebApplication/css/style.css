@@ -249,8 +249,8 @@ h5 {
 }
 
 #nav{
-	max-height: 90px;
-	min-height: 90px;
+	max-height: 160px;
+	min-height: 160px;
 	overflow: hidden;
 	position: absolute;
 	top: 0px;

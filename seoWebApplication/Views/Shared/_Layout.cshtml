@@ -60,22 +60,14 @@
                 <br />
 
                 <a class="scroll" href="/shoppingcart.aspx">Cart</a>
-                <a class="scroll" href="/register.aspx">Register</a>
+                <a class="scroll" href="/Account/Register">Register</a>
 
             </div>
-        </div>
-        <div class="row">
-            <div class="large-12 columns text-right width100">
-                <ul class="navigation hide-for-small">
-                    <uc3:DepartmentsList runat="server" id="DepartmentsList" />
-                </ul>
-            </div>
-        </div>
+        </div> 
+        @Html.Action("Menu", "Departments")
     </section>
-
-    <br>
-
-
+   
+    <br /><br /><br /><br /><br /><br /><br /><br />
     <a id="work-nav">&nbsp;</a>
     <section id="work" class="row">
         <section class="small-6 columns">
@@ -188,7 +180,7 @@
             </div>
         </div>
 
-        </div><!-- end of contact holder -->
+       <!-- end of contact holder -->
 
 
 
