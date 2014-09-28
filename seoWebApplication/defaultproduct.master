@@ -68,22 +68,24 @@
                     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=741995452511167";
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));</script>
-                <br /><br /><br /><br /><br /><br /><br /><br />
+               
                 <a class="scroll" href="/shoppingcart.aspx">Cart</a>   
                 <a class="scroll" href="/Account/Register">Register</a> 
               
             </div> 
-          </div> 
-	    <div class="row">
-		<div class="large-12 columns text-right width100"> 
+          </div>  
+</section> 
+<section class="row">
+  <div class="pad-small">
+      <div class="large-12 columns text-right width100"> 
 			<ul class="navigation hide-for-small">
                 <uc3:DepartmentsList runat="server" id="DepartmentsList" />  
 			</ul> 
 		</div> 
-	    </div> 
-</section> 
+  </div>
+</section>
            
-        <br>
+        <br /> 
        
 
         <a id="work-nav">&nbsp;</a>
