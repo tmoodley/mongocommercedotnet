@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/default2.Master"  AutoEventWireup="true" CodeBehind="ShoppingCart.aspx.cs" Inherits="seoWebApplication.ShoppingCart" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/defaultproduct.Master"  AutoEventWireup="true" CodeBehind="ShoppingCart.aspx.cs" Inherits="seoWebApplication.ShoppingCart" %>
 
 <%@ Register src="UserControls/ProductRecommendations.ascx" tagname="ProductRecommendations" tagprefix="uc1" %>
 
@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2"
 ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-<div class="panel-innards">
+ <section class="row">
 <p>
 <asp:Label ID="titleLabel" runat="server" Text="Your Shopping Cart" CssClass="CatalogTitle" />
 </p>
@@ -53,11 +53,11 @@ Width="24px" MaxLength="2" Text='<%#Eval("quantity")%>' />
         <asp:Button ID="checkoutButton" runat="server"
 Text="Proceed to Checkout" onclick="checkoutButton_Click" />
 </p>
-</div>
-<div>
+</section>
+ <section class="row">
 
     <uc1:ProductRecommendations ID="ProductRecommendations1" runat="server" />
 
-</div>
+</section>
 </asp:Content>
 

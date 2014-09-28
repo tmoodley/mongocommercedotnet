@@ -124,7 +124,11 @@ namespace seoWebApplication
         protected void AddToCartButton_Click(object sender, EventArgs e)
         {
             // Retrieve ProductID from the query string
-            string productId = Request.QueryString["Product_id"];
+            string pid = Request.QueryString["idProduct"];
+             
+            string[] words = pid.Split(',');
+
+            string productId = words[1];
             // Retrieves product details
             ProductDetails pd = catalogAccesor.GetProductDetails(productId);
             // Retrieve the selected product options

@@ -1,7 +1,8 @@
-﻿ <%@ Page Language="C#" MasterPageFile="~/default2.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="seoWebApplication.Login" %>
+﻿ <%@ Page Language="C#" MasterPageFile="~/defaultproduct.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="seoWebApplication.Login" %>
  <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1"
 runat="server">
-     <center>
+      <section class="row">
+      <center>
          
  
 <table>
@@ -29,5 +30,6 @@ runat="server">
 </table> 
   
     </center>
+      </section>
 </asp:content>
  
