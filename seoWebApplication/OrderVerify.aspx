@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/default2.Master"  AutoEventWireup="true" CodeBehind="OrderVerify.aspx.cs" Inherits="seoWebApplication.OrderVerify" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/defaultproduct.Master"  AutoEventWireup="true" CodeBehind="OrderVerify.aspx.cs" Inherits="seoWebApplication.OrderVerify" %>
 
   
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2"
 ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-<div class="panel-innards">
+<section class="row">
 <p>
 <asp:Label ID="titleLabel" runat="server" CssClass="CatalogTitle" Text="Confirm Your Order" />
 </p>
@@ -73,14 +73,7 @@ Shipping type:
 <br /><br />
 <asp:Button ID="placeOrderButton" runat="server"
 Text="Check Out" OnClick="placeOrderButton_Click" />
-</p>
-
- 
- 
-</div>
-<div>
- 
-
-</div>
+</p> 
+</section>
 </asp:Content>
 

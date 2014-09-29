@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/default2.Master"  AutoEventWireup="true" CodeBehind="Checkout.aspx.cs" Inherits="seoWebApplication.Checkout" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/defaultproduct.Master"  AutoEventWireup="true" CodeBehind="Checkout.aspx.cs" Inherits="seoWebApplication.Checkout" %>
 
   
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -6,7 +6,7 @@
 <asp:Content ID="Content2"
 ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-<center>
+<section class="row">
 <div class="panel-innards">
 <div class="panels">
 <div id="steps">
@@ -826,7 +826,7 @@ Text="Place order" OnClick="placeOrderButton_Click" />
 </ul>         </div>        </div>        </div></div>
 </div>
 </div>
-</center> 
+</section> 
  
   
 </asp:Content>

@@ -8,19 +8,21 @@ using System.Web.UI.WebControls;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.entObject;
+using seoWebApplication.Service;
 
 namespace seoWebApplication
 {
     public partial class OrderVerify : System.Web.UI.Page
     {
+       
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Set the title of the page
-            this.Title = seoWebAppConfiguration.SiteName +
-            " : Verify Order";
-            if (!Convert.ToBoolean(Session["User"]))
+            this.Title = seoWebAppConfiguration.SiteName + " : Verify Order";
+            if (!User.Identity.IsAuthenticated) 
             {
-                Response.Redirect("login.aspx");
+                Response.Redirect("/Account/Login");
             }
             // populate the control only on the initial page load
             if (!IsPostBack)
@@ -44,10 +46,12 @@ namespace seoWebApplication
           
 
               //get customer id
-            int custId;
-            custId = new customerEO().getUserId(Session["UserName"].ToString());
-
-            int pointsAvail = customerEO.getTotalPoints(custId);
+           
+            //custId = new customerEO().getUserId(Session["UserName"].ToString());
+            CustomerService _customerService = new CustomerService();
+            var customer  = _customerService.GetCustomerByUserName(User.Identity.Name);
+            var custId = customer.CellPhone;
+            int pointsAvail = Convert.ToInt32(customer.RewardPoints);
             //load total customer points
             lblPoints.Text = pointsAvail.ToString();
 
@@ -63,29 +67,29 @@ namespace seoWebApplication
                 {
                     points = pointsAvail;
                     txtPoints.Text = points.ToString();
-                    
+
                 }
-                
+
                 appliedPoints = points / pointMultiplier;
                 lblPointsApplied.Text = Decimal.Round(appliedPoints, 2).ToString();
-                lblNewTotal.Text = Decimal.Round((amount -appliedPoints), 2).ToString();
-                  
+                lblNewTotal.Text = Decimal.Round((amount - appliedPoints), 2).ToString();
+
             }
             else
             {
                 lblPointsApplied.Text = Decimal.Round(0, 2).ToString();
                 lblNewTotal.Text = Decimal.Round((amount), 2).ToString();
 
-                newPoints = Convert.ToDecimal(amount * pointsEO.getPointPercentage()); 
-                nwPnts = Convert.ToInt32(newPoints * pointsEO.getPointMultiplier()); 
+                newPoints = Convert.ToDecimal(amount * pointsEO.getPointPercentage());
+                nwPnts = Convert.ToInt32(newPoints * pointsEO.getPointMultiplier());
             }
 
-            if(appliedPoints>0)
+            if (appliedPoints > 0)
             {
                 nwPnts = 0;
             }
 
-            
+
 
             //load Points Name Message
             lblOrderPointsMsg.Text = "This order will get " + nwPnts.ToString() + " " + pointsEO.getPointName();
@@ -156,8 +160,11 @@ namespace seoWebApplication
             cartId = new ShoppingCartEO().shoppingCartId;
 
             int custId;
-            custId = new customerEO().getUserId(Session["UserName"].ToString());
+            // custId = new customerEO().getUserId(Session["UserName"].ToString());
 
+            CustomerService _customerService = new CustomerService();
+            var customer = _customerService.GetCustomerByUserName(User.Identity.Name);
+            custId = Convert.ToInt32(customer.CellPhone);
             //string shippingRegion;
             //shippingRegion = new customerEO().getShippingId(Session["UserName"].ToString());
 

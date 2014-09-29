@@ -9,6 +9,7 @@ using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.entObject;
 using seoWebApplication.st.SharkTankDAL.Framework;
+using seoWebApplication.Service;
 
 namespace seoWebApplication
 {
@@ -21,7 +22,7 @@ namespace seoWebApplication
             // Set the title of the page
             this.Title = seoWebAppConfiguration.SiteName +
             " : Check Out";
-            if (!Convert.ToBoolean(Session["User"]))
+            if (!User.Identity.IsAuthenticated)
             {
                 Response.Redirect("login.aspx");
             }
@@ -50,25 +51,24 @@ namespace seoWebApplication
 
         protected void LoadScreenFromObject()
         {
-            customerEO customer = new customerEO();
+            CustomerService _customerService = new CustomerService();
+            var customer = _customerService.GetCustomerByUserName(User.Identity.Name); 
 
-            customer.Load(new customerEO().getUserId(Session["UserName"].ToString()));
-
-            txtfname.Text = Convert.ToString(customer.fname + ' ' + Convert.ToString(customer.lname));
+            txtfname.Text = Convert.ToString(customer.FirstName + ' ' + Convert.ToString(customer.LastName));
   
-            txtaddress1.Text = Convert.ToString(customer.address1);
+            txtaddress1.Text = Convert.ToString(customer.Address1);
 
-            txtaddress2.Text = Convert.ToString(customer.address2);
+            txtaddress2.Text = Convert.ToString(customer.Address2);
 
-            txtcity.Text = Convert.ToString(customer.city);
+            txtcity.Text = Convert.ToString(customer.City);
              
-            ddlRegion.Items.Insert(0, new ListItem(customer.region.ToString(), "0"));
+            ddlRegion.Items.Insert(0, new ListItem(customer.State.ToString(), "0"));
             ddlRegion.SelectedIndex = 0;
              
 
-            txtzip.Text = Convert.ToString(customer.zip);
+            txtzip.Text = Convert.ToString(customer.Zip);
 
-            ddlCountries.Items.Insert(0, new ListItem(customer.country.ToString(), "0"));
+            ddlCountries.Items.Insert(0, new ListItem(customer.Country.ToString(), "0"));
             ddlCountries.SelectedIndex = 0; 
 
             //txtshippingRegion.Text = Convert.ToString(customer.shippingRegion);
@@ -104,7 +104,7 @@ namespace seoWebApplication
 
             lblTotal.Text = String.Format("{0:c}", amount);  
             //Put the object in the view state so it can be attached back to the data context.
-            ViewState[VIEW_STATE_KEY_customer] = customer;
+            //ViewState[VIEW_STATE_KEY_customer] = customer;
         }
          
 
@@ -118,7 +118,10 @@ namespace seoWebApplication
             decimal amount = OrdersEO.getOrderTotal(cartId);
                
             int custId;
-            custId = new customerEO().getUserId(Session["UserName"].ToString());
+            //custId = new customerEO().getUserId(Session["UserName"].ToString());
+            CustomerService _customerService = new CustomerService();
+            var customer = _customerService.GetCustomerByUserName(User.Identity.Name);
+            custId = Convert.ToInt32(customer.CellPhone);
 
             //string shippingRegion;
             //shippingRegion = new customerEO().getShippingId(Session["UserName"].ToString());
@@ -144,7 +147,7 @@ namespace seoWebApplication
             //        break;
             //} 
             // Update Order
-            int completed = new OrdersEO().CompleteOrder(cartId, true, txtfname.Text.ToString(), Session["UserName"].ToString(), txtaddress1.Text.ToString(), custId, 1, "1234".ToString(), "good".ToString(), 1, 9, amount);
+            int completed = new OrdersEO().CompleteOrder(cartId, true, txtfname.Text.ToString(), User.Identity.Name.ToString(), txtaddress1.Text.ToString(), custId, 1, "1234".ToString(), "good".ToString(), 1, 9, amount);
 
             decimal newPoints = Convert.ToDecimal(amount * pointsEO.getPointPercentage());
 
@@ -172,8 +175,8 @@ namespace seoWebApplication
             }
 
             // Process order
-            OrderProcessor processor = new OrderProcessor(orderId);
-            processor.Process();
+            //OrderProcessor processor = new OrderProcessor(orderId);
+            //processor.Process();
 
             // Redirect to the conformation page
             Response.Redirect("OrderPlaced.aspx");

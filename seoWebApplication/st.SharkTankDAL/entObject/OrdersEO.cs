@@ -5,6 +5,8 @@ using System.Web;
 using System.Text; 
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
+using seoWebApplication.Service;
+using seoWebApplication.Models;
 
 namespace seoWebApplication.st.SharkTankDAL.dataObject
 {
@@ -113,7 +115,26 @@ namespace seoWebApplication.st.SharkTankDAL.dataObject
 
         public int CompleteOrder(string cartID, bool completed, string customerName, string customerEmail, string shippingAddress, int customerID, int status, string authCode, string reference, int taxID, int shippingID, decimal total)
         {
-            return new OrdersData().COMPLETEORDER(cartID, completed, customerName, customerEmail, shippingAddress, customerID, status, authCode, reference, taxID, shippingID, total);
+            Orders o = new Orders();
+            o.cart_id = cart_id;
+            o.Completed = completed;
+            o.CustomerName = customerName;
+            o.CustomerEmail = customerEmail;
+            o.ShippingAddress = shippingAddress;
+            o.CustomerID = customerID;
+            o.Status = status;
+            o.AuthCode = authCode;
+            o.Reference = reference;
+            o.TaxID = taxID;
+            o.ShippingID = shippingID;
+            o.total = total;
+
+            OrderService _orderService = new OrderService();
+            _orderService.Create(o);
+
+            return Convert.ToInt32(o.CustomerID);
+
+            //return new OrdersData().COMPLETEORDER(cartID, completed, customerName, customerEmail, shippingAddress, customerID, status, authCode, reference, taxID, shippingID, total);
         }
 
         public int getOrderIdByCartId(string cartID)

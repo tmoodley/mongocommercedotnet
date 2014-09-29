@@ -5,6 +5,7 @@ using System.Web;
 using System.Text;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
+using seoWebApplication.Service;
 
 namespace seoWebApplication.st.SharkTankDAL.entObject
 {
@@ -207,23 +208,11 @@ namespace seoWebApplication.st.SharkTankDAL.entObject
 
         internal static void updateTotalPoints(int cId, int points)
         {
-            int newPoints, oldPoints;
-            customerEO cust = new customerEO();
-            cust.Load(cId);
-            newPoints = points;
-            oldPoints = Convert.ToInt32(cust.rewardPoints);
-
-            //check if new points are greater than old points
-            if (newPoints > oldPoints)
-            {
-                newPoints -= oldPoints;
-            }
-            else
-            {
-                newPoints = 0;
-            }
-            cust.rewardPoints = newPoints;
-            cust.Save(false); 
+            int newPoints, oldPoints; 
+            CustomerService _customerService = new CustomerService();
+            _customerService.updateTotalPoints(cId, points);
+             
+           
         }
 
         internal static int getTotalPoints(int cId)

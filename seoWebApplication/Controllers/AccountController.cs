@@ -90,6 +90,7 @@ namespace seoWebApplication.Controllers
             switch (result)
             {
                 case seoWebApplication.Models.SignInStatus.Success:
+                    Session["UserName"] = user.UserName;
                     return RedirectToLocal(returnUrl);
                 case seoWebApplication.Models.SignInStatus.LockedOut:
                     return View("Lockout");
