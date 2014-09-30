@@ -9,6 +9,7 @@ using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.entObject;
 using seoWebApplication.Service;
+using seoWebApplication.Models;
 
 namespace seoWebApplication
 {
@@ -33,7 +34,7 @@ namespace seoWebApplication
         private void PopulateControls(int points)
         {
             // get the items in the shopping cart
-            DataTable dt = ShoppingCartAccess.GetItems();
+            IList<mShoppingCart> dt = ShoppingCartAccess.GetItems();
             // populate the list with the shopping cart contents
             grid.DataSource = dt;
             grid.DataBind();

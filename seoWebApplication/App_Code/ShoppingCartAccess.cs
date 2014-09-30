@@ -14,16 +14,18 @@ using System.Web.UI.HtmlControls;
 using System.Net;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.entObject;
+using seoWebApplication.Service;
+using seoWebApplication.Models;
 
 namespace seoWebApplication
 {
     public class ShoppingCartAccess
     {
+        
         public ShoppingCartAccess()
         {
             //
-            // TODO: Add constructor logic here
-            //
+            // TODO: Add constructor logic here 
         }
 
         
@@ -77,41 +79,23 @@ namespace seoWebApplication
         // Add a new shopping cart item
         public static bool AddItem(string product_id, string attributes)
         {
-            // get a configured DbCommand object
-            DbCommand comm = GenericDataAccessor.CreateCommand();
-            // set the stored procedure name
-            comm.CommandText = "ShoppingCartAddItem";
-            // create a new parameter
-            DbParameter param = comm.CreateParameter();
-            param.ParameterName = "@cart_id";
-            param.Value = shoppingCartId;
-            param.DbType = DbType.String;
-            param.Size = 36;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@product_id";
-            param.Value = product_id;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@webstore_id";
-            param.Value = dBHelper.GetWebstoreId();
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@attributes";
-            param.Value = attributes;
-            param.DbType = DbType.String;
-            comm.Parameters.Add(param);
+            ShoppingCartService _shoppingcartservice = new ShoppingCartService();
+            ProductService _productservice = new ProductService();
+            mShoppingCart sc = new mShoppingCart();
+            sc.cart_id = shoppingCartId;
+            sc.attributes = attributes;
+            sc.dateadded = DateTime.Now;
+            sc.product_id = Convert.ToInt32(product_id);
+            var _product = _productservice.GetProduct(product_id);
+            sc.name = _product.name;
+            sc.price = _product.price;
+            sc.subtotal = _product.price * 1;
+            sc.quantity = 1;
             // returns true in case of success and false in case of an error
             try
             {
-                // execute the stored procedure and return true if it executes
-                // successfully, and false otherwise
-                return (GenericDataAccessor.ExecuteNonQuery(comm) != -1);
+                // execute the stored procedure and return true if it executes 
+                return _shoppingcartservice.Create(sc); 
             }
             catch
             {
@@ -124,41 +108,25 @@ namespace seoWebApplication
         // Update the quantity of a shopping cart item
         public static bool UpdateItem(string product_id, int quantity)
         {
-            // get a configured DbCommand object
-            DbCommand comm = GenericDataAccessor.CreateCommand();
-            // set the stored procedure name
-            comm.CommandText = "ShoppingCartUpdateItem";
-            // create a new parameter
-            DbParameter param = comm.CreateParameter();
-            param.ParameterName = "@cart_id";
-            param.Value = shoppingCartId;
-            param.DbType = DbType.String;
-            param.Size = 36;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@product_id";
-            param.Value = product_id;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@webstore_id";
-            param.Value = dBHelper.GetWebstoreId();
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@quantity";
-            param.Value = quantity;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
+            ShoppingCartService _shoppingcartservice = new ShoppingCartService();
+            ProductService _productservice = new ProductService();
+            mShoppingCart sc = new mShoppingCart();
+            sc.cart_id = shoppingCartId;
+            sc.quantity = quantity;
+            sc.dateadded = DateTime.Now;
+            sc.product_id = Convert.ToInt32(product_id);
+            sc.webstore_id = dBHelper.GetWebstoreId();
+            var _product = _productservice.GetProduct(product_id);
+            sc.name = _product.name;
+            sc.price = _product.price;
+            sc.subtotal = _product.price * quantity;
+            sc.quantity = quantity;
             // returns true in case of success and false in case of an error
             try
             {
                 // execute the stored procedure and return true if it executes
                 // successfully, and false otherwise
-                return (GenericDataAccessor.ExecuteNonQuery(comm) != -1);
+                return _shoppingcartservice.Update(sc);
             }
             catch
             {
@@ -171,35 +139,18 @@ namespace seoWebApplication
         // Remove a shopping cart item
         public static bool RemoveItem(string product_id)
         {
-            // get a configured DbCommand object
-            DbCommand comm = GenericDataAccessor.CreateCommand();
-            // set the stored procedure name
-            comm.CommandText = "ShoppingCartRemoveItem";
-            // create a new parameter
-            DbParameter param = comm.CreateParameter();
-            param.ParameterName = "@cart_id";
-            param.Value = shoppingCartId;
-            param.DbType = DbType.String;
-            param.Size = 36;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@product_id";
-            param.Value = product_id;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@webstore_id";
-            param.Value = dBHelper.GetWebstoreId();
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
+            ShoppingCartService _shoppingcartservice = new ShoppingCartService();
+            mShoppingCart sc = new mShoppingCart();
+            sc.cart_id = shoppingCartId; 
+            sc.dateadded = DateTime.Now;
+            sc.product_id = Convert.ToInt32(product_id);
+            sc.webstore_id = dBHelper.GetWebstoreId(); 
             // returns true in case of success and false in case of an error
             try
             {
                 // execute the stored procedure and return true if it executes
                 // successfully, and false otherwise
-                return (GenericDataAccessor.ExecuteNonQuery(comm) != -1);
+                return _shoppingcartservice.Delete(sc);
             }
             catch
             {
@@ -210,52 +161,20 @@ namespace seoWebApplication
         }
 
         // Retrieve shopping cart items
-        public static DataTable GetItems()
+        public static IList<mShoppingCart> GetItems()
         {
-        // get a configured DbCommand object
-        DbCommand comm = GenericDataAccessor.CreateCommand();
-        // set the stored procedure name
-        comm.CommandText = "ShoppingCartGetItems";
-        // create a new parameter
-        DbParameter param = comm.CreateParameter();
-        param.ParameterName = "@cart_id";
-        param.Value = shoppingCartId;
-        param.DbType = DbType.String;
-        param.Size = 36;
-        comm.Parameters.Add(param);
-        // create a new parameter
-        param = comm.CreateParameter();
-        param.ParameterName = "@webstore_id";
-        param.Value = dBHelper.GetWebstoreId();
-        param.DbType = DbType.Int32;
-        comm.Parameters.Add(param);
-        // return the result table
-        DataTable table = GenericDataAccessor.ExecuteSelectCommand(comm);
-        return table;
+            ShoppingCartService _shoppingcartservice = new ShoppingCartService();
+            var items = _shoppingcartservice.GetShoppingCartById(shoppingCartId);
+       
+            return items;
         }
 
         // Retrieve shopping cart items
         public static decimal GetTotalAmount()
-        {
-            // get a configured DbCommand object
-            DbCommand comm = GenericDataAccessor.CreateCommand();
-            // set the stored procedure name
-            comm.CommandText = "ShoppingCartGetTotalAmount";
-            // create a new parameter
-            DbParameter param = comm.CreateParameter();
-            param.ParameterName = "@cart_id";
-            param.Value = shoppingCartId;
-            param.DbType = DbType.String;
-            param.Size = 36;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@webstore_id";
-            param.Value = dBHelper.GetWebstoreId();
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
+        { 
             // return the result table
-            return Decimal.Parse(GenericDataAccessor.ExecuteScalar(comm));
+            ShoppingCartService _shoppingcartservice = new ShoppingCartService(); 
+            return _shoppingcartservice.GetShoppingTotalById(shoppingCartId);
         }
 
         // Retrieve shopping cart items

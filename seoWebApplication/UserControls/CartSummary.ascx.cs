@@ -1,5 +1,7 @@
-﻿using System;
+﻿using seoWebApplication.Models;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
@@ -35,9 +37,9 @@ namespace seoWebApplication.UserControls
         private void PopulateControls()
         {
         // get the items in the shopping cart
-        System.Data.DataTable dt = ShoppingCartAccess.GetItems();
+            IList<mShoppingCart> dt = ShoppingCartAccess.GetItems();
         // if the shopping cart is empty...
-        if (dt.Rows.Count == 0)
+        if (dt.Count == 0)
         {
         cartSummaryLabel.Text = "Your shopping cart is empty.";
         totalAmountLabel.Text = String.Format("{0:c}", 0);

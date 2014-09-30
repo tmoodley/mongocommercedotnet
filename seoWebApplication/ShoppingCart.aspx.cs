@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using seoWebApplication.Models;
 
 namespace seoWebApplication
 {
@@ -28,9 +29,9 @@ namespace seoWebApplication
             this.ProductRecommendations1.LoadCartRecommendations();
 
             // get the items in the shopping cart
-            DataTable dt = ShoppingCartAccess.GetItems();
+            IList<mShoppingCart> dt = ShoppingCartAccess.GetItems();
             // if the shopping cart is empty...
-            if (dt.Rows.Count == 0)
+            if (dt.Count == 0)
             {
                 titleLabel.Text = "Your shopping cart is empty!";
                 grid.Visible = false;

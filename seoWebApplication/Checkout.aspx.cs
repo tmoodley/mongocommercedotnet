@@ -10,6 +10,7 @@ using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.entObject;
 using seoWebApplication.st.SharkTankDAL.Framework;
 using seoWebApplication.Service;
+using seoWebApplication.Models;
 
 namespace seoWebApplication
 {
@@ -42,11 +43,7 @@ namespace seoWebApplication
             decimal amount = ShoppingCartAccess.GetTotalAmount();
             totalAmountLabel.Text = String.Format("{0:c}", amount);    
             // check customer details
-
-           
              
-             
- 
         }
 
         protected void LoadScreenFromObject()
@@ -147,7 +144,8 @@ namespace seoWebApplication
             //        break;
             //} 
             // Update Order
-            int completed = new OrdersEO().CompleteOrder(cartId, true, txtfname.Text.ToString(), User.Identity.Name.ToString(), txtaddress1.Text.ToString(), custId, 1, "1234".ToString(), "good".ToString(), 1, 9, amount);
+            IList<mShoppingCart> lineitem = ShoppingCartAccess.GetItems();
+            int completed = new OrdersEO().CompleteOrder(cartId, true, txtfname.Text.ToString(), User.Identity.Name.ToString(), txtaddress1.Text.ToString(), custId, 1, "1234".ToString(), "good".ToString(), 1, 9, amount, lineitem);
 
             decimal newPoints = Convert.ToDecimal(amount * pointsEO.getPointPercentage());
 

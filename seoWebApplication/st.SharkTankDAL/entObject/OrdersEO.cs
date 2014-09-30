@@ -113,7 +113,7 @@ namespace seoWebApplication.st.SharkTankDAL.dataObject
             return new OrdersData().CREATEORDER(cartID, CustomerID, taxId, shippingId, total);
         }
 
-        public int CompleteOrder(string cartID, bool completed, string customerName, string customerEmail, string shippingAddress, int customerID, int status, string authCode, string reference, int taxID, int shippingID, decimal total)
+        public int CompleteOrder(string cartID, bool completed, string customerName, string customerEmail, string shippingAddress, int customerID, int status, string authCode, string reference, int taxID, int shippingID, decimal total, IList<mShoppingCart> lineitem)
         {
             Orders o = new Orders();
             o.cart_id = cart_id;
@@ -128,6 +128,7 @@ namespace seoWebApplication.st.SharkTankDAL.dataObject
             o.TaxID = taxID;
             o.ShippingID = shippingID;
             o.total = total;
+            o.lineitem = lineitem;
 
             OrderService _orderService = new OrderService();
             _orderService.Create(o);

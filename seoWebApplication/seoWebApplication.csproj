@@ -1551,6 +1551,7 @@
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Results.cs" />
+    <Compile Include="Models\mShoppingCart.cs" />
     <Compile Include="Models\Subscribe.cs" />
     <Compile Include="Models\Subscriber.cs" />
     <Compile Include="Models\Orders.cs" />
@@ -1626,6 +1627,7 @@
     <Compile Include="Service\CategoriesService.cs" />
     <Compile Include="Service\CustomerService.cs" />
     <Compile Include="Service\OrderService.cs" />
+    <Compile Include="Service\ShoppingCartService.cs" />
     <Compile Include="Service\ProductService.cs" />
     <Compile Include="Service\DepartmentService.cs" />
     <Compile Include="Service\DeviceLogService.cs" />
