@@ -10,7 +10,9 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq; 
+using System.Xml.Linq;
+using seoWebApplication.Service;
+using seoWebApplication.Models; 
 
 namespace seoWebApplication
 {
@@ -112,15 +114,14 @@ namespace seoWebApplication
                 // get first page url and pager format
                 firstPageUrl = Linkor.ToDepartment(department_id, "1");
                 pagerFormat = Linkor.ToDepartment(department_id, "{0}");
-                using (var dc = new seowebappDataContext())
-                {
-                    CatalogGetdepartmentDetailsResult dd = dc.CatalogGetdepartmentDetails(Convert.ToInt32(department_id)).SingleOrDefault();
-                    catalogDescriptionLabel.Text = HttpUtility.HtmlEncode(dd.description);
-                    catalogTitleLabel.Text = HttpUtility.HtmlEncode(dd.name);
-                    this.Title = HttpUtility.HtmlEncode(seoWebAppConfiguration.SiteName +
-            ": " + dd.name);
+                
+                var dc = new DepartmentService();
+                    Departments dd = dc.GetDepartmentsById(Convert.ToInt32(department_id));
+                    catalogDescriptionLabel.Text = HttpUtility.HtmlEncode(dd.Description);
+                    catalogTitleLabel.Text = HttpUtility.HtmlEncode(dd.Name);
+                    this.Title = HttpUtility.HtmlEncode(seoWebAppConfiguration.SiteName + ": " + dd.Name);
 
-                }
+                
                 //DepartmentDetails dd =
                 //CatalogAccess.GetDepartmentDetails(department_id);
                 //catalogTitleLabel.Text = HttpUtility.HtmlEncode(dd.Name);

@@ -55,6 +55,6 @@ namespace seoWebApplication.Models
         public byte[] Version { get; set; } 
         public IList<mAttribute> Attributes { get; set; }
 
-        public IList<Categories> Categories { get; set; }
+        public List<Categories> Categories { get; set; } 
     }
 }

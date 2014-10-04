@@ -109,8 +109,8 @@ namespace seoWebApplication.st.SharkTankDAL
         {
             var dc = new DepartmentService();
             ddl.DataSource = dc.GetDepartments();
-                ddl.DataTextField = "name";
-                ddl.DataValueField = "department_id";
+                ddl.DataTextField = "Name";
+                ddl.DataValueField = "Department_id";
                 ddl.DataBind();
                 if(Id>0)
                 ddl.SelectedValue = Id.ToString();
@@ -120,17 +120,16 @@ namespace seoWebApplication.st.SharkTankDAL
         public static void LoadDdlCategory(DropDownList ddl, int Id)
         {
 
-            using (var dc = new seowebappDataContextDataContext())
-            {
-                ddl.DataSource = dc.categorySelectByWId(dBHelper.GetWebstoreId());
+                var dc = new CategoriesService();
+                ddl.DataSource = dc.GetCategories();
                 ddl.DataTextField = "Name";
-                ddl.DataValueField = "category_id";
+                ddl.DataValueField = "Category_id";
                 ddl.DataBind();
                 if (Id > 0)
                 {
                     ddl.SelectedValue = Id.ToString();
                 }
-            }
+            
         }
     }
 }

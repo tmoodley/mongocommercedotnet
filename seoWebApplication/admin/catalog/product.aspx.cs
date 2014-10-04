@@ -25,7 +25,7 @@ namespace seoWebApplication.admin
 
              int id = commonClasses.GetId();
              var dc = new ProductService();
-             if (id > 0)
+             if (id > 0 && !IsPostBack)
              {
                  LoadScreenFromObject(dc.GetProduct(id));
              } 
@@ -212,9 +212,9 @@ namespace seoWebApplication.admin
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 string cId, pid;
-                mProducts obj = (mProducts)(e.Row.DataItem);
+                Categories obj = (Categories)(e.Row.DataItem);
                 cId = obj.category_id.ToString();
-                pid = obj.product_id.ToString();
+                pid = commonClasses.GetId().ToString();
                 //Add the edit link to the action column.
                 HyperLink editLink = new HyperLink();
 
@@ -294,15 +294,15 @@ namespace seoWebApplication.admin
         public void loadCatGrid()
         { 
                 BoundField bf1 = new BoundField();
-                bf1.DataField = "name";
+                bf1.DataField = "Name";
                 bf1.HeaderText = "Name";
 
                 BoundField bf2 = new BoundField();
-                bf2.DataField = "description";
+                bf2.DataField = "Description";
                 bf2.HeaderText = "Description";
 
                 BoundField bf3 = new BoundField();
-                bf3.DataField = "category_id";
+                bf3.DataField = "Category_id";
                 bf3.HeaderText = "Action";
   
 

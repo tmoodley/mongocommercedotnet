@@ -15,6 +15,7 @@ using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.Service;
 using seoWebApplication.Models;
+using System.Collections.Generic;
  
 namespace seoWebApplication
 {
@@ -113,24 +114,14 @@ namespace seoWebApplication
         // get department details
         public static DepartmentDetails GetDepartmentDetails(string department_id)
         {
-            // get a configured DbCommand object
-            DbCommand comm = GenericDataAccessor.CreateCommand();
-            // set the stored procedure name
-            comm.CommandText = "CatalogGetDepartmentDetails";
-            // create a new parameter
-            DbParameter param = comm.CreateParameter();
-            param.ParameterName = "@department_id";
-            param.Value = department_id;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // execute the stored procedure
-            DataTable table = GenericDataAccessor.ExecuteSelectCommand(comm);
-            // wrap retrieved data into a DepartmentDetails object
+
+            var dc = new DepartmentService();
+            Departments dept = dc.GetDepartmentsById(Convert.ToInt32(department_id));
             DepartmentDetails details = new DepartmentDetails();
-            if (table.Rows.Count > 0)
+            if (dept != null)
             {
-                details.name = table.Rows[0]["name"].ToString();
-                details.description = table.Rows[0]["description"].ToString();
+                details.name = dept.Name.ToString();
+                details.description = dept.Description.ToString();
             }
             // return department details
             return details;
@@ -252,55 +243,21 @@ namespace seoWebApplication
         }
 
         // retrieve the list of products featured for a department
-        public static DataTable GetProductsOnDeptPromo(string department_id, string pageNumber, out int howManyPages)
+        public static IList<mProducts> GetProductsOnDeptPromo(string department_id, string pageNumber, out int howManyPages)
         {
-            // get a configured DbCommand object
-            DbCommand comm = GenericDataAccessor.CreateCommand();
-            // set the stored procedure name
-            comm.CommandText = "CatalogGetProductsOnDeptPromo";
-            // create a new parameter
-            DbParameter param = comm.CreateParameter();
-            param.ParameterName = "@department_id";
-            param.Value = department_id;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@webstore_id";
-            param.Value = dBHelper.GetWebstoreId();
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@DescriptionLength";
-            param.Value = seoWebAppConfiguration.ProductDescriptionLength;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@PageNumber";
-            param.Value = pageNumber;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@ProductsPerPage";
-            param.Value = seoWebAppConfiguration.ProductsPerPage;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // create a new parameter
-            param = comm.CreateParameter();
-            param.ParameterName = "@HowManyProducts";
-            param.Direction = ParameterDirection.Output;
-            param.DbType = DbType.Int32;
-            comm.Parameters.Add(param);
-            // execute the stored procedure and save the results in a DataTable
-            DataTable table = GenericDataAccessor.ExecuteSelectCommand(comm);
-            // calculate how many pages of products and set the out parameter
-            int howManyProducts = Int32.Parse(comm.Parameters["@HowManyProducts"].Value.ToString());
-            howManyPages = (int)Math.Ceiling((double)howManyProducts / (double)seoWebAppConfiguration.ProductsPerPage);
+            var dc = new ProductService();
+            IList<mProducts> prods = dc.GetProductsOnDeptPromo(department_id, pageNumber);
+             int howManyProducts = Int32.Parse(prods.Count.ToString());
+            var PageSize = seoWebAppConfiguration.ProductsPerPage;
+            howManyPages = (int)Math.Ceiling((double)howManyProducts / (double)PageSize);
+            int page = Convert.ToInt32(pageNumber);
+            IList<mProducts> products = (from p in prods select p).Skip((page -1) * howManyPages).Take(PageSize).ToList();
+
+            var descLength = seoWebAppConfiguration.ProductDescriptionLength;
+               
+           
             // return the page of products
-            return table;
+            return products;
         }
         // retrieve the list of products in a category
         public static DataTable GetProductsInCategory(string category_id, string pageNumber, out int howManyPages)

@@ -6,7 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
-using seoWebApplication.st.SharkTankDAL.Framework; 
+using seoWebApplication.st.SharkTankDAL.Framework;
+using seoWebApplication.Service; 
 
 namespace seoWebApplication.admin.catalog
 {
@@ -16,7 +17,9 @@ namespace seoWebApplication.admin.catalog
         {
             int id = commonClasses.GetId();
             int pid = commonClasses.GetP_order_id();
-            categoryEO.delProductToCategory(id, pid);
+
+            var dc = new ProductService();
+            dc.DeleteCategory(id, pid);
             string qryStr = StringHelpers.EncryptQueryString("id=" + id);
             Response.Redirect("product.aspx" + qryStr);
         

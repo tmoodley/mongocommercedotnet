@@ -77,6 +77,9 @@ namespace seoWebApplication.Service
              }
          }
 
+         
+        
+
          public int GetLastId()
         {
             try

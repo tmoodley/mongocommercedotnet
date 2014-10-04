@@ -31,7 +31,7 @@ namespace seoWebApplication.Controllers
         }
 
         public ActionResult Menu(string Id) { 
-            return PartialView(_departmentService.GetDepartmentsById(dBHelper.GetWebstoreId()));
+            return PartialView(_departmentService.GetDepartments());
         }
 
         // GET: /Departments/Details/5
