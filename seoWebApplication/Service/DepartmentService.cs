@@ -84,8 +84,9 @@ namespace seoWebApplication.Service
         {
             try
             {
-                var query = (from d in GetDepartments() orderby d.department_id ascending select d).First();
+                var query = (from d in GetDepartments() orderby d.department_id descending select d).First();
 
+                
                 return query.department_id + 1;
             }
             catch {
