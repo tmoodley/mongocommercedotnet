@@ -6,11 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
-using seoWebApplication.st.SharkTankDAL.Framework; 
+using seoWebApplication.st.SharkTankDAL.Framework;
+using seoWebApplication.Service;
+using seoWebApplication.Models; 
 
 namespace seoWebApplication.admin.catalog
 {
-    public partial class category : BaseEditPage<categoryEO>
+    public partial class category : System.Web.UI.Page
     {
         private const string VIEW_STATE_KEY_category = "category";
         protected void Page_Load(object sender, EventArgs e)
@@ -18,25 +20,25 @@ namespace seoWebApplication.admin.catalog
             Master.SaveButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_SaveButton_Click);
             Master.CancelButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_CancelButton_Click);
             Master.DeleteButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_DeleteButton_Click);
-
+            txtwebstore_id.Text = dBHelper.GetWebstoreId().ToString();
+            txtInsertENTUserAccountId.Text = "1";
+            var dc = new CategoriesService();
+            int id = commonClasses.GetId();
+            if (id > 0)
+            {
+                LoadScreenFromObject(dc.GetCategoryById(id));
+            }
+            else {
+                commonClasses.LoadDdlDept(ddlDepartments, 0);
+            }
         }
 
         void Master_DeleteButton_Click(object sender, EventArgs e)
         {
             ENTValidationErrors validationErrors = new ENTValidationErrors();
-            categoryEO category = (categoryEO)ViewState[VIEW_STATE_KEY_category];
-            LoadObjectFromScreen(category);
-
-            category.DBAction = ENTBaseEO.DBActionEnum.Delete;
-
-            if (!category.Delete(ref validationErrors, 1))
-            { 
-                Master.ValidationErrors = validationErrors;
-            }
-            else
-            {
-                GoToGridPage();
-            }
+            var dc = new CategoriesService();
+            dc.Delete(commonClasses.GetId());
+            GoToGridPage();
         }
 
         void Master_CancelButton_Click(object sender, EventArgs e)
@@ -47,34 +49,32 @@ namespace seoWebApplication.admin.catalog
         void Master_SaveButton_Click(object sender, EventArgs e)
         {
             ENTValidationErrors validationErrors = new ENTValidationErrors();
-            categoryEO category = (categoryEO)ViewState[VIEW_STATE_KEY_category];
-            LoadObjectFromScreen(category);
-            if (!category.Save(ref validationErrors, 1))
+            Categories categories = new Categories();
+            categories.webstore_id = dBHelper.GetWebstoreId();
+            LoadObjectFromScreen(categories);
+            try
             {
-                //Master.ValidationErrors = validationErrors;
+                var dc = new CategoriesService();
+                dc.Create(categories);
+                GoToGridPage();
             }
-            else
+            catch
             {
                 GoToGridPage();
             }
         }
 
-        protected override void LoadObjectFromScreen(categoryEO baseEO)
-        {
+        protected void LoadObjectFromScreen(Categories baseEO)
+        { 
+            baseEO.department_id = Convert.ToInt32(this.ddlDepartments.SelectedValue); 
 
-            baseEO.department_id = Convert.ToInt32(this.ddlDepartments.SelectedValue);
+            baseEO.Name = txtname.Text;
 
-            baseEO.webstore_id = Convert.ToInt32(txtwebstore_id.Text);
+            baseEO.Description = txtdescription.Text;
 
-            baseEO.name = txtname.Text;
+            baseEO.category_id = commonClasses.GetId();
 
-            baseEO.description = txtdescription.Text;
-
-            categoryEO category = (categoryEO)ViewState[VIEW_STATE_KEY_category];
-
-            baseEO.ID = category.category_id;
-
-            if (baseEO.ID == 0)
+            if (baseEO.category_id == 0)
             {
                 baseEO.InsertENTUserAccountId = Convert.ToInt32(Session["AdminUserId"]);
             }
@@ -85,18 +85,18 @@ namespace seoWebApplication.admin.catalog
              
         }
 
-        protected override void LoadScreenFromObject(categoryEO baseEO)
+        protected void LoadScreenFromObject(Categories baseEO)
         { 
 
-            loadDdlDept(ddlDepartments, baseEO.department_id);
+            commonClasses.LoadDdlDept(ddlDepartments, baseEO.department_id);
 
             txtwebstore_id.Text = Convert.ToString(dBHelper.GetWebstoreId());
 
-            txtname.Text = Convert.ToString(baseEO.name);
+            txtname.Text = Convert.ToString(baseEO.Name);
 
-            txtdescription.Text = Convert.ToString(baseEO.description);
+            txtdescription.Text = Convert.ToString(baseEO.Description);
 
-            if (baseEO.ID == 0)
+            if (baseEO.category_id == 0)
             {
                 baseEO.InsertENTUserAccountId = Convert.ToInt32(Session["AdminUserId"]);
             }
@@ -105,26 +105,23 @@ namespace seoWebApplication.admin.catalog
                 baseEO.UpdateENTUserAccountId = Convert.ToInt32(Session["AdminUserId"]);
             }
 
-            txtInsertENTUserAccountId.Text = Convert.ToString(baseEO.InsertENTUserAccountId);
-            //Put the object in the view state so it can be attached back to the data context.
-            ViewState[VIEW_STATE_KEY_category] = baseEO;
+            txtInsertENTUserAccountId.Text = Convert.ToString(baseEO.InsertENTUserAccountId); 
         }
 
-        protected override void LoadControls()
+        protected void LoadControls()
         {
         }
-        protected override void GoToGridPage()
+        protected void GoToGridPage()
         {
             Response.Redirect("categories.aspx");
         }
 
         public void ReloadPage()
-        {
-            categoryEO category = (categoryEO)ViewState[VIEW_STATE_KEY_category];
-            Response.Redirect("category.aspx" + EncryptQueryString("id=" + (category.category_id)));
+        { 
+            Response.Redirect("category.aspx" + EncryptQueryString.Get("id=" + (commonClasses.GetId())));
         }
 
-        public override string MenuItemName()
+        public string MenuItemName()
         {
             return "category";
         }

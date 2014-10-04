@@ -15,17 +15,42 @@ using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.Framework;
 using seoWebApplication.DAL;
+using seoWebApplication.Service;
 
 
 namespace seoWebApplication
 {
     public partial class _Default : System.Web.UI.Page
     {
+        public bool loggedIn;
+        public string storeName;
+        public string seoDesc;
+        public string seoKeywords;
+        public string seoTitle;
+        public string imgLogo; 
+        public int webstoreId;
+
+        public string address;
+        public string city2;
+        public int phone;
+        public string url;
+        public string host;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            CreateDocumentDb.CreateDb();
+            webstoreId = seoWebAppConfiguration.IdWebstore;
 
-            this.Title = seoWebAppConfiguration.SiteName;
+            storeName = seoWebAppConfiguration.StoreName;
+            seoDesc = seoWebAppConfiguration.StoreDesc + " at " + storeName;
+            seoKeywords = seoWebAppConfiguration.StoreKeywords + " at " + storeName;
+            seoTitle = seoWebAppConfiguration.StoreTitle;
+            address = seoWebAppConfiguration.StoreAddress;
+            city2 = seoWebAppConfiguration.StoreCity;
+            phone = Convert.ToInt32(seoWebAppConfiguration.StorePhone);
+            imgLogo = seoWebAppConfiguration.StoreImgLogo;
+            url = HttpContext.Current.Request.Url.AbsoluteUri;
+            host = HttpContext.Current.Request.Url.Host;
 
             // Retrieve Page from the query string
             string page = Request.QueryString["Page"];
@@ -37,8 +62,9 @@ namespace seoWebApplication
             string pagerFormat = "";
             // If browsing a category...
 
-            // Retrieve list of products on department promotion             
-            list.DataSource = catalogAccesor.GetProductsOnFrontPromo(page, out howManyPages);
+            // Retrieve list of products on department promotion         
+            var dc = new ProductService();
+            list.DataSource = dc.GetProductsOnFrontPromo();
             list.DataBind();
 
             // have the current page as integer

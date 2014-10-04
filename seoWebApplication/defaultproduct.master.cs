@@ -1,4 +1,5 @@
 ﻿using seoWebApplication.Data;
+using seoWebApplication.st.SharkTankDAL;
 using System;
 using System.Collections;
 using System.Configuration;
@@ -34,18 +35,14 @@ namespace seoWebApplication
         {  
             webstoreId = seoWebAppConfiguration.IdWebstore;
 
-            SeoWebAppEntities db = new SeoWebAppEntities();
-            var store = (from ws in db.webstores where ws.webstore_id == webstoreId select ws).FirstOrDefault();
-            var idCity = store.city;
-            var city = (from ws in db.cities where ws.idCity == idCity select ws).FirstOrDefault();
-            storeName = store.webstoreName;
-            seoDesc = store.seoDescription + " at "+ storeName;
-            seoKeywords = store.seoKeywords + " at " + storeName;
-            seoTitle = store.seoTitle;
-            address = store.address;
-            city2 = city.city1;
-            phone = Convert.ToInt32(store.ownerNumber);
-            imgLogo = store.image;
+            storeName = seoWebAppConfiguration.StoreName;
+            seoDesc = seoWebAppConfiguration.StoreDesc + " at " + storeName;
+            seoKeywords = seoWebAppConfiguration.StoreKeywords + " at " + storeName;
+            seoTitle = seoWebAppConfiguration.StoreTitle;
+            address = seoWebAppConfiguration.StoreAddress;
+            city2 = seoWebAppConfiguration.StoreCity;
+            phone = Convert.ToInt32(seoWebAppConfiguration.StorePhone);
+            imgLogo = seoWebAppConfiguration.StoreImgLogo;
             url = HttpContext.Current.Request.Url.AbsoluteUri;
             host = HttpContext.Current.Request.Url.Host;
 

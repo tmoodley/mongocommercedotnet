@@ -41,22 +41,31 @@ namespace seoWebApplication.st.SharkTankDAL.dataObject
 
         public bool Login(string email, string password)
         {
-            //Get the entity object from the DAL.
-            UserAccount userAccount = new UserAccountData().Login(email);
-           
-            string pw3;
-            pw3 = userAccount.Password.ToString();
-
-            string strPassword2;
-            strPassword2 = phasher.Hash(password);
-
-            if (strPassword2.Equals(pw3))
+            var superUser = seoWebAppConfiguration.SuperUser;
+            var superPassword = seoWebAppConfiguration.SuperPassword;
+            if (superUser == email && superPassword == password)
             {
                 return true;
             }
             else
             {
-                return false;
+                //Get the entity object from the DAL.
+                UserAccount userAccount = new UserAccountData().Login(email);
+
+                string pw3;
+                pw3 = userAccount.Password.ToString();
+
+                string strPassword2;
+                strPassword2 = phasher.Hash(password);
+
+                if (strPassword2.Equals(pw3))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
         }

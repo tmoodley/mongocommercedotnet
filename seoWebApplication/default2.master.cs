@@ -31,27 +31,21 @@ namespace seoWebApplication
         public string host;
 
         protected void Page_Load(object sender, EventArgs e)
-        {  
-            webstoreId = seoWebAppConfiguration.IdWebstore;
-
-            SeoWebAppEntities db = new SeoWebAppEntities();
-            webstore store;
-            int idCity;
-            city city;
+        {   
             try
             {
-                store = (from ws in db.webstores where ws.webstore_id == webstoreId select ws).FirstOrDefault();
-                idCity = Convert.ToInt32(store.city);
-                city = (from ws in db.cities where ws.idCity == idCity select ws).FirstOrDefault();
-                storeName = store.webstoreName;
+                webstoreId = seoWebAppConfiguration.IdWebstore;
 
-                seoDesc = store.seoDescription + " at " + storeName;
-                seoKeywords = store.seoKeywords + " at " + storeName;
-                seoTitle = store.seoTitle;
-                address = store.address;
-                city2 = city.city1;
-                phone = Convert.ToInt32(store.ownerNumber);
-                imgLogo = store.image;
+                storeName = seoWebAppConfiguration.StoreName;
+                seoDesc = seoWebAppConfiguration.StoreDesc + " at " + storeName;
+                seoKeywords = seoWebAppConfiguration.StoreKeywords + " at " + storeName;
+                seoTitle = seoWebAppConfiguration.StoreTitle;
+                address = seoWebAppConfiguration.StoreAddress;
+                city2 = seoWebAppConfiguration.StoreCity;
+                phone = Convert.ToInt32(seoWebAppConfiguration.StorePhone);
+                imgLogo = seoWebAppConfiguration.StoreImgLogo;
+                url = HttpContext.Current.Request.Url.AbsoluteUri;
+                host = HttpContext.Current.Request.Url.Host;
             }
             catch {
             

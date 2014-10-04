@@ -10,6 +10,8 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using seoWebApplication.Service;
+using seoWebApplication.Models;
 /// <summary>
 /// Link factory class
 /// </summary>
@@ -89,10 +91,10 @@ using System.Text.RegularExpressions;
         }
         public static string ToProduct(string product_id)
         {
-            // prepare product URL name
-            ProductDetails p = CatalogAccess.GetProductDetails(product_id.ToString());
-
-            string fileName = p.name;
+            // prepare product URL name 
+            var dc = new ProductService();
+            mProducts _mProduct = dc.GetProduct(Convert.ToInt32(product_id));
+            string fileName = _mProduct.name;
             if (fileName.Length <= 0)
             {
                 fileName = "Coming-Soon.gif";

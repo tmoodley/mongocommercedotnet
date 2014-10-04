@@ -50,7 +50,7 @@ namespace seoWebApplication
                 Session["AdminUser"] = "true";
                 Session["webstore_id"] = dBHelper.GetWebstoreId();
                 Session["AdminUserName"] = m_textboxUserName.Text;
-                Session["AdminUserId"] = dBHelper.GetUserId(m_textboxUserName.Text);
+                Session["AdminUserId"] = 1;
                 Response.Redirect("default.aspx");
             }
             else

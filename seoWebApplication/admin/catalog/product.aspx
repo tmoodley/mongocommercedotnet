@@ -189,9 +189,7 @@ Image2 file name:
    </asp:View>
 
      <asp:View ID="view7" runat="server">
-       
- <asp:Button ID="btnDeleteProductScart" runat="server" Text="Remove Products from Scart" 
-           onclick="btnDeleteProductScart_Click" />  
+ 
  
    </asp:View>
 

@@ -2,6 +2,7 @@
 using MongoDB.Driver.Builders;
 using seoWebApplication.DAL;
 using seoWebApplication.Models;
+using seoWebApplication.st.SharkTankDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,15 +20,32 @@ namespace seoWebApplication.Service
 
          public void Create(Departments departments)
         {
+            departments.department_id = GetLastId();
             _departments.Collection.Insert(departments);
         }
+
+         public bool Delete(int department_id)
+         {
+             try
+             {
+                 var query = Query<Departments>.EQ(e => e.department_id, department_id);
+                 _departments.Collection.Remove(query);
+                 return true;
+             }
+             catch
+             {
+                 return false;
+             }
+         }
         
 
          public IList<Departments> GetDepartments()
         {
             try
             {
-                return _departments.Collection.FindAll().ToList<Departments>();
+                int Id = dBHelper.GetWebstoreId();
+               
+                return _departments.Collection.Find(Query.EQ("webstore_id", Id)).ToList<Departments>();
             }
             catch (MongoConnectionException)
             {
@@ -35,24 +53,41 @@ namespace seoWebApplication.Service
             }
         }
 
-         public IList<Departments> GetDepartmentsById(int Id)
+         public Departments GetDepartmentsById(int Id)
          {
              try
              {
-                 return _departments.Collection.Find(Query.EQ("webstore_id", Id)).ToList<Departments>();
-                  
+                 if (Id > 0)
+                 {
+                     var query = Query.And(
+                                     Query<Departments>.EQ(e => e.department_id, Id),
+                                     Query<Departments>.EQ(e => e.webstore_id, dBHelper.GetWebstoreId())
+                                 );
+                     var list = _departments.Collection.Find(query).First<Departments>();
+                     return list;
+                 }
+                 else {
+                     return null;
+                 }
+                 
              }
              catch (MongoConnectionException)
              {
-                 return new List<Departments>();
+                 return new Departments();
              }
          }
 
-         public Departments GetDepartmentst(string name)
+         public int GetLastId()
         {
-            var post = _departments.Collection.Find(Query.EQ("Name", name)).Single();
-            //post.Comments = post.Comments.OrderByDescending(c => c.Date).ToList();
-            return post;
+            try
+            {
+                var query = (from d in GetDepartments() orderby d.department_id ascending select d).First();
+
+                return query.department_id + 1;
+            }
+            catch {
+                return 1;
+            }
         }
     }
 }

@@ -86,7 +86,7 @@ namespace seoWebApplication
             sc.attributes = attributes;
             sc.dateadded = DateTime.Now;
             sc.product_id = Convert.ToInt32(product_id);
-            var _product = _productservice.GetProduct(product_id);
+            var _product = _productservice.GetProduct(Convert.ToInt32(product_id));
             sc.name = _product.name;
             sc.price = _product.price;
             sc.subtotal = _product.price * 1;
@@ -116,7 +116,7 @@ namespace seoWebApplication
             sc.dateadded = DateTime.Now;
             sc.product_id = Convert.ToInt32(product_id);
             sc.webstore_id = dBHelper.GetWebstoreId();
-            var _product = _productservice.GetProduct(product_id);
+            var _product = _productservice.GetProduct(Convert.ToInt32(product_id));
             sc.name = _product.name;
             sc.price = _product.price;
             sc.subtotal = _product.price * quantity;

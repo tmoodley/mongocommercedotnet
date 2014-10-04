@@ -2,6 +2,7 @@
 using MongoDB.Driver.Builders;
 using seoWebApplication.DAL;
 using seoWebApplication.Models;
+using seoWebApplication.st.SharkTankDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,15 +20,31 @@ namespace seoWebApplication.Service
 
          public void Create(Categories categories)
         {
+            categories.category_id = GetLastId();
             _categories.Collection.Insert(categories);
         }
+
+         public bool Delete(int id)
+         {
+             try
+             {
+                 var query = Query<Categories>.EQ(e => e.category_id, id);
+                 _categories.Collection.Remove(query);
+                 return true;
+             }
+             catch
+             {
+                 return false;
+             }
+         }
 
 
          public IList<Categories> GetCategories()
         {
             try
-            {
-                return _categories.Collection.FindAll().ToList<Categories>();
+            { 
+                int Id = dBHelper.GetWebstoreId();
+                return _categories.Collection.Find(Query.EQ("webstore_id", Id)).ToList<Categories>();
             }
             catch (MongoConnectionException)
             {
@@ -48,10 +65,46 @@ namespace seoWebApplication.Service
              }
          }
 
+         public Categories GetCategoryById(int Id)
+         {
+             try
+             {
+                 if (Id > 0)
+                 {
+                     var query = Query.And(
+                                     Query<Categories>.EQ(e => e.category_id, Id),
+                                     Query<Categories>.EQ(e => e.webstore_id, dBHelper.GetWebstoreId())
+                                 );
+                     var list = _categories.Collection.Find(query).First<Categories>();
+                     return list;
+                 }
+                 else
+                 {
+                     return null;
+                 }
+
+             }
+             catch { return null; }
+         }
+
          public Categories GetCategories(string name)
         {
             var post = _categories.Collection.Find(Query.EQ("Name", name)).Single();  
             return post;
         }
+
+         public int GetLastId()
+         {
+             try
+             {
+                 var query = (from d in GetCategories() orderby d.category_id ascending select d).First();
+
+                 return query.category_id + 1;
+             }
+             catch
+             {
+                 return 1;
+             }
+         }
     }
 }

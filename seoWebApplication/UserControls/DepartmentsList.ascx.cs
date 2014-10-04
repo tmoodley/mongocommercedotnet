@@ -40,10 +40,10 @@ namespace seoWebApplication.UserControls
                
                 showCategory = false;
             }
-           
-            
-             
-                list.DataSource = _departmentService.GetDepartmentsById(dBHelper.GetWebstoreId());
+
+
+
+            list.DataSource = _departmentService.GetDepartments();
                 list.DataBind();
       
              

@@ -7,6 +7,29 @@
     public static class seoWebAppConfiguration
     {
         // Caches the connection string
+        private readonly static string storeName;
+        // Caches the connection string
+        private readonly static string storeDesc;
+        // Caches the connection string
+        private readonly static string storeKeywords;
+        // Caches the connection string
+        private readonly static string storeTitle; 
+        // Caches the connection string
+        private readonly static string storeAddress;
+        private readonly static string storeZip;
+        private readonly static string storeCity;
+        // Caches the connection string
+        private readonly static string storeState;
+        // Caches the connection string
+        private readonly static string storePhone;
+        // Caches the connection string
+        private readonly static string storeImgLogo;
+        
+        // Caches the connection string
+        private readonly static string superUser;
+        // Caches the connection string
+        private readonly static string superPassword;
+        // Caches the connection string
         private readonly static bool useDocumentDb;
         // Caches the connection string
         private readonly static bool useRavenDb;
@@ -27,7 +50,22 @@
         // Store the name of your shop
         private readonly static string siteName;
         static seoWebAppConfiguration()
-        {
+        { 
+        
+            storeName = ConfigurationManager.AppSettings["StoreName"];
+            storeImgLogo = ConfigurationManager.AppSettings["StoreImgLogo"];
+            storePhone = ConfigurationManager.AppSettings["StorePhone"];
+            storeZip = ConfigurationManager.AppSettings["StoreZip"];
+            storeState = ConfigurationManager.AppSettings["StoreState"];
+            storeCity = ConfigurationManager.AppSettings["StoreCity"];
+            storeAddress = ConfigurationManager.AppSettings["StoreAddress"];
+            storeTitle = ConfigurationManager.AppSettings["StoreTitle"];
+            storeKeywords = ConfigurationManager.AppSettings["StoreKeywords"];
+            storeDesc = ConfigurationManager.AppSettings["StoreDescr"]; 
+
+            superUser = ConfigurationManager.AppSettings["SuperUser"];
+            superPassword = ConfigurationManager.AppSettings["SuperPassword"];  
+
             useDocumentDb = System.Boolean.Parse(ConfigurationManager.AppSettings["UseDocumentDb"]);
             useRavenDb = System.Boolean.Parse(ConfigurationManager.AppSettings["UseRavenDb"]);
             useMongoDb = System.Boolean.Parse(ConfigurationManager.AppSettings["UseMongoDb"]);
@@ -39,6 +77,76 @@
             productsPerPage = System.Int32.Parse(ConfigurationManager.AppSettings["ProductsPerPage"]);
             productDescriptionLength = System.Int32.Parse(ConfigurationManager.AppSettings["ProductDescriptionLength"]);
             siteName = ConfigurationManager.AppSettings["SiteName"];
+        }
+ public static string StoreName
+        {
+            get
+            {
+                return storeName;
+            }
+        }
+ public static string StoreImgLogo
+        {
+            get
+            {
+                return storeImgLogo;
+            }
+        }
+ public static string StorePhone
+        {
+            get
+            {
+                return storePhone;
+            }
+        }
+ public static string StoreZip
+        {
+            get
+            {
+                return storeZip;
+            }
+        }
+ public static string StoreState
+        {
+            get
+            {
+                return storeState;
+            }
+        }
+ public static string StoreCity
+        {
+            get
+            {
+                return storeCity;
+            }
+        }
+ public static string StoreAddress
+        {
+            get
+            {
+                return storeAddress;
+            }
+        }
+ public static string StoreTitle
+        {
+            get
+            {
+                return storeTitle;
+            }
+        }
+ public static string StoreKeywords
+        {
+            get
+            {
+                return storeKeywords;
+            }
+        }
+ public static string StoreDesc
+        {
+            get
+            {
+                return storeDesc;
+            }
         }
         public static bool UseDocumentDb
         {
@@ -75,7 +183,21 @@
                 return idWebstore;
             }
         }
-
+        public static string SuperUser
+        {
+            get
+            {
+                return superUser;
+            }
+        }
+        // Returns the data provider name
+        public static string SuperPassword
+        {
+            get
+            {
+                return superPassword;
+            }
+        }
         public static string DbConnectionString
         {
             get

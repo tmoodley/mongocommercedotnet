@@ -310,15 +310,6 @@ namespace seoWebApplication.admin {
         protected global::System.Web.UI.WebControls.View view7;
         
         /// <summary>
-        /// btnDeleteProductScart control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteProductScart;
-        
-        /// <summary>
         /// view8 control.
         /// </summary>
         /// <remarks>

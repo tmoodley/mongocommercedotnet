@@ -171,7 +171,7 @@ namespace seoWebApplication
             ProductDetails details = new ProductDetails();
              
             ProductService _productService = new ProductService();
-            Products dr =_productService.GetProduct(product_id);
+            mProducts dr =_productService.GetProduct(Convert.ToInt32(product_id));
 
             details.product_id = int.Parse(product_id);
             details.name = dr.name.ToString();

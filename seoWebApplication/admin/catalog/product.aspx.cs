@@ -6,11 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
-using seoWebApplication.st.SharkTankDAL.Framework; 
+using seoWebApplication.st.SharkTankDAL.Framework;
+using seoWebApplication.Service;
+using seoWebApplication.Models; 
 
 namespace seoWebApplication.admin
 {
-    public partial class product : BaseEditPage<productEO>
+    public partial class product : System.Web.UI.Page
     {
         public string Id;
         private const string VIEW_STATE_KEY_product = "product";
@@ -19,6 +21,14 @@ namespace seoWebApplication.admin
             Master.SaveButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_SaveButton_Click);
             Master.CancelButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_CancelButton_Click);
             Master.DeleteButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_DeleteButton_Click);
+            txtwebstore_id.Text = dBHelper.GetWebstoreId().ToString(); 
+
+             int id = commonClasses.GetId();
+             var dc = new ProductService();
+             if (id > 0)
+             {
+                 LoadScreenFromObject(dc.GetProduct(id));
+             } 
 
             if (IsPostBack)
             {
@@ -35,38 +45,37 @@ namespace seoWebApplication.admin
         void Master_DeleteButton_Click(object sender, EventArgs e)
         {
             ENTValidationErrors validationErrors = new ENTValidationErrors();
-            productEO product = (productEO)ViewState[VIEW_STATE_KEY_product];
-            LoadObjectFromScreen(product);
-
-            product.DBAction = ENTBaseEO.DBActionEnum.Delete; 
-
-            if (!product.Delete(ref validationErrors, 1))
+            
+            var dc = new ProductService();
+            int id = commonClasses.GetId();
+            if (id > 0)
             {
-                
-                Master.ValidationErrors = validationErrors;
+                LoadScreenFromObject(dc.GetProduct(id));
             }
             else
             {
-                GoToGridPage();
+                commonClasses.LoadDdlDept(this.ddlCategory, 0);
             }
         }
 
         void Master_SaveButton_Click(object sender, EventArgs e)
         {
             ENTValidationErrors validationErrors = new ENTValidationErrors();
-            productEO product = (productEO)ViewState[VIEW_STATE_KEY_product];
+            mProducts product = new mProducts();
             LoadObjectFromScreen(product);
-            if (!product.Save(ref validationErrors, 1))
+            try
             {
-                Master.ValidationErrors = validationErrors;
+                var dc = new ProductService();
+                dc.Create(product);
+                GoToGridPage();
             }
-            else
+            catch
             {
                 GoToGridPage();
             }
         }
 
-        protected override void LoadObjectFromScreen(productEO baseEO)
+        protected void LoadObjectFromScreen(mProducts baseEO)
         {
 
             baseEO.webstore_id = Convert.ToInt32(txtwebstore_id.Text);
@@ -85,16 +94,14 @@ namespace seoWebApplication.admin
 
             baseEO.promodept = chkpromodept.Checked;
 
-            productEO product = (productEO)ViewState[VIEW_STATE_KEY_product];
-
-            baseEO.ID = product.product_id;
+            baseEO.product_id = commonClasses.GetId();
 
             baseEO.defaultAttribute = chkdefaultAttribute.Checked;
 
             baseEO.defaultAttCat = chkdefaultAttCat.Checked;
         }
 
-        protected override void LoadScreenFromObject(productEO baseEO)
+        protected void LoadScreenFromObject(mProducts baseEO)
         {
             
 
@@ -116,32 +123,29 @@ namespace seoWebApplication.admin
 
             chkdefaultAttCat.Checked = baseEO.defaultAttCat;
 
-            chkpromodept.Checked = baseEO.promodept;
-            //Put the object in the view state so it can be attached back to the data context.
-            ViewState[VIEW_STATE_KEY_product] = baseEO;
+            chkpromodept.Checked = baseEO.promodept; 
 
             loadGrid();
-            loadDdlCat(ddlCategory, 0);
+            commonClasses.LoadDdlCategory(ddlCategory, 0);
             loadCatGrid();
             this.AdminPictures.LoadProductPictures(baseEO.product_id);
             this.Id = baseEO.product_id.ToString();
         }
 
-        protected override void LoadControls()
+        protected void LoadControls()
         {
         }
-        protected override void GoToGridPage()
+        protected void GoToGridPage()
         {
             Response.Redirect("products.aspx");
         }
 
         public void ReloadPage()
-        {
-            productEO product = (productEO)ViewState[VIEW_STATE_KEY_product];
-            Response.Redirect("Product.aspx" + EncryptQueryString("id=" + (product.product_id)));
+        { 
+            Response.Redirect("Product.aspx" + EncryptQueryString.Get("id=" + (commonClasses.GetId())));
         }
 
-        public override string MenuItemName()
+        public string MenuItemName()
         {
             return "product";
         }
@@ -164,14 +168,9 @@ namespace seoWebApplication.admin
                     // save image to server
                     image1FileUpload.SaveAs(location);
 
-                    productEO product = (productEO)ViewState[VIEW_STATE_KEY_product]; 
+                    var dc = new ProductService();
+                    dc.ProductThumbnailUpdate(commonClasses.GetId(), dBHelper.GetWebstoreId(), fileName);
                      
-                    // update database with new product details
-                    using (seowebappDataContextDataContext db = new seowebappDataContextDataContext(dBHelper.GetSeoWebAppConnectionString()))
-                    {
-                        db.productImageUpdate(product.product_id, product.webstore_id, fileName, "", 1, 1);
-                    }
-                    // reload the page
                     ReloadPage();
                      
                 }
@@ -193,14 +192,9 @@ namespace seoWebApplication.admin
                     string location = Server.MapPath("~/ProductImages/") + fileName;
                     // save image to server
                     image2FileUpload.SaveAs(location);
-                    // update database with new product details 
 
-                    productEO product = (productEO)ViewState[VIEW_STATE_KEY_product];
-
-                    using (seowebappDataContextDataContext db = new seowebappDataContextDataContext(dBHelper.GetSeoWebAppConnectionString()))
-                    {
-                        db.productImageUpdate(product.product_id, product.webstore_id, "", fileName, 2, 1);
-                    }
+                    var dc = new ProductService();
+                    dc.ProductImageUpdate(commonClasses.GetId(), dBHelper.GetWebstoreId(), fileName);
                     // reload the page
                     ReloadPage();
                 }
@@ -218,7 +212,7 @@ namespace seoWebApplication.admin
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 string cId, pid;
-                productcategorySelectResult obj = (productcategorySelectResult)(e.Row.DataItem);
+                mProducts obj = (mProducts)(e.Row.DataItem);
                 cId = obj.category_id.ToString();
                 pid = obj.product_id.ToString();
                 //Add the edit link to the action column.
@@ -226,7 +220,7 @@ namespace seoWebApplication.admin
 
                 editLink.Text = "DEL";
 
-                editLink.NavigateUrl = "deleteProductCategory.aspx" + EncryptQueryString("id=" + (pid) + "&p_order_id=" + (cId));
+                editLink.NavigateUrl = "deleteProductCategory.aspx" + EncryptQueryString.Get("id=" + (pid) + "&p_order_id=" + (cId));
 
                 e.Row.Cells[2].Controls.Add(editLink);
 
@@ -239,15 +233,15 @@ namespace seoWebApplication.admin
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 string aId;
-                vw_product_attributeSelectByPIdResult obj = (vw_product_attributeSelectByPIdResult)(e.Row.DataItem);
-                aId = obj.ProductAttributeValueId.ToString();
+                mAttribute obj = (mAttribute)(e.Row.DataItem);
+                aId = obj.AttributeID.ToString();
 
                 //Add the edit link to the action column.
                 HyperLink editLink = new HyperLink();
 
                 editLink.Text = "Edit";
 
-                editLink.NavigateUrl = "productAttributeValue.aspx" + EncryptQueryString("id=" + (aId));
+                editLink.NavigateUrl = "productAttributeValue.aspx" + EncryptQueryString.Get("id=" + (aId));
 
                 e.Row.Cells[3].Controls.Add(editLink);
 
@@ -257,9 +251,7 @@ namespace seoWebApplication.admin
 
         public void loadGrid()
         {
-            using (var dc = new seowebappDataContextDataContext())
-            {
-
+            
                 BoundField bf1 = new BoundField();
                 bf1.DataField = "Value";
                 bf1.HeaderText = "Value";
@@ -292,17 +284,15 @@ namespace seoWebApplication.admin
 
                 cgvAttributeValues.AutoGenerateColumns = false;
 
-                cgvAttributeValues.DataSource = dc.vw_product_attributeSelectByPId(Convert.ToInt32(GetId()));
+                var dc = new ProductService();
+                cgvAttributeValues.DataSource = dc.GetProductAttributes(Convert.ToInt32(commonClasses.GetId()));
 
                 cgvAttributeValues.DataBind();
-            }
+            
         }
 
         public void loadCatGrid()
-        {
-            using (var dc = new seowebappDataContextDataContext())
-            {
-
+        { 
                 BoundField bf1 = new BoundField();
                 bf1.DataField = "name";
                 bf1.HeaderText = "Name";
@@ -329,28 +319,29 @@ namespace seoWebApplication.admin
 
                 cgvCategory.AutoGenerateColumns = false;
 
-                cgvCategory.DataSource = dc.productcategorySelect(Convert.ToInt32(GetId()));
+                var dc = new ProductService();
+          
+                cgvCategory.DataSource = dc.ProductCategorySelect(Convert.ToInt32(commonClasses.GetId()));
 
                 cgvCategory.DataBind();
-            }
+            
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            Response.Redirect("productAttributeValue.aspx" + EncryptQueryString("id=0&newRec=true&p_order_id=" + GetId()));
+            Response.Redirect("productAttributeValue.aspx" + EncryptQueryString.Get("id=0&newRec=true&p_order_id=" + commonClasses.GetId()));
         
         }
 
-        protected void btnDeleteProductScart_Click(object sender, EventArgs e)
+        protected void btnDeletemProductscart_Click(object sender, EventArgs e)
         {
-            productEO product = (productEO)ViewState[VIEW_STATE_KEY_product];
-            LoadObjectFromScreen(product);
-            product.removeProductId(product.ID);
+             
         }
 
         protected void btnCat_Click(object sender, EventArgs e)
         {
-            categoryEO.addProductToCategory(GetId(), Convert.ToInt32(ddlCategory.SelectedValue.ToString()));
+            var dc = new ProductService();
+            dc.AddProductToCategory(commonClasses.GetId(), Convert.ToInt32(ddlCategory.SelectedValue.ToString()));
             ReloadPage();
         }
 

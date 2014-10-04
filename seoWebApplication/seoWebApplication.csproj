@@ -1546,9 +1546,10 @@
     <Compile Include="Models\IdentityContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\mAttribute.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Post.cs" />
-    <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\mProducts.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Results.cs" />
     <Compile Include="Models\mShoppingCart.cs" />
@@ -1627,6 +1628,7 @@
     <Compile Include="Service\CategoriesService.cs" />
     <Compile Include="Service\CustomerService.cs" />
     <Compile Include="Service\OrderService.cs" />
+    <Compile Include="Service\AttributeService.cs" />
     <Compile Include="Service\ShoppingCartService.cs" />
     <Compile Include="Service\ProductService.cs" />
     <Compile Include="Service\DepartmentService.cs" />
@@ -1758,6 +1760,7 @@
     <Compile Include="st.SharkTankDAL\entObject\stateEO.cs" />
     <Compile Include="st.SharkTankDAL\entObject\webstoreEO.cs" />
     <Compile Include="st.SharkTankDAL\entObject\zoneEO.cs" />
+    <Compile Include="st.SharkTankDAL\Framework\EncryptQueryString.cs" />
     <Compile Include="st.SharkTankDAL\seowebappDataContext.cs">
       <DependentUpon>seowebappDataContext.dbml</DependentUpon>
     </Compile>
@@ -2323,6 +2326,7 @@
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\Shared\_PartialDepartmentsMenu.cshtml" />
     <Content Include="Views\Departments\Menu.cshtml" />
+    <Content Include="Views\Account\AdminLogin.cshtml" />
     <None Include="Web References\com.shade4sale\authenticateUser.disco" />
     <None Include="Web References\com.shade4sale\authenticateUser.wsdl" />
     <None Include="Web References\com.shade4sale\Product.datasource">

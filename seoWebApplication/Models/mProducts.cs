@@ -7,7 +7,7 @@ using System.Web;
 
 namespace seoWebApplication.Models
 {
-    public class Products
+    public class mProducts
     {
         private DateTime date;
         //added
@@ -17,6 +17,8 @@ namespace seoWebApplication.Models
         public int product_id { get; set; }
          [BsonElement("webstore_id")]
         public int webstore_id { get; set; }
+          [BsonElement("category_id")]
+         public int category_id { get; set; }        
          [BsonElement("name")]
         public string name { get; set; }
          [BsonElement("description")]
@@ -50,6 +52,9 @@ namespace seoWebApplication.Models
          [BsonElement("UpdateENTUserAccountId")]
         public int UpdateENTUserAccountId { get; set; }
         [BsonElement("Version")]
-        public byte[] Version { get; set; }
+        public byte[] Version { get; set; } 
+        public IList<mAttribute> Attributes { get; set; }
+
+        public IList<Categories> Categories { get; set; }
     }
 }

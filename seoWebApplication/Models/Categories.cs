@@ -13,6 +13,8 @@ namespace seoWebApplication.Models
 
         [BsonId(IdGenerator = typeof(CombGuidGenerator))]
         public Guid Id { get; set; }
+        [BsonElement("webstore_id")]
+        public int webstore_id { get; set; }
         [BsonElement("category_id")]
         public int category_id { get; set; }
         [BsonElement("department_id")]

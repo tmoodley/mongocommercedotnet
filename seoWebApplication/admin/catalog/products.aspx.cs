@@ -15,6 +15,7 @@ using seoWebApplication.st.SharkTankDAL.entObject;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.Framework;
 using System.Data.SqlClient;
+using seoWebApplication.Service;
 
 namespace seoWebApplication.admin
 {
@@ -60,9 +61,8 @@ namespace seoWebApplication.admin
             if (!IsPostBack)
             {
                 BindDDlFilter();
-                using (var dc = new seowebappDataContextDataContext())
-                {
 
+               
                     BoundField bf2 = new BoundField();
                     bf2.DataField = "name";
                     bf2.HeaderText = "name";
@@ -99,21 +99,18 @@ namespace seoWebApplication.admin
 
 
                     cgvProducts.AutoGenerateColumns = false;
-
-                    cgvProducts.DataSource = dc.productSelectByWId(dBHelper.GetWebstoreId());
+                    var dc = new ProductService();
+                    cgvProducts.DataSource = dc.GetProducts();
 
                     cgvProducts.DataBind();
-                }
+                
             }
         }
         void BindGridDynamic(string tblName, string search)
         {
-            using (var dc = new seowebappDataContextDataContext())
-            {
-                //var query = dc.productSelectByWId(dBHelper.GetWebstoreId()).Where("webstore_id = 3");
-                //var query = dc.products.Where("webstore_id = 3").OrderBy("product_id");
-                var query = from p in dc.products
-                            where p.webstore_id == 2 
+
+                var dc = new ProductService();
+                var query = from p in dc.GetProducts() 
                             orderby p.name
                             select p;
                 BoundField bf2 = new BoundField();
@@ -154,7 +151,7 @@ namespace seoWebApplication.admin
                 cgvProducts.AutoGenerateColumns = false;
                 cgvProducts.DataSource = query;
                 cgvProducts.DataBind();
-            }
+            
         }
 
         void BindDDlFilter()
@@ -202,12 +199,9 @@ namespace seoWebApplication.admin
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 string pId;
-                   productSelectByWIdResult obj = (productSelectByWIdResult)(e.Row.DataItem);
-                    pId = obj.product_id.ToString();
+                seoWebApplication.Models.mProducts obj = (seoWebApplication.Models.mProducts)(e.Row.DataItem);
+                pId = obj.product_id.ToString();
                 
-                   
-
-
                 //Add the edit link to the action column.
                 HyperLink editLink = new HyperLink();
 

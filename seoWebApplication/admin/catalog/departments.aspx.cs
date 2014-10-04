@@ -15,6 +15,8 @@ using seoWebApplication.st.SharkTankDAL.entObject;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.Framework;
 using System.Data.SqlClient;
+using seoWebApplication.Service;
+using seoWebApplication.Models;
 
 namespace seoWebApplication.admin.catalog
 {
@@ -28,9 +30,7 @@ namespace seoWebApplication.admin.catalog
             if (!IsPostBack)
             {
                 BindDDlFilter();
-                using (var dc = new seowebappDataContextDataContext())
-                {
-
+                
                     BoundField bf2 = new BoundField();
                     bf2.DataField = "name";
                     bf2.HeaderText = "name";
@@ -51,23 +51,20 @@ namespace seoWebApplication.admin.catalog
 
 
                     cgvDepartments.AutoGenerateColumns = false;
-
-                    cgvDepartments.DataSource = dc.departmentSelectByWId(dBHelper.GetWebstoreId());
+                    var dc = new DepartmentService();
+                    cgvDepartments.DataSource = dc.GetDepartments();
 
                     cgvDepartments.DataBind();
-                }
+                
             }
 
         }
 
         void BindGridDynamic(string tblName, string search)
         {
-            using (var dc = new seowebappDataContextDataContext())
-            {
-                //var query = dc.productSelectByWId(dBHelper.GetWebstoreId()).Where("webstore_id = 3");
-                //var query = dc.products.Where("webstore_id = 3").OrderBy("product_id");
-                var query = from d in dc.departments
-                            where d.webstore_id == dBHelper.GetWebstoreId()
+           
+                var dc = new DepartmentService();
+                var query = from d in dc.GetDepartments() 
                             orderby d.Name
                             select d;
                 BoundField bf2 = new BoundField();
@@ -93,7 +90,7 @@ namespace seoWebApplication.admin.catalog
                 cgvDepartments.AutoGenerateColumns = false;
                 cgvDepartments.DataSource = query;
                 cgvDepartments.DataBind();
-            }
+          
         }
 
         void BindDDlFilter()
@@ -141,7 +138,7 @@ namespace seoWebApplication.admin.catalog
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 string dId;
-                departmentSelectByWIdResult obj = (departmentSelectByWIdResult)(e.Row.DataItem);
+                Departments obj = (Departments)(e.Row.DataItem);
                 dId = obj.department_id.ToString();
 
 

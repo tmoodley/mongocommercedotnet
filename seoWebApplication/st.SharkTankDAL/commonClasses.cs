@@ -13,6 +13,7 @@ using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.Framework;
 using System.Collections.Specialized;
+using seoWebApplication.Service;
 
 namespace seoWebApplication.st.SharkTankDAL
 {
@@ -104,6 +105,32 @@ namespace seoWebApplication.st.SharkTankDAL
             return StringHelpers.EncryptQueryString(queryString);
         }
 
-        
+        public static void LoadDdlDept(DropDownList ddl, int Id)
+        {
+            var dc = new DepartmentService();
+            ddl.DataSource = dc.GetDepartments();
+                ddl.DataTextField = "name";
+                ddl.DataValueField = "department_id";
+                ddl.DataBind();
+                if(Id>0)
+                ddl.SelectedValue = Id.ToString();
+            
+        }
+
+        public static void LoadDdlCategory(DropDownList ddl, int Id)
+        {
+
+            using (var dc = new seowebappDataContextDataContext())
+            {
+                ddl.DataSource = dc.categorySelectByWId(dBHelper.GetWebstoreId());
+                ddl.DataTextField = "Name";
+                ddl.DataValueField = "category_id";
+                ddl.DataBind();
+                if (Id > 0)
+                {
+                    ddl.SelectedValue = Id.ToString();
+                }
+            }
+        }
     }
 }

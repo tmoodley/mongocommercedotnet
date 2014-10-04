@@ -28,7 +28,7 @@ namespace seoWebApplication.Controllers
             {
                 if (seoWebAppConfiguration.UseMongoDb)
                 {
-                    Models.Products prods = new Models.Products();
+                    Models.mProducts prods = new Models.mProducts();
                     prods.product_id = prod.product_id;
                     prods.name = prod.name;
                     prods.description = prod.description;
