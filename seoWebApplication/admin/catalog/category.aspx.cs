@@ -24,13 +24,15 @@ namespace seoWebApplication.admin.catalog
             txtInsertENTUserAccountId.Text = "1";
             var dc = new CategoriesService();
             int id = commonClasses.GetId();
-            if (id > 0 && !IsPostBack)
-            {
-                LoadScreenFromObject(dc.GetCategoryById(id));
-            }
-            else {
-                commonClasses.LoadDdlDept(ddlDepartments, 0);
-            }
+            if (!IsPostBack) { 
+                if (id > 0)
+                {
+                    LoadScreenFromObject(dc.GetCategoryById(id));
+                }
+                else {
+                    commonClasses.LoadDdlDept(ddlDepartments, 0);
+                }
+            } 
         }
 
         void Master_DeleteButton_Click(object sender, EventArgs e)
@@ -50,8 +52,10 @@ namespace seoWebApplication.admin.catalog
         {
             ENTValidationErrors validationErrors = new ENTValidationErrors();
             Categories categories = new Categories();
+            
             categories.webstore_id = dBHelper.GetWebstoreId();
             LoadObjectFromScreen(categories);
+            categories.department_id = Convert.ToInt32(ddlDepartments.SelectedValue.ToString());
             try
             {
                 var dc = new CategoriesService();

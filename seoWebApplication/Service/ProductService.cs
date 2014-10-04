@@ -242,8 +242,7 @@ namespace seoWebApplication.Service
             try
             {  
                 List<Categories> cat = GetProduct(pid).Categories;
-                var dc = new CategoriesService();
-                Categories category = dc.GetCategoryById(id); 
+                var dc = new CategoriesService(); 
 
                 var query = Query<mProducts>.EQ(e => e.product_id, pid); 
                 cat.RemoveAll((x) => x.category_id == id);

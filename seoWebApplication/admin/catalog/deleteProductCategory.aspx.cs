@@ -20,7 +20,7 @@ namespace seoWebApplication.admin.catalog
 
             var dc = new ProductService();
             dc.DeleteCategory(id, pid);
-            string qryStr = StringHelpers.EncryptQueryString("id=" + id);
+            string qryStr = StringHelpers.EncryptQueryString("id=" + pid);
             Response.Redirect("product.aspx" + qryStr);
         
         }

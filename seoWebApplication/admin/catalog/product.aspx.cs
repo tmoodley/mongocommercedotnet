@@ -220,7 +220,7 @@ namespace seoWebApplication.admin
 
                 editLink.Text = "DEL";
 
-                editLink.NavigateUrl = "deleteProductCategory.aspx" + EncryptQueryString.Get("id=" + (pid) + "&p_order_id=" + (cId));
+                editLink.NavigateUrl = "deleteProductCategory.aspx" + EncryptQueryString.Get("id=" + cId + "&p_order_id=" + pid);
 
                 e.Row.Cells[2].Controls.Add(editLink);
 
