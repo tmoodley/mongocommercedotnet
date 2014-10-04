@@ -24,7 +24,7 @@ namespace seoWebApplication.admin.catalog
             txtInsertENTUserAccountId.Text = "1";
             var dc = new CategoriesService();
             int id = commonClasses.GetId();
-            if (id > 0)
+            if (id > 0 && !IsPostBack)
             {
                 LoadScreenFromObject(dc.GetCategoryById(id));
             }
