@@ -7,6 +7,7 @@
     public static class seoWebAppConfiguration
     {
         // Caches the connection string
+        
         private readonly static string storeName;
         // Caches the connection string
         private readonly static string storeDesc;
@@ -53,8 +54,10 @@
         private readonly static string twitterUrl;
         private readonly static string facebookUrl;
         private readonly static string facebookAppId;
+        private readonly static string storeUrl;
         static seoWebAppConfiguration()
         {
+            storeUrl = ConfigurationManager.AppSettings["StoreUrl"];
             facebookAppId = ConfigurationManager.AppSettings["FacebookAppId"];
             storeName = ConfigurationManager.AppSettings["StoreName"];
             storeImgLogo = ConfigurationManager.AppSettings["StoreImgLogo"];
@@ -85,6 +88,13 @@
             googleUrl = ConfigurationManager.AppSettings["GoogleUrl"];
             twitterUrl = ConfigurationManager.AppSettings["TwitterUrl"];
             facebookUrl = ConfigurationManager.AppSettings["FacebookUrl"];
+        }
+        public static string StoreUrl
+        {
+            get
+            {
+                return storeUrl;
+            }
         }
         public static string FacebookAppId
         {

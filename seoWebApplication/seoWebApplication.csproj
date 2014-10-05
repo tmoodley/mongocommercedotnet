@@ -975,6 +975,7 @@
     <Content Include="defaultproduct.master" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\hale.pubxml" />
+    <None Include="Properties\PublishProfiles\halemeals.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

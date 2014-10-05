@@ -213,20 +213,38 @@ namespace seoWebApplication
             apiContext.Config = sdkConfig; 
             Amount amnt = new Amount();
             amnt.currency = "USD";
-            amnt.total = amount.ToString();
+            amnt.total = amount.ToString(); 
 
+            ItemList order = new ItemList();
+            foreach(var i in ShoppingCartAccess.GetItems()){
+                order.items.Add(new Item { name = i.name, price = i.price.ToString(), quantity = i.quantity.ToString(), sku = i.name });
+            }
+             
+            ShippingAddress sa = new ShippingAddress();
+             
+            sa.recipient_name = customer.FirstName + " " + customer.LastName;
+            sa.line1 = customer.Address1;
+            sa.line2 = customer.Address2;
+            sa.state = customer.State;
+            sa.city = customer.City;
+            sa.country_code = customer.Country;
+            sa.phone = customer.CellPhone;
+            sa.postal_code = customer.Zip;
+             
             List<Transaction> transactionList = new List<Transaction>();
             Transaction tran = new Transaction();
-            tran.description = "Payment for Order:" + orderId ;
+            tran.description = "Payment for Order ID:" + orderId ;
             tran.amount = amnt;
+            tran.item_list = order;
+            tran.item_list.shipping_address = sa;
             transactionList.Add(tran);
 
             Payer payr = new Payer();
             payr.payment_method = "paypal";
 
             RedirectUrls redirUrls = new RedirectUrls();
-            redirUrls.cancel_url = "http://mongocommerce.azurewebsites.net/OrderVerify.aspx?cancel=true";
-            redirUrls.return_url = "http://mongocommerce.azurewebsites.net/OrderComplete.aspx?success=true";
+            redirUrls.cancel_url = seoWebAppConfiguration.StoreUrl + "/OrderVerify.aspx?cancel=true";
+            redirUrls.return_url = seoWebAppConfiguration.StoreUrl + "/OrderComplete.aspx?success=true";
 
             Payment pymnt = new Payment();
             pymnt.intent = "sale";
