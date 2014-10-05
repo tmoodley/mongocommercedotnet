@@ -904,6 +904,7 @@
     <Content Include="js\scripts.js" />
     <Content Include="js\smooth-scroll.js" />
     <Content Include="myaccount.aspx" />
+    <Content Include="OrderComplete.aspx" />
     <Content Include="product_view.aspx" />
     <Content Include="assets\ajax.css" />
     <Content Include="assets\init_product.js" />
@@ -1571,6 +1572,13 @@
     </Compile>
     <Compile Include="myaccount.aspx.designer.cs">
       <DependentUpon>myaccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderComplete.aspx.cs">
+      <DependentUpon>OrderComplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderComplete.aspx.designer.cs">
+      <DependentUpon>OrderComplete.aspx</DependentUpon>
     </Compile>
     <Compile Include="product_view.aspx.cs">
       <DependentUpon>product_view.aspx</DependentUpon>

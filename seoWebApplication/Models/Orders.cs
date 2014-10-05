@@ -13,7 +13,9 @@ namespace seoWebApplication.Models
     {
         [BsonId(IdGenerator = typeof(CombGuidGenerator))]
         public Guid Id { get; set; }
-
+        public Users Customer { get; set; }
+        public string Token { get; set; }
+        public string PayerID { get; set; }
         public IList<mShoppingCart> lineitem { get; set; }
     }
 }

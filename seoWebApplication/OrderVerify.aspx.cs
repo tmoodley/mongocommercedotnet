@@ -198,9 +198,9 @@ namespace seoWebApplication
 
             amount += shippingAmount;
 
-            // Create the order and store the order ID
+            // Create the order and store the order ID  
             var dc = new OrderService();
-            int orderId = dc.CreateOrder(cartId, custId, 9, 1, amount);
+            int orderId = dc.CreateOrder(cartId, custId, 9, 1, amount, ShoppingCartAccess.GetItems(), customer);
 
             //update cart total
             dc.UpdateOrderTotal(cartId, Convert.ToDecimal(lblNewTotal.Text), Convert.ToInt32(txtPoints.Text));

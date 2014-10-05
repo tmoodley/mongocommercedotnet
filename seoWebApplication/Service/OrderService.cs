@@ -103,13 +103,23 @@ namespace seoWebApplication.Service
              }
          }
 
-         internal int CreateOrder(string cartId, int custId, int p1, int p2, decimal amount)
+         internal int CreateOrder(string cartId, int custId, int p1, int p2, decimal amount, IList<mShoppingCart> lineitem, Users name)
          {
              Orders o = new Orders();
              o.cart_id = cartId;
              o.CustomerID = custId;
              o.total = amount;
+             o.lineitem = lineitem;
+             o.Customer = name;
              return Create(o);
+         }
+
+         internal void UpdateOrderComplete(string cartID, string token, string payerID)
+         {
+             var query = Query<Orders>.EQ(e => e.cart_id, cartID);
+             var update = Update<Orders>.Set(e => e.Status, 1).Set(e => e.Token, token).Set(e => e.PayerID, payerID);
+
+             _order.Collection.Update(query, update);
          }
     }
 }
