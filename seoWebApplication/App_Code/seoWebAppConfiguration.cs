@@ -23,7 +23,7 @@
         // Caches the connection string
         private readonly static string storePhone;
         // Caches the connection string 
-       
+        private readonly static string storeImgLogo;
         
         // Caches the connection string
         private readonly static string superUser;

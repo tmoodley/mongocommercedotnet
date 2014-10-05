@@ -48,9 +48,7 @@ namespace seoWebApplication
                     imgLogo = seoWebAppConfiguration.StoreImgLogo;
                     url = HttpContext.Current.Request.Url.AbsoluteUri;
                     host = HttpContext.Current.Request.Url.Host;
-
-                    var socialMedia = (from ws in db.SocialMedias where ws.WebstoreId == webstoreId select ws).FirstOrDefault();
-                    fbUrl = socialMedia.Facebook;
+                    fbUrl = seoWebAppConfiguration.FacebookUrl;
 
                     // 301 redirect to the proper URL if necessary
                     //Linkor.CheckProductUrl(Request.QueryString["product_id"]);

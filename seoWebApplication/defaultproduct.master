@@ -100,7 +100,7 @@
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<%=seoWebAppConfiguration.FacebookAppId %>";
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<%=facebookAppId %>";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 	<div class="page-header pad-small-bottom-2">
@@ -181,8 +181,8 @@ Added Flaxseed: +10¢</p>
 			<div class="large-12 columns text-center">
 				<div id="footer">
 					 <ul id="footer-social"> 
-						<li><a href="<%=seoWebAppConfiguration.FacebookUrl %>" target="_blank"><i class="myicon myicon-facebook"></i></a></li>
-						<li><a href="<%=seoWebAppConfiguration.TwitterUrl %>" target="_blank"><i class="myicon myicon-twitter"></i></a></li>
+						<li><a href="<%=facebookUrl %>" target="_blank"><i class="myicon myicon-facebook"></i></a></li>
+						<li><a href="<%=twitterUrl %>" target="_blank"><i class="myicon myicon-twitter"></i></a></li>
 						<li><a href="mailto:support@livinghale.com"><i class="myicon myicon-email"></i></a></li>
 					</ul>
 					<div id="copy-text" &copy;

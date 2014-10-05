@@ -30,10 +30,18 @@ namespace seoWebApplication
         public string url;
         public string host;
 
+        public string facebookUrl;
+        public string twitterUrl;
+
         protected void Page_Load(object sender, EventArgs e)
         {   
             try
             {
+
+                facebookUrl = seoWebAppConfiguration.FacebookUrl;
+
+                twitterUrl = seoWebAppConfiguration.TwitterUrl;
+
                 webstoreId = seoWebAppConfiguration.IdWebstore;
 
                 storeName = seoWebAppConfiguration.StoreName;
