@@ -19,9 +19,11 @@ namespace seoWebApplication.Service
             _order = new MongoHelper<Orders>();
         }
 
-         public void Create(Orders order)
-        { 
+         public int Create(Orders order)
+        {
+            order.OrderID = GetLastId();
             _order.Collection.Insert(order);
+            return order.OrderID;
         }
 
 
@@ -76,6 +78,38 @@ namespace seoWebApplication.Service
                                                         select e).First();
 
              return query;
+         }
+
+         internal void UpdateOrderTotal(string cartID, decimal orderTotal, int orderPoints)
+         {
+             var query = Query<Orders>.EQ(e => e.cart_id, cartID);
+             var update = Update<Orders>.Set(e => e.total, orderTotal).Set(e => e.point, orderPoints);
+
+             _order.Collection.Update(query, update); 
+         }
+
+         public int GetLastId()
+         {
+             try
+             {
+                 var query = (from d in GetOrders() orderby d.OrderID descending select d).First();
+
+
+                 return query.OrderID + 1;
+             }
+             catch
+             {
+                 return 1;
+             }
+         }
+
+         internal int CreateOrder(string cartId, int custId, int p1, int p2, decimal amount)
+         {
+             Orders o = new Orders();
+             o.cart_id = cartId;
+             o.CustomerID = custId;
+             o.total = amount;
+             return Create(o);
          }
     }
 }

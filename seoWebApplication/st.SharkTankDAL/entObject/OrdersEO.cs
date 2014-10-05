@@ -221,13 +221,9 @@ namespace seoWebApplication.st.SharkTankDAL.dataObject
         }
 
         internal static void updateOrderTotal(string cartID, decimal orderTotal, int orderPoints)
-        {
-            OrdersEO orders = new OrdersEO();
-            orders.LoadByCartId(cartID);
-            orders.total = orderTotal;
-            orders.point = orderPoints*-1;
-            orders.DateShipped = DateTime.Now;
-            orders.Save(false);
+        { 
+            OrderService _orderService = new OrderService();
+            _orderService.UpdateOrderTotal(cartID, orderTotal, orderPoints);  
         }
 
         internal static int getOrderPoints(string cartID)

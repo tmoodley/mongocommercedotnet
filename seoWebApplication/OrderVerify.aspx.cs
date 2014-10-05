@@ -10,6 +10,8 @@ using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.entObject;
 using seoWebApplication.Service;
 using seoWebApplication.Models;
+using PayPal;
+using PayPal.Api.Payments;
 
 namespace seoWebApplication
 {
@@ -176,9 +178,8 @@ namespace seoWebApplication
             shippingAmount = Convert.ToDecimal(ddlShippingDetails.SelectedValue.ToString());
            
             // display the total amount
-            
-             decimal amount = Convert.ToDecimal(lblPointsApplied.Text);
-            //decimal amount = ShoppingCartAccess.GetTotalAmount();
+             
+             decimal amount = ShoppingCartAccess.GetTotalAmount();
 
             
 
@@ -198,13 +199,45 @@ namespace seoWebApplication
             amount += shippingAmount;
 
             // Create the order and store the order ID
-            int orderId = new OrdersEO().CreateOrder(cartId, custId, 9, 1, amount);
+            var dc = new OrderService();
+            int orderId = dc.CreateOrder(cartId, custId, 9, 1, amount);
 
             //update cart total
-            OrdersEO.updateOrderTotal(cartId, Convert.ToDecimal(lblNewTotal.Text), Convert.ToInt32(txtPoints.Text));
+            dc.UpdateOrderTotal(cartId, Convert.ToDecimal(lblNewTotal.Text), Convert.ToInt32(txtPoints.Text));
+
+            Dictionary<string, string> sdkConfig = new Dictionary<string, string>();
+            sdkConfig.Add("mode", "sandbox");
+            string accessToken = new OAuthTokenCredential("AQkquBDf1zctJOWGKWUEtKXm6qVhueUEMvXO_-MCI4DQQ4-LWvkDLIN2fGsd", "EL1tVxAjhT7cJimnz5-Nsx9k2reTKSVfErNQF-CmrwJgxRtylkGTKlU4RvrX", sdkConfig).GetAccessToken();
+             
+            APIContext apiContext = new APIContext(accessToken);
+            apiContext.Config = sdkConfig; 
+            Amount amnt = new Amount();
+            amnt.currency = "USD";
+            amnt.total = amount.ToString();
+
+            List<Transaction> transactionList = new List<Transaction>();
+            Transaction tran = new Transaction();
+            tran.description = "Payment for Order:" + orderId ;
+            tran.amount = amnt;
+            transactionList.Add(tran);
+
+            Payer payr = new Payer();
+            payr.payment_method = "paypal";
+
+            RedirectUrls redirUrls = new RedirectUrls();
+            redirUrls.cancel_url = "http://mongocommerce.azurewebsites.net/OrderVerify.aspx?cancel=true";
+            redirUrls.return_url = "http://mongocommerce.azurewebsites.net/OrderComplete.aspx?success=true";
+
+            Payment pymnt = new Payment();
+            pymnt.intent = "sale";
+            pymnt.payer = payr;
+            pymnt.transactions = transactionList;
+            pymnt.redirect_urls = redirUrls;
+
+            Payment createdPayment = pymnt.Create(apiContext);
            
             // Redirect to the conformation page
-            Response.Redirect("Checkout.aspx");
+            Response.Redirect(createdPayment.links[1].href.ToString());
 
              
         }
