@@ -47,10 +47,11 @@ namespace seoWebApplication.admin
             ENTValidationErrors validationErrors = new ENTValidationErrors();
             
             var dc = new ProductService();
+           
             int id = commonClasses.GetId();
             if (id > 0)
             {
-                LoadScreenFromObject(dc.GetProduct(id));
+                dc.Delete(id);
             }
             else
             {
@@ -65,8 +66,16 @@ namespace seoWebApplication.admin
             LoadObjectFromScreen(product);
             try
             {
-                var dc = new ProductService();
-                dc.Create(product);
+                if (product.product_id > 0)
+                {
+                    var dc = new ProductService();
+                    dc.Update(product);
+                }
+                else { 
+                     var dc = new ProductService();
+                    dc.Create(product);
+                }
+               
                 GoToGridPage();
             }
             catch

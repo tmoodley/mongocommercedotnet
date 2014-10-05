@@ -161,7 +161,7 @@ namespace seoWebApplication.Service
             {
                 mProducts query = (from e in _product.Collection.AsQueryable<mProducts>()
                                    where e.product_id == Id
-                                   select e).Single();
+                                   select e).First();
 
                 return query.Attributes;
             }
@@ -177,7 +177,7 @@ namespace seoWebApplication.Service
             {
                 mProducts query = (from e in _product.Collection.AsQueryable<mProducts>()
                                    where e.product_id == Id
-                                   select e).Single();
+                                   select e).First();
 
                 return query.Categories;
             }
@@ -254,6 +254,38 @@ namespace seoWebApplication.Service
             catch
             {
                 
+            } 
+        }
+
+        internal void Update(mProducts p)
+        {  
+            var query = Query<mProducts>.EQ(e => e.product_id, p.product_id); 
+            var update = Update<mProducts>.Set(e => e.name, p.name)
+                                           .Set(e => e.price, p.price)
+                                           .Set(e => e.IsActive, p.IsActive)
+                                           .Set(e => e.image, p.image)
+                                           .Set(e => e.thumbnail, p.thumbnail)
+                                           .Set(e => e.description, p.description)
+                                           .Set(e => e.defaultAttCat, p.defaultAttCat)
+                                           .Set(e => e.defaultAttribute, p.defaultAttribute)
+                                           .Set(e => e.Categories, p.Categories)
+                                           .Set(e => e.Attributes, p.Attributes);
+
+            _product.Collection.Update(query, update); 
+        }
+
+        internal void Delete(int id)
+        {
+            try
+            {
+                var query = Query<mProducts>.EQ(e => e.product_id, id);  
+
+                _product.Collection.Remove(query);
+
+            }
+            catch
+            {
+
             } 
         }
     }
