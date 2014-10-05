@@ -100,7 +100,7 @@
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=741995452511167";
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<%=seoWebAppConfiguration.FacebookAppId %>";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 	<div class="page-header pad-small-bottom-2">
@@ -180,15 +180,14 @@ Added Flaxseed: +10¢</p>
 		<div class="row">
 			<div class="large-12 columns text-center">
 				<div id="footer">
-					 <ul id="footer-social">
-						<li><a href="http://instagram.com/madewithfaded" target="_blank"><i class="myicon myicon-instagram"></i></a></li>
-						<li><a href="http://facebook.com/madewithfaded" target="_blank"><i class="myicon myicon-facebook"></i></a></li>
-						<li><a href="http://twitter.com/madewithfaded" target="_blank"><i class="myicon myicon-twitter"></i></a></li>
+					 <ul id="footer-social"> 
+						<li><a href="<%=seoWebAppConfiguration.FacebookUrl %>" target="_blank"><i class="myicon myicon-facebook"></i></a></li>
+						<li><a href="<%=seoWebAppConfiguration.TwitterUrl %>" target="_blank"><i class="myicon myicon-twitter"></i></a></li>
 						<li><a href="mailto:support@livinghale.com"><i class="myicon myicon-email"></i></a></li>
 					</ul>
 					<div id="copy-text" &copy;
                     <script>document.write(new Date().getFullYear());</script>
-                    - Powered By - <a href="http://www.Shoppersparadise.co.zw">Shoppersparadise.co.zw <i class="icon-chevron-right"></i></a>
+                    - Powered By - <a href="http://www.mongo-commerce.com">Mongo-Commerce <i class="icon-chevron-right"></i></a>
                         <span class="logo-text">Hale</span>&nbsp;&nbsp;2014     <span class="label label-info"><%=address%>, <%=city2%> Phone: <%=phone%></span></div>
 				</div>
 			</div>

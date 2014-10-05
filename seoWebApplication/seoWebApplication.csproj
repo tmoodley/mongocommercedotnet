@@ -967,6 +967,7 @@
     <Content Include="app.config" />
     <Content Include="defaultproduct.master" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\hale.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -2105,8 +2106,6 @@
     <Content Include="content\fonts\font-awesome\fontawesome-webfont.ttf" />
     <Content Include="content\fonts\font-awesome\fontawesome-webfont.woff" />
     <Content Include="content\fonts\font-awesome\FontAwesome.otf" />
-    <None Include="Properties\PublishProfiles\catalog.shoppersparadisezim.com - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\ibuyusa.co - Web Deploy.pubxml" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
     <None Include="seowebapp.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>

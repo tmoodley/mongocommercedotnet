@@ -318,13 +318,15 @@ Added Flaxseed: +10¢</p>
 		<div class="row">
 			<div class="large-12 columns text-center">
 				<div id="footer">
-					<!-- <ul id="footer-social">
-						<li><a href="http://instagram.com/madewithfaded" target="_blank"><i class="myicon myicon-instagram"></i></a></li>
-						<li><a href="http://facebook.com/madewithfaded" target="_blank"><i class="myicon myicon-facebook"></i></a></li>
-						<li><a href="http://twitter.com/madewithfaded" target="_blank"><i class="myicon myicon-twitter"></i></a></li>
+					 <ul id="footer-social"> 
+						<li><a href="<%=seoWebAppConfiguration.FacebookUrl %>" target="_blank"><i class="myicon myicon-facebook"></i></a></li>
+						<li><a href="<%=seoWebAppConfiguration.TwitterUrl %>" target="_blank"><i class="myicon myicon-twitter"></i></a></li>
 						<li><a href="mailto:support@livinghale.com"><i class="myicon myicon-email"></i></a></li>
-					</ul>-->
-					<div id="copy-text">&copy;&nbsp;&nbsp;<span class="logo-text">Hale</span>&nbsp;&nbsp;2014</div>
+					</ul>
+					<div id="copy-text" &copy;
+                    <script>document.write(new Date().getFullYear());</script>
+                    - Powered By - <a href="http://www.mongo-commerce.com">Mongo-Commerce <i class="icon-chevron-right"></i></a>
+                        <span class="logo-text">Hale</span>&nbsp;&nbsp;2014     <span class="label label-info"><%=address%>, <%=city2%> Phone: <%=phone%></span></div>
 				</div>
 			</div>
 		</div>

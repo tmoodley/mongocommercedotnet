@@ -22,8 +22,8 @@
         private readonly static string storeState;
         // Caches the connection string
         private readonly static string storePhone;
-        // Caches the connection string
-        private readonly static string storeImgLogo;
+        // Caches the connection string 
+       
         
         // Caches the connection string
         private readonly static string superUser;
@@ -49,9 +49,13 @@
         private readonly static int idWebstore;
         // Store the name of your shop
         private readonly static string siteName;
+        private readonly static string googleUrl;
+        private readonly static string twitterUrl;
+        private readonly static string facebookUrl;
+        private readonly static string facebookAppId;
         static seoWebAppConfiguration()
-        { 
-        
+        {
+            facebookAppId = ConfigurationManager.AppSettings["FacebookAppId"];
             storeName = ConfigurationManager.AppSettings["StoreName"];
             storeImgLogo = ConfigurationManager.AppSettings["StoreImgLogo"];
             storePhone = ConfigurationManager.AppSettings["StorePhone"];
@@ -77,6 +81,40 @@
             productsPerPage = System.Int32.Parse(ConfigurationManager.AppSettings["ProductsPerPage"]);
             productDescriptionLength = System.Int32.Parse(ConfigurationManager.AppSettings["ProductDescriptionLength"]);
             siteName = ConfigurationManager.AppSettings["SiteName"];
+
+            googleUrl = ConfigurationManager.AppSettings["GoogleUrl"];
+            twitterUrl = ConfigurationManager.AppSettings["TwitterUrl"];
+            facebookUrl = ConfigurationManager.AppSettings["FacebookUrl"];
+        }
+        public static string FacebookAppId
+        {
+            get
+            {
+                return facebookAppId;
+            }
+        }
+        public static string GoogleUrl
+        {
+            get
+            {
+                return googleUrl;
+            }
+        }
+
+        public static string TwitterUrl
+        {
+            get
+            {
+                return twitterUrl;
+            }
+        }
+
+        public static string FacebookUrl
+        {
+            get
+            {
+                return facebookUrl;
+            }
         }
  public static string StoreName
         {

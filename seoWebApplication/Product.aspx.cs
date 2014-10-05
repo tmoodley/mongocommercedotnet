@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
-using seoWebApplication.st.SharkTankDAL;
-using seoWebApplication.st.SharkTankDAL.dataObject;
-using seoWebApplication.st.SharkTankDAL.Framework;
+﻿using System; 
+using System.Web; 
+using System.Web.UI; 
+using System.Web.UI.WebControls; 
+using seoWebApplication.st.SharkTankDAL; 
 using seoWebApplication.Data; 
 
 namespace seoWebApplication
@@ -47,14 +37,17 @@ namespace seoWebApplication
                     //this.Pictures.LoadProductPictures(Convert.ToInt32(product_id));
                     //this.PicturesModals.LoadProductModals(Convert.ToInt32(product_id));
                     webstoreId = seoWebAppConfiguration.IdWebstore;
-                    url = seoWebApplication.Linkor.ToProduct(product_id).ToString();
-                    host = HttpContext.Current.Request.Url.Host;
 
-                    SeoWebAppEntities db = new SeoWebAppEntities();
-                    var store = (from ws in db.webstores where ws.webstore_id == webstoreId select ws).FirstOrDefault();
-                    var idCity = store.city;
-                    var city = (from ws in db.cities where ws.idCity == idCity select ws).FirstOrDefault();
-                    storeName = store.webstoreName;
+                    storeName = seoWebAppConfiguration.StoreName;
+                    seoDesc = seoWebAppConfiguration.StoreDesc + " at " + storeName;
+                    seoKeywords = seoWebAppConfiguration.StoreKeywords + " at " + storeName;
+                    seoTitle = seoWebAppConfiguration.StoreTitle;
+                    address = seoWebAppConfiguration.StoreAddress;
+                    city2 = seoWebAppConfiguration.StoreCity;
+                    phone = Convert.ToInt32(seoWebAppConfiguration.StorePhone);
+                    imgLogo = seoWebAppConfiguration.StoreImgLogo;
+                    url = HttpContext.Current.Request.Url.AbsoluteUri;
+                    host = HttpContext.Current.Request.Url.Host;
 
                     var socialMedia = (from ws in db.SocialMedias where ws.WebstoreId == webstoreId select ws).FirstOrDefault();
                     fbUrl = socialMedia.Facebook;
