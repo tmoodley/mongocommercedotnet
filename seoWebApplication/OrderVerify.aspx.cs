@@ -213,11 +213,22 @@ namespace seoWebApplication
             apiContext.Config = sdkConfig; 
             Amount amnt = new Amount();
             amnt.currency = "USD";
-            amnt.total = amount.ToString(); 
+            amnt.total = amount.ToString();
 
-            ItemList order = new ItemList();
+
+            List<Transaction> transactionList = new List<Transaction>();
+            Transaction tran = new Transaction();
+            tran.description = "Payment for Order ID:" + orderId;
+            tran.amount = amnt;
+
+            tran.item_list = new ItemList(); 
+            tran.item_list.items = new List<Item>();
+            //ItemList order = new ItemList();
             foreach(var i in ShoppingCartAccess.GetItems()){
-                order.items.Add(new Item { name = i.name, price = i.price.ToString(), quantity = i.quantity.ToString(), sku = i.name });
+                Item item = new Item { name = i.name, price = i.price.ToString(), quantity = i.quantity.ToString(), sku = i.name, currency = seoWebAppConfiguration.PaypalCurrency };
+            
+            tran.item_list.items.Add(item);
+
             }
              
             ShippingAddress sa = new ShippingAddress();
@@ -230,12 +241,7 @@ namespace seoWebApplication
             sa.country_code = customer.Country;
             sa.phone = customer.CellPhone;
             sa.postal_code = customer.Zip;
-             
-            List<Transaction> transactionList = new List<Transaction>();
-            Transaction tran = new Transaction();
-            tran.description = "Payment for Order ID:" + orderId ;
-            tran.amount = amnt;
-            tran.item_list = order;
+
             tran.item_list.shipping_address = sa;
             transactionList.Add(tran);
 
