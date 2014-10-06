@@ -207,7 +207,7 @@ namespace seoWebApplication
 
             Dictionary<string, string> sdkConfig = new Dictionary<string, string>();
             sdkConfig.Add("mode", "sandbox");
-            string accessToken = new OAuthTokenCredential("AQkquBDf1zctJOWGKWUEtKXm6qVhueUEMvXO_-MCI4DQQ4-LWvkDLIN2fGsd", "EL1tVxAjhT7cJimnz5-Nsx9k2reTKSVfErNQF-CmrwJgxRtylkGTKlU4RvrX", sdkConfig).GetAccessToken();
+            string accessToken = new OAuthTokenCredential(seoWebAppConfiguration.PaypalClientId, seoWebAppConfiguration.PaypalClientSecret, sdkConfig).GetAccessToken();
              
             APIContext apiContext = new APIContext(accessToken);
             apiContext.Config = sdkConfig; 
@@ -243,8 +243,8 @@ namespace seoWebApplication
             payr.payment_method = "paypal";
 
             RedirectUrls redirUrls = new RedirectUrls();
-            redirUrls.cancel_url = seoWebAppConfiguration.StoreUrl + "/OrderVerify.aspx?cancel=true";
-            redirUrls.return_url = seoWebAppConfiguration.StoreUrl + "/OrderComplete.aspx?success=true";
+            redirUrls.cancel_url = seoWebAppConfiguration.StoreUrl + seoWebAppConfiguration.PaypalCancelUrl;
+            redirUrls.return_url = seoWebAppConfiguration.StoreUrl + seoWebAppConfiguration.PaypalReturnUrl;
 
             Payment pymnt = new Payment();
             pymnt.intent = "sale";

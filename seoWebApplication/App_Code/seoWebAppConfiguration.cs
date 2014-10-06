@@ -5,9 +5,7 @@
 
  
     public static class seoWebAppConfiguration
-    {
-        // Caches the connection string
-        
+    {  
         private readonly static string storeName;
         // Caches the connection string
         private readonly static string storeDesc;
@@ -55,8 +53,14 @@
         private readonly static string facebookUrl;
         private readonly static string facebookAppId;
         private readonly static string storeUrl;
+        private readonly static string paypalClientId;
+        // Caches the connection string
+        private readonly static string paypalClientSecret;
+        private readonly static string paypalReturnUrl;
+        // Caches the connection string
+        private readonly static string paypalCancelUrl;
         static seoWebAppConfiguration()
-        {
+        { 
             storeUrl = ConfigurationManager.AppSettings["StoreUrl"];
             facebookAppId = ConfigurationManager.AppSettings["FacebookAppId"];
             storeName = ConfigurationManager.AppSettings["StoreName"];
@@ -88,6 +92,40 @@
             googleUrl = ConfigurationManager.AppSettings["GoogleUrl"];
             twitterUrl = ConfigurationManager.AppSettings["TwitterUrl"];
             facebookUrl = ConfigurationManager.AppSettings["FacebookUrl"];
+
+            paypalClientId = ConfigurationManager.AppSettings["PaypalClientId"];
+            paypalClientSecret = ConfigurationManager.AppSettings["PaypalClientSecret"];
+            paypalReturnUrl = ConfigurationManager.AppSettings["PaypalReturnUrl"];
+            paypalCancelUrl = ConfigurationManager.AppSettings["PaypalCancelUrl"];
+        }
+        public static string PaypalReturnUrl
+        {
+            get
+            {
+                return paypalReturnUrl;
+            }
+        }
+        public static string PaypalCancelUrl
+        {
+            get
+            {
+                return paypalCancelUrl;
+            }
+        }
+
+        public static string PaypalClientId
+        {
+            get
+            {
+                return paypalClientId;
+            }
+        }
+        public static string PaypalClientSecret
+        {
+            get
+            {
+                return paypalClientSecret;
+            }
         }
         public static string StoreUrl
         {
@@ -360,22 +398,7 @@
                 return ConfigurationManager.AppSettings["PaypalCurrency"];
             }
         }
-        // Return URL after a successful transaction
-        public static string PaypalReturnUrl
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["PaypalReturnUrl"];
-            }
-        }
-        // Return URL after a canceled transaction
-        public static string PaypalCancelUrl
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["PaypalCancelUrl"];
-            }
-        }
+        
 
         // Returns the number of days for shopping cart expiration
         public static int CartPersistDays
