@@ -206,7 +206,7 @@ namespace seoWebApplication
             dc.UpdateOrderTotal(cartId, Convert.ToDecimal(lblNewTotal.Text), Convert.ToInt32(txtPoints.Text));
 
             Dictionary<string, string> sdkConfig = new Dictionary<string, string>();
-            sdkConfig.Add("mode", "sandbox");
+            sdkConfig.Add("mode", "live");
             string accessToken = new OAuthTokenCredential(seoWebAppConfiguration.PaypalClientId, seoWebAppConfiguration.PaypalClientSecret, sdkConfig).GetAccessToken();
              
             APIContext apiContext = new APIContext(accessToken);

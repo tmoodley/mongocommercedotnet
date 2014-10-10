@@ -16,7 +16,7 @@ namespace seoWebApplication
 
         public string address;
         public string city2;
-        public int phone;
+        public string phone;
         public string url;
         public string host;
         public string facebookUrl;
@@ -36,7 +36,7 @@ namespace seoWebApplication
             seoTitle = seoWebAppConfiguration.StoreTitle;
             address = seoWebAppConfiguration.StoreAddress;
             city2 = seoWebAppConfiguration.StoreCity;
-            phone = Convert.ToInt32(seoWebAppConfiguration.StorePhone);
+            phone = seoWebAppConfiguration.StorePhone;
             imgLogo = seoWebAppConfiguration.StoreImgLogo;
             url = HttpContext.Current.Request.Url.AbsoluteUri;
             host = HttpContext.Current.Request.Url.Host;

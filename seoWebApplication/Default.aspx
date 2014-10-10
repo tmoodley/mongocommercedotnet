@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/default2.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="seoWebApplication._Default" Title="Shoppers Paradise Zim" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/default2.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="seoWebApplication._Default" Title="Living Hale Meals" %>
  
 <%@ Register src="UserControls/ProductsList.ascx" tagname="ProductsList" tagprefix="uc1" %>
 <%@ Register src="UserControls/Pager.ascx" tagname="Pager" tagprefix="uc2" %>  

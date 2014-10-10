@@ -627,6 +627,7 @@
     <Content Include="css\flexslider.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="css\foundation.css" />
+    <Content Include="css\layout.css" />
     <Content Include="css\pages\dashboard.css" />
     <Content Include="css\pages\plans.css" />
     <Content Include="css\pages\pricing.css" />
@@ -903,6 +904,7 @@
     <Content Include="js\plugins\validate\jquery.validate.js" />
     <Content Include="js\scripts.js" />
     <Content Include="js\smooth-scroll.js" />
+    <Content Include="js\theme.js" />
     <Content Include="myaccount.aspx" />
     <Content Include="OrderComplete.aspx" />
     <Content Include="product_view.aspx" />

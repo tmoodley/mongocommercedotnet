@@ -65,7 +65,7 @@
             facebookAppId = ConfigurationManager.AppSettings["FacebookAppId"];
             storeName = ConfigurationManager.AppSettings["StoreName"];
             storeImgLogo = ConfigurationManager.AppSettings["StoreImgLogo"];
-            storePhone = ConfigurationManager.AppSettings["StorePhone"];
+            storePhone = ConfigurationManager.AppSettings["Phone"];
             storeZip = ConfigurationManager.AppSettings["StoreZip"];
             storeState = ConfigurationManager.AppSettings["StoreState"];
             storeCity = ConfigurationManager.AppSettings["StoreCity"];
@@ -387,7 +387,7 @@
         {
             get
             {
-                return ConfigurationManager.AppSettings["PaypalEmail"];
+                return ConfigurationManager.AppSettings["Email"];
             }
         }
         // Currency code (such as USD)
