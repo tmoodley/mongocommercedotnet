@@ -1,4 +1,6 @@
-﻿using System; 
+﻿using seoWebApplication.Models;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web; 
 
@@ -14,6 +16,7 @@ namespace seoWebApplication
         public string imgLogo;
         public int webstoreId;
 
+        public int cartItems;
         public string address;
         public string city2;
         public string phone;
@@ -41,6 +44,9 @@ namespace seoWebApplication
             imgLogo = seoWebAppConfiguration.StoreImgLogo;
             url = HttpContext.Current.Request.Url.AbsoluteUri;
             host = HttpContext.Current.Request.Url.Host;
+
+            IList<mShoppingCart> dt = ShoppingCartAccess.GetItems();
+            cartItems = dt.Count;
 
             if (imgLogo == null) {
                 imgLogo = "";

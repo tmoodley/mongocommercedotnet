@@ -47,7 +47,7 @@
 </div>  
 <div class="mk-header-right">
 <div class="shopping-cart-header">
-     <a class="shoping-cart-link" href="/ShoppingCart.aspx"><i class="fa fa-shopping-cart"><span>0</span></i></a>
+     <a class="shoping-cart-link" href="/ShoppingCart.aspx"><i class="fa fa-shopping-cart"><span><%=cartItems %></span></i></a>
         
 </div>
 </div>            
