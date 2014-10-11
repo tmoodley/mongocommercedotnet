@@ -11,7 +11,7 @@ namespace seoWebApplication
         public string seoDesc;
         public string seoKeywords;
         public string seoTitle;
-        public string imgLogo; 
+        public string imgLogo;
         public int webstoreId;
 
         public string address;
@@ -19,10 +19,10 @@ namespace seoWebApplication
         public string phone;
         public string url;
         public string host;
+        public string email;
         public string facebookUrl;
         public string facebookAppId;
         public string twitterUrl;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             facebookUrl = seoWebAppConfiguration.FacebookUrl;
@@ -36,7 +36,8 @@ namespace seoWebApplication
             seoTitle = seoWebAppConfiguration.StoreTitle;
             address = seoWebAppConfiguration.StoreAddress;
             city2 = seoWebAppConfiguration.StoreCity;
-            phone = seoWebAppConfiguration.StorePhone;
+            phone = seoWebAppConfiguration.StorePhone; 
+            email = seoWebAppConfiguration.PaypalEmail;
             imgLogo = seoWebAppConfiguration.StoreImgLogo;
             url = HttpContext.Current.Request.Url.AbsoluteUri;
             host = HttpContext.Current.Request.Url.Host;

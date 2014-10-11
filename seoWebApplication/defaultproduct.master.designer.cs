@@ -49,13 +49,13 @@ namespace seoWebApplication {
         protected global::seoWebApplication.SearchBox SearchBox;
         
         /// <summary>
-        /// DepartmentsList control.
+        /// CartSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::seoWebApplication.UserControls.DepartmentsList DepartmentsList;
+        protected global::seoWebApplication.UserControls.CartSummary CartSummary;
         
         /// <summary>
         /// ContentPlaceHolder1 control.

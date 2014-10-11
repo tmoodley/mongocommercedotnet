@@ -676,6 +676,7 @@
     <Content Include="Images\button-bg2.gif" />
     <Content Include="Images\GSA.jpg" />
     <Content Include="Images\houseofwings_logo.gif" />
+    <Content Include="Images\line.gif" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\logos2.png" />
     <Content Include="Images\main-bg.gif" />

@@ -14,15 +14,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title><%=seoTitle + " at " + storeName%></title>
     <meta name="description" content="<%= "" + seoDesc %>">
-    <meta name="keywords" content="<%= "" + seoKeywords %>">
-    
-	
+    <meta name="keywords" content="<%= "" + seoKeywords %>"> 
     <meta name="robots" content="INDEX,FOLLOW">
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href="css/flexslider.css">
     <link rel="stylesheet" href="css/typicons.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link href="css/layout.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Petrona' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,100,300,400,700,900' rel='stylesheet' type='text/css'>
@@ -32,44 +32,137 @@
 </head>
 <body>
     <form id="form1" runat="server">
+          <div class="mk-header-toolbar">
+<span class="header-toolbar-contact"><i class="fa fa-phone"></i><%=phone %></span>
+            <span class="header-toolbar-contact"><i class="fa fa-envelope-o"></i><a href="mailto:<%=email %>"><%=email %></a></span> 
+<div class="main-nav-side-search">
+<a class="mk-search-trigger mk-toggle-trigger mk-toggle-active" href="#"><i class="fa fa-search"></i>Search</a>
+<div id="mk-nav-search-wrapper" class="mk-box-to-trigger" style="display: none; top: 30px;"> 
+    <uc4:SearchBox runat="server" ID="SearchBox" />
+</div>
+</div>  
+<div class="mk-header-right">
+<div class="shopping-cart-header">
+     <a class="shoping-cart-link" href="/ShoppingCart.aspx"><i class="fa fa-shopping-cart"><span>0</span></i></a>
+        
+</div>
+</div>            
+<div class="mk-shopping-cart-box" style="top: 40px; display: none;">
+<div class="widget widget_shopping_cart">
+    <h2 class="widgettitle"> </h2>
+    <div class="widget_shopping_cart_content">
+
+        <uc3:CartSummary runat="server" ID="CartSummary" />
+
+
+    </div>
+
+</div> <div class="clearboth"></div>
+</div>          
+<div class="mk-header-login">
+<a href="#" id="mk-header-login-button" class="mk-login-link mk-toggle-trigger"><i class="fa fa-user"></i>Login</a>
+<div class="mk-login-register mk-box-to-trigger">
+<div id="mk-login-panel">
+
+<form id="mk_login_form" name="mk_login_form" method="post" class="mk-login-form" action="/Account/Login/">
+<span class="form-section">
+<label for="log">Email</label>
+<input type="text" id="Email" name="Email" class="text-input">
+</span>
+<span class="form-section">
+<label for="pwd">Password</label>
+<input type="password" id="Password" name="Password" class="text-input">
+</span>
+<label class="mk-login-remember">
+<input type="checkbox" name="rememberme" id="rememberme" value="forever"> Remember Me </label>
+<input type="submit" id="login" name="submit_button" class="shop-flat-btn shop-skin-btn" value="LOG IN"> 
+<div class="register-login-links">
+<a href="#" class="mk-forget-password">Forget?</a>
+</div>
+</form>
+</div>
+<div id="mk-forget-panel">
+<span class="mk-login-title">Forget your password?</span>
+<form id="forgot_form" name="login_form" method="post" class="mk-forget-password-form" action="/Account/Suscribe">
+<span class="form-section">
+<label for="user_login">Username or E-mail</label>
+<input type="text" id="forgot-email" name="user_login" class="text-input">
+</span>
+<span class="form-section">
+<input type="submit" id="recover" name="submit" class="shop-flat-btn shop-skin-btn" value="Get New Password">
+</span>
+<div class="register-login-links">
+<a class="mk-return-login" href="#">Remember Password?</a>
+</div>
+</form>
+</div>
+</div>
+</div>
+<div class="mk-header-signup">
+<a href="#" id="mk-header-subscribe-button" class="mk-subscribe-link mk-toggle-trigger"><i class="fa fa-envelope"></i>Subscribe</a>
+<div id="mk-header-subscribe" class="mk-box-to-trigger">
+<form action="http://artbees.us7.list-manage2.com/subscribe/post?u=d4f4e5e82a59166b0cfbc716f&amp;id=3db82d169b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+<label for="mce-EMAIL">Subscribe to newsletter</label>
+<input type="email" value="" name="EMAIL" class="email text-input" id="mce-EMAIL" placeholder="Email Address" required="">
+<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="shop-flat-btn shop-skin-btn">
+</form>
+</div>
+</div> 
+            <div class="clearboth"></div>
+</div>
 
         <div id="loader">
             <div id="progress-bar"></div>
         </div>
         <a id="home-nav"></a>
         <section id="nav">
-            <div class="row">
-		    <div class="large-3 columns text-right width200">
-             <%if(imgLogo.Length > 0) %>
-                     <%{%>
-                   <img src="<%=imgLogo%>" alt="<%=seoTitle%> at <%=storeName %>" style="width: 200px;"/>    
-                     <%}%>  
-                    <%else%>  
-                     <%{%> 
-                   <span class="label label-info"><h1><%=storeName %> </h1> </span>
-                   <span class="label label-info"><%=seoTitle%></span>
-                     <%}%> 
-            </div>
-
-            <div class="large-6 columns text-right width600">
-                <uc4:SearchBox runat="server" ID="SearchBox" />
-            </div>
-
-            <div class="large-3 columns text-right width200"> 
-                <a class="scroll" href="/shoppingcart.aspx">Cart</a>   
-                <a class="scroll" href="/Account/Register">Register</a>  
-            </div> 
-          </div>  
-</section> 
-<section class="row">
-  <div class="pad-small">
-      <div class="large-12 columns text-right width100"> 
+	    <div class="row">
+		<div class="large-4 columns text-right width375">
 			<ul class="navigation hide-for-small">
-                <uc3:DepartmentsList runat="server" id="DepartmentsList" />  
-			</ul> 
-		</div> 
-  </div>
-</section>
+				<li><a class="scroll" href="#highlights-nav">KEEP HEALTHY</a></li>
+                <li><a class="scroll" href="#info-nav">HOW</a></li>
+                <!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> -->
+			</ul>
+		</div>
+		
+		<div class="large-3 columns text-center">
+			<a class="home-link scroll" href="#home-nav"><div id="hale-logo">Hale</div></a>
+		</div>
+		
+		<div class="large-4 columns text-left width375">
+			<ul class="navigation hide-for-small">
+				<li><a class="scroll" href="#work-nav">FLAVORS</a></li>
+                <li><a class="scroll" href="#pricing-nav">PRICES</a></li>
+                
+
+			</ul>
+		</div>
+		
+		<div class="open-menu show-for-small right"><i class="typcn typcn-th-menu"></i></div>
+	</div>
+	
+	    <div class="row">
+		<div class="large-12 columns mobile-nav">
+			<ul class="navigation">
+				<!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> -->
+				<li><a class="scroll" href="#highlights-nav">KEEP HEALTHY</a></li>
+				<li><a class="scroll" href="#info-nav">HOW</a></li>
+				<li><a class="scroll" href="#work-nav">FLAVORS</a></li>
+                <li><a class="scroll" href="#pricing-nav">PRICES</a></li>
+			</ul>
+            <div class="main-nav-side-search">
+<a class="mk-search-trigger mk-toggle-trigger" href="#"><i class="mk-icon-search"></i></a>
+<div id="mk-nav-search-wrapper" class="mk-box-to-trigger" style="display: none; top: 93px;">
+<form method="get" id="mk-header-navside-searchform" action="http://artbees.net/themes/jupiter-demo">
+<span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" value="" name="s" id="mk-ajax-search-input" class="ui-autocomplete-input" autocomplete="off">
+<i class="mk-moon-search-3 nav-side-search-icon"><input value="" type="submit"></i>
+</form>
+<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="display: none;"></ul></div>
+</div>
+		</div>
+	</div>
+
+        </section>
            
         <br /> 
        
@@ -207,7 +300,8 @@ Added Flaxseed: +10¢</p>
         <script src="/js/foundation.reveal.js"></script>
         <script src="/js/jquery.flexslider.js"></script>
         <script src="/js/smooth-scroll.js"></script>
-        <script src="/js/scripts.js"></script>
+        <script src="/js/scripts.js"></script> 
+        <script src="/js/theme.js"></script>
         <!-- <script>
   var video_link = 'http://player.vimeo.com/video/80870342?title=0&amp;byline=0&amp;portrait=0&amp;color=64b0af;autoplay=1';
   </script> -->
