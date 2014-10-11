@@ -652,10 +652,10 @@
   padding-left: 9px;
 }
 .mk-header-right {
-  position: absolute;
-  right: 30px;
-  top: 0;
-  z-index: 30;
+    position: absolute;
+    right: 225px;
+    top: 5px;
+    z-index: 30;
 }
 .header-grid.mk-grid {
   position: relative;
@@ -1269,6 +1269,7 @@
   margin: 0 0 0 10px;
   vertical-align: top;
   position: relative;
+  top: 6px;
 }
 .mk-search-trigger {
   display: block;
@@ -1455,7 +1456,7 @@
 }
 .mk-shopping-cart-box {
   position: absolute;
-  right: -10px;
+  right: 210px;
   top: 80px;
   width: 280px;
   padding: 0 10px;

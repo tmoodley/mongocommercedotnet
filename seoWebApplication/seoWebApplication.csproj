@@ -625,6 +625,7 @@
     <Content Include="css\css_003.css" />
     <Content Include="css\custom.css" />
     <Content Include="css\flexslider.css" />
+    <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="css\foundation.css" />
     <Content Include="css\layout.css" />
@@ -658,6 +659,7 @@
     <Content Include="default2.master" />
     <Content Include="delete.gif" />
     <Content Include="externaldlls\Kendo.Mvc.dll" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="font\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -976,6 +978,10 @@
     <Content Include="app.config" />
     <Content Include="defaultproduct.master" />
     <Content Include="packages.config" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\hale.pubxml" />
     <None Include="Properties\PublishProfiles\halemeals.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\mongo-commerce.com - Web Deploy.pubxml" />
