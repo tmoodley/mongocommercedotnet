@@ -1445,8 +1445,7 @@
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 30px;
-  padding: 5px 8px;
-  color: #fff;
+  padding: 5px 8px; 
   font-size: 12px;
   line-height: 12px;
   font-weight: bold;
