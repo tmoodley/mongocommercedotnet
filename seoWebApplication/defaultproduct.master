@@ -105,6 +105,7 @@
 	    <div class="row">
 		<div class="large-4 columns text-right width375">
 			<ul class="navigation hide-for-small">
+                <li><a class="scroll" href="/">Home</a></li> 
 				<li><a class="scroll" href="#highlights-nav">KEEP HEALTHY</a></li>
                 <li><a class="scroll" href="#info-nav">HOW</a></li>
                 <!-- <li><a class="scroll" href="#buy-nav">BUY</a></li> -->
