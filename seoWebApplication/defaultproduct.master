@@ -7,6 +7,8 @@
 <%@ Register Src="~/UserControls/CategoriesList.ascx" TagPrefix="uc3" TagName="CategoriesList" %>
 <%@ Register Src="~/UserControls/DeptCategoriesList.ascx" TagPrefix="uc3" TagName="DeptCategoriesList" %>
 <%@ Register Src="~/UserControls/ProductSpecials.ascx" TagPrefix="uc3" TagName="ProductSpecials" %>
+<%@ Register Src="~/UserControls/LogIn.ascx" TagPrefix="uc3" TagName="LogIn" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head id="Head1" runat="server">
@@ -32,7 +34,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-          <div class="mk-header-toolbar">
+        <div class="mk-header-toolbar">
 <span class="header-toolbar-contact"><i class="fa fa-phone"></i><%=phone %></span>
             <span class="header-toolbar-contact"><i class="fa fa-envelope-o"></i><a href="mailto:<%=email %>"><%=email %></a></span> 
 <div class="main-nav-side-search">
@@ -62,28 +64,12 @@
 <div class="mk-header-login">
 <a href="#" id="mk-header-login-button" class="mk-login-link mk-toggle-trigger"><i class="fa fa-user"></i>Login</a>
 <div class="mk-login-register mk-box-to-trigger">
-<div id="mk-login-panel">
-
-<form id="mk_login_form" name="mk_login_form" method="post" class="mk-login-form" action="/Account/Login/">
-<span class="form-section">
-<label for="log">Email</label>
-<input type="text" id="Email" name="Email" class="text-input">
-</span>
-<span class="form-section">
-<label for="pwd">Password</label>
-<input type="password" id="Password" name="Password" class="text-input">
-</span>
-<label class="mk-login-remember">
-<input type="checkbox" name="rememberme" id="rememberme" value="forever"> Remember Me </label>
-<input type="submit" id="login" name="submit_button" class="shop-flat-btn shop-skin-btn" value="LOG IN"> 
-<div class="register-login-links">
-<a href="#" class="mk-forget-password">Forget?</a>
-</div>
-</form>
+<div id="mk-login-panel">  
+    <uc3:LogIn runat="server" id="LogIn" />
 </div>
 <div id="mk-forget-panel">
 <span class="mk-login-title">Forget your password?</span>
-<form id="forgot_form" name="login_form" method="post" class="mk-forget-password-form" action="/Account/Suscribe">
+<%--<form id="forgot_form" name="login_form" method="post" class="mk-forget-password-form" action="/Account/Suscribe">
 <span class="form-section">
 <label for="user_login">Username or E-mail</label>
 <input type="text" id="forgot-email" name="user_login" class="text-input">
@@ -94,22 +80,22 @@
 <div class="register-login-links">
 <a class="mk-return-login" href="#">Remember Password?</a>
 </div>
-</form>
+</form>--%>
 </div>
 </div>
 </div>
 <div class="mk-header-signup">
 <a href="#" id="mk-header-subscribe-button" class="mk-subscribe-link mk-toggle-trigger"><i class="fa fa-envelope"></i>Subscribe</a>
 <div id="mk-header-subscribe" class="mk-box-to-trigger">
-<form action="http://artbees.us7.list-manage2.com/subscribe/post?u=d4f4e5e82a59166b0cfbc716f&amp;id=3db82d169b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+<%--<form action="/Account/Suscribe/" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
 <label for="mce-EMAIL">Subscribe to newsletter</label>
 <input type="email" value="" name="EMAIL" class="email text-input" id="mce-EMAIL" placeholder="Email Address" required="">
 <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="shop-flat-btn shop-skin-btn">
-</form>
+</form>--%>
 </div>
 </div> 
             <div class="clearboth"></div>
-</div>
+</div>  
 
         <div id="loader">
             <div id="progress-bar"></div>
@@ -150,15 +136,7 @@
 				<li><a class="scroll" href="#work-nav">FLAVORS</a></li>
                 <li><a class="scroll" href="#pricing-nav">PRICES</a></li>
 			</ul>
-            <div class="main-nav-side-search">
-<a class="mk-search-trigger mk-toggle-trigger" href="#"><i class="mk-icon-search"></i></a>
-<div id="mk-nav-search-wrapper" class="mk-box-to-trigger" style="display: none; top: 93px;">
-<form method="get" id="mk-header-navside-searchform" action="http://artbees.net/themes/jupiter-demo">
-<span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" value="" name="s" id="mk-ajax-search-input" class="ui-autocomplete-input" autocomplete="off">
-<i class="mk-moon-search-3 nav-side-search-icon"><input value="" type="submit"></i>
-</form>
-<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="display: none;"></ul></div>
-</div>
+             
 		</div>
 	</div>
 
@@ -300,7 +278,7 @@ Added Flaxseed: +10¢</p>
         <script src="/js/foundation.reveal.js"></script>
         <script src="/js/jquery.flexslider.js"></script>
         <script src="/js/smooth-scroll.js"></script>
-        <script src="/js/scripts.js"></script> 
+        <script src="/js/scripts.js"></script>  
         <script src="/js/theme.js"></script>
         <!-- <script>
   var video_link = 'http://player.vimeo.com/video/80870342?title=0&amp;byline=0&amp;portrait=0&amp;color=64b0af;autoplay=1';

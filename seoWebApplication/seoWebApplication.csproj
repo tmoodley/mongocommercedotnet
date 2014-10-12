@@ -983,6 +983,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="DefaultMasterIndex.master" />
     <None Include="Properties\PublishProfiles\hale.pubxml" />
     <None Include="Properties\PublishProfiles\halemeals.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\mongo-commerce.com - Web Deploy.pubxml" />
@@ -1189,6 +1190,7 @@
     <Content Include="UserControls\contact.ascx" />
     <Content Include="UserControls\CuisineList.ascx" />
     <Content Include="UserControls\DeptCategoriesList.ascx" />
+    <Content Include="UserControls\LogIn.ascx" />
     <Content Include="UserControls\MapLocation.ascx" />
     <Content Include="UserControls\MenuList.ascx" />
     <Content Include="UserControls\Pictures.ascx" />
@@ -1531,6 +1533,13 @@
     <Compile Include="default2.master.designer.cs">
       <DependentUpon>default2.master</DependentUpon>
     </Compile>
+    <Compile Include="DefaultMasterIndex.master.cs">
+      <DependentUpon>DefaultMasterIndex.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultMasterIndex.master.designer.cs">
+      <DependentUpon>DefaultMasterIndex.master</DependentUpon>
+    </Compile>
     <Compile Include="defaultproduct.master.cs">
       <DependentUpon>defaultproduct.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1843,6 +1852,13 @@
     </Compile>
     <Compile Include="UserControls\DeptCategoriesList.ascx.designer.cs">
       <DependentUpon>DeptCategoriesList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LogIn.ascx.cs">
+      <DependentUpon>LogIn.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\LogIn.ascx.designer.cs">
+      <DependentUpon>LogIn.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MapLocation.ascx.cs">
       <DependentUpon>MapLocation.ascx</DependentUpon>
