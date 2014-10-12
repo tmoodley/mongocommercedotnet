@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
+﻿using System; 
+using System.Linq; 
 
 namespace seoWebApplication.UserControls
 {
     public partial class UserInfo2 : System.Web.UI.UserControl
     {
+        public bool loggedIn = false;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["UserName"] != null) {
+                loggedIn = true;
+            }
         }
     }
 }
