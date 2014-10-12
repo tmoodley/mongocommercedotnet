@@ -9,6 +9,8 @@
 <%@ Register Src="~/UserControls/CustomerDetailsEdit.ascx" TagPrefix="uc3" TagName="CustomerDetailsEdit" %>
 <%@ Register Src="~/UserControls/SearchBox2.ascx" TagPrefix="uc3" TagName="SearchBox2" %>
 <%@ Register Src="~/UserControls/SearchBox.ascx" TagPrefix="uc4" TagName="SearchBox" %>
+<%@ Register Src="~/UserControls/LogIn.ascx" TagPrefix="uc3" TagName="LogIn" %>
+
 
 
 
@@ -64,7 +66,7 @@
 <a href="#" id="mk-header-login-button" class="mk-login-link mk-toggle-trigger"><i class="fa fa-user"></i>Login</a>
 <div class="mk-login-register mk-box-to-trigger">
 <div id="mk-login-panel">
-    <uc3:LogIn runat="server" id="LogIn" />
+    <uc3:LogIn runat="server" ID="LogIn" /> 
 </div>
 <%--<div id="mk-forget-panel">
 <span class="mk-login-title">Forget your password?</span>
