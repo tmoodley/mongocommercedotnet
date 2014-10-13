@@ -126,7 +126,7 @@ namespace seoWebApplication.Controllers
             return View();
         }
 
-
+        [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> LoginFromControl(LoginViewModel model)
         {
