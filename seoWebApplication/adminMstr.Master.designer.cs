@@ -40,22 +40,13 @@ namespace seoWebApplication {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// MenuTab2 control.
+        /// lblVersion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::seoWebApplication.UserControls.MenuTab MenuTab2;
-        
-        /// <summary>
-        /// MenuList2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::seoWebApplication.UserControls.MenuList MenuList2;
+        protected global::System.Web.UI.WebControls.Label lblVersion;
         
         /// <summary>
         /// ContentPlaceHolder1 control.
@@ -74,23 +65,5 @@ namespace seoWebApplication {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::seoWebApplication.st.SharkTankDAL.ValidationErrorMessages ValidationErrorMessages1;
-        
-        /// <summary>
-        /// lblCopyright control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCopyright;
-        
-        /// <summary>
-        /// lblVersion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblVersion;
     }
 }

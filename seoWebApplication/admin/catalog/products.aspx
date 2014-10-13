@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <asp:Button ID="Button1" runat="server" Text="Add" OnClick="Button1_Click" />
  <asp:GridView ID="cgvProducts" runat="server"  BorderColor="#CCCCCC" 
-        onrowdatabound="cgvProducts_RowDataBound" CssClass="wrapper">
+        onrowdatabound="cgvProducts_RowDataBound" CssClass="wrapper table">
     <AlternatingRowStyle BackColor="#CCCCCC" />
 </asp:GridView> 
  

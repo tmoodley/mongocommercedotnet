@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System; 
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Web;
+using System.Linq; 
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using seoWebApplication.st.SharkTankDAL;
-using seoWebApplication.st.SharkTankDAL.dataObject;
-using seoWebApplication.st.SharkTankDAL.Framework; 
+using System.Web.UI.WebControls; 
 using System.Web.UI.HtmlControls;
 
 namespace seoWebApplication.st.SharkTankDAL

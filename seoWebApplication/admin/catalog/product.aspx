@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/seoWebAppAdminEditPage.Master" AutoEventWireup="true" CodeBehind="product.aspx.cs" Inherits="seoWebApplication.admin.product" %>
+﻿<%@ Page EnableEventValidation="false" Title="" Language="C#" MasterPageFile="~/seoWebAppAdminEditPage.Master" AutoEventWireup="true" CodeBehind="product.aspx.cs" Inherits="seoWebApplication.admin.product" %>
+
 <%@ MasterType virtualPath="~/seoWebAppAdminEditPage.master"%>
 <%@ Register Src="~/UserControls/Pictures.ascx" TagPrefix="uc1" TagName="Pictures" %>
 <%@ Register Src="~/UserControls/AdminPictures.ascx" TagPrefix="uc1" TagName="AdminPictures" %>
