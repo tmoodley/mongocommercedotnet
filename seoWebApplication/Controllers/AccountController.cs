@@ -119,6 +119,14 @@ namespace seoWebApplication.Controllers
                 return _helper;
             }
         }
+
+        [AllowAnonymous]
+        public ActionResult LoginFromControl()
+        { 
+            return View();
+        }
+
+
         [AllowAnonymous]
         public async Task<ActionResult> LoginFromControl(LoginViewModel model)
         {

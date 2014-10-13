@@ -69,32 +69,13 @@
 <div class="mk-login-register mk-box-to-trigger">
 <div id="mk-login-panel">
     <uc3:LogIn runat="server" ID="LogIn" /> 
-</div>
-<%--<div id="mk-forget-panel">
-<span class="mk-login-title">Forget your password?</span>
-<form id="forgot_form" name="login_form" method="post" class="mk-forget-password-form" action="/Account/Suscribe">
-<span class="form-section">
-<label for="user_login">Username or E-mail</label>
-<input type="text" id="forgot-email" name="user_login" class="text-input">
-</span>
-<span class="form-section">
-<input type="submit" id="recover" name="submit" class="shop-flat-btn shop-skin-btn" value="Get New Password">
-</span>
-<div class="register-login-links">
-<a class="mk-return-login" href="#">Remember Password?</a>
-</div>
-</form>
-</div>--%>
+</div> 
 </div>
 </div>
 <div class="mk-header-signup">
 <a href="#" id="mk-header-subscribe-button" class="mk-subscribe-link mk-toggle-trigger"><i class="fa fa-envelope"></i>Subscribe</a>
 <div id="mk-header-subscribe" class="mk-box-to-trigger">
-<form action="/Account/Suscribe/" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
-<label for="mce-EMAIL">Subscribe to newsletter</label>
-<input type="email" value="" name="EMAIL" class="email text-input" id="mce-EMAIL" placeholder="Email Address" required="">
-<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="shop-flat-btn shop-skin-btn">
-</form>
+ 
 </div>
 </div> 
             <div class="clearboth"></div>
@@ -142,11 +123,8 @@
             <div class="main-nav-side-search">
 <a class="mk-search-trigger mk-toggle-trigger" href="#"><i class="mk-icon-search"></i></a>
 <div id="mk-nav-search-wrapper" class="mk-box-to-trigger" style="display: none; top: 93px;">
-<form method="get" id="mk-header-navside-searchform" action="http://artbees.net/themes/jupiter-demo">
-<span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input type="text" value="" name="s" id="mk-ajax-search-input" class="ui-autocomplete-input" autocomplete="off">
-<i class="mk-moon-search-3 nav-side-search-icon"><input value="" type="submit"></i>
-</form>
-<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="display: none;"></ul></div>
+ <uc4:SearchBox runat="server" id="SearchBox1" />
+ </div>
 </div>
 		</div>
 	</div>
@@ -374,22 +352,7 @@ Added Flaxseed: +10¢</p>
 			<a href="mailto:support@livinghale.com"><img src="images/page_images/footer_images/email2.png" height="32" width="32" /></a></div>
 		</div>
 		
-		<!-- <div class="row">
-			<div class="large-10 columns">
-				 <div id="contact-form">
-					<div id="name">
-						<input id="form-name" type="text" placeholder="Name" />
-					</div>
-					
-					<div id="email">
-						<input id="form-email" type="email" placeholder="Email" />
-					</div>
-					<div class="btn-wrapper"><div class="btn">SIGN UP</div></div>
-					
-					<div id="details-error" class="text-white"><i class="typcn typcn-warning">&nbsp;</i>Error: Please ensure all fields are completed correctly.</div>
-					<div id="form-sent" class="text-white"><i class="typcn typcn-thumbs-up">&nbsp;</i>You are now on the list! Stay tuned for some exciting updates.</div>
-				</div>
-			</div>-->
+		 
   </div>
 		
 		<div class="row">

@@ -7,8 +7,8 @@
 <%@ Register Src="~/UserControls/CategoriesList.ascx" TagPrefix="uc3" TagName="CategoriesList" %>
 <%@ Register Src="~/UserControls/DeptCategoriesList.ascx" TagPrefix="uc3" TagName="DeptCategoriesList" %>
 <%@ Register Src="~/UserControls/ProductSpecials.ascx" TagPrefix="uc3" TagName="ProductSpecials" %>
-<%@ Register Src="~/UserControls/LogIn.ascx" TagPrefix="uc3" TagName="LogIn" %>
-
+<%@ Register Src="~/UserControls/LogIn.ascx" TagPrefix="uc3" TagName="LogIn" %> 
+<%@ Register Src="~/UserControls/UserInfo2.ascx" TagPrefix="uc3" TagName="UserInfo2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head id="Head1" runat="server">
