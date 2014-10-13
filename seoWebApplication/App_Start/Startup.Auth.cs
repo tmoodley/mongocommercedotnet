@@ -60,5 +60,7 @@ namespace seoWebApplication
 
             //app.UseGoogleAuthentication();
         }
-    }
+
+      
+    } 
 }

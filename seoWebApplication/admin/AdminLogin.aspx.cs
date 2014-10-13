@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
+﻿using System; 
+using System.Linq; 
+using seoWebApplication.st.SharkTankDAL; 
+using seoWebApplication.st.SharkTankDAL.dataObject;
 using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
-using System.Web.Configuration;
-using seoWebApplication.st.SharkTankDAL;
-using seoWebApplication.st.SharkTankDAL.Framework;
-using System.Text;
-using seoWebApplication.st.SharkTankDAL.dataObject; 
+using seoWebApplication.Models; 
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using AspNet.Identity.MongoDB;
+using System.Net.Http;
 
 namespace seoWebApplication 
 {
@@ -51,6 +44,7 @@ namespace seoWebApplication
                 Session["webstore_id"] = dBHelper.GetWebstoreId();
                 Session["AdminUserName"] = m_textboxUserName.Text;
                 Session["AdminUserId"] = 1;
+                InitializeIdentity();
                 Response.Redirect("default.aspx");
             }
             else
@@ -64,6 +58,65 @@ namespace seoWebApplication
         protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        //Create User=Admin@Admin.com with password=Admin@123456 in the Admin role        
+        public static void InitializeIdentity()
+        {
+            var userManager =
+                HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            var roleManager =
+                HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
+            string SuperUser = seoWebAppConfiguration.SuperUser;
+            string SuperPassword = seoWebAppConfiguration.SuperPassword;
+            string name = SuperUser;
+            string password = SuperPassword;
+            const string roleName = "Admin";
+
+            //Create Role Admin if it does not exist
+            var role = roleManager.FindByName(roleName);
+
+            if (role == null)
+            {
+                role = new IdentityRole(roleName);
+                var roleresult = roleManager.Create(role);
+            }
+
+            var user = userManager.FindByName(name);
+
+            if (user == null)
+            {
+                user = new ApplicationUser { UserName = name, Email = name };
+                var result = userManager.Create(user, password);
+
+                // Set Email confirmation property (see note above):
+                user.EmailConfirmed = true;
+                result = userManager.SetLockoutEnabled(user.Id, false);
+            }
+
+            // Add user admin to Role Admin if not already added
+            var rolesForUser = userManager.GetRoles(user.Id);
+
+            if (!rolesForUser.Contains(role.Name))
+            {
+                var result = userManager.AddToRole(user.Id, role.Name);
+            }
         }
     }
 }

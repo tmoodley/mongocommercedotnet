@@ -20,6 +20,7 @@ namespace seoWebApplication.Models
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
+      
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
@@ -307,5 +308,6 @@ namespace seoWebApplication.Models
             }
             return SignInStatus.Failure;
         }
-    }
+          
 }
+    }

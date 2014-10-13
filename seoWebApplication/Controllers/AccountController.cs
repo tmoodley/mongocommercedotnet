@@ -42,6 +42,13 @@ namespace seoWebApplication.Controllers
 
         // GET: /Account/AdminLogin
         [AllowAnonymous]
+        public ActionResult Manage()
+        { 
+            return View();
+        }
+
+        // GET: /Account/AdminLogin
+        [AllowAnonymous]
         public ActionResult AdminLogin(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -182,7 +189,7 @@ namespace seoWebApplication.Controllers
             switch (result)
             {
                 case seoWebApplication.Models.SignInStatus.Success:
-                    Session["UserName"] = user.UserName;
+                    Session["UserName"] = user.UserName; 
                     return RedirectToLocal(returnUrl);
                 case seoWebApplication.Models.SignInStatus.LockedOut:
                     return View("Lockout");

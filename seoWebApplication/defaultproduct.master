@@ -62,7 +62,7 @@
 </div> <div class="clearboth"></div>
 </div>          
 <div class="mk-header-login">
-<a href="#" id="mk-header-login-button" class="mk-login-link mk-toggle-trigger"><i class="fa fa-user"></i>Login</a>
+ <uc3:UserInfo2 runat="server" ID="UserInfo2" />
 <div class="mk-login-register mk-box-to-trigger">
 <div id="mk-login-panel">  
     <uc3:LogIn runat="server" id="LogIn" />

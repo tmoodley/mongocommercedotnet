@@ -105,14 +105,16 @@
     <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Cors">
       <HintPath>..\packages\Microsoft.Owin.Cors.2.1.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
@@ -354,6 +356,10 @@
     <Content Include="assets\tooltip-script.js" />
     <Content Include="assets\twitter.png" />
     <Content Include="assets\TXMAS_logo.jpg" />
+    <Content Include="bootstrap-theme.css" />
+    <Content Include="bootstrap-theme.min.css" />
+    <Content Include="bootstrap.css" />
+    <Content Include="bootstrap.min.css" />
     <Content Include="content\Black\editor.png" />
     <Content Include="content\Black\imagebrowser.png" />
     <Content Include="content\Black\loading-image.gif" />
@@ -654,11 +660,14 @@
     <Content Include="css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="css\ui-lightness\jquery-ui-1.10.0.custom.css" />
     <Content Include="css\ui-lightness\jquery-ui-1.10.0.custom.min.css" />
+    <Content Include="dashboard.css" />
     <Content Include="Default.aspx" />
     <Content Include="Default2.aspx" />
     <Content Include="default2.master" />
     <Content Include="delete.gif" />
     <Content Include="externaldlls\Kendo.Mvc.dll" />
+    <Content Include="font-awesome.css" />
+    <Content Include="font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="font\fontawesome-webfont.svg" />
@@ -733,6 +742,7 @@
     <Content Include="Images\shoppersZimLogo.png" />
     <Content Include="Images\TXMAS_logo.jpg" />
     <Content Include="Images\wings.jpg" />
+    <Content Include="Image\avatar_user.png" />
     <Content Include="img\avatar.png" />
     <Content Include="img\blue-push-pin.gif" />
     <Content Include="img\blue-push-pin.png" />
@@ -984,6 +994,8 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="DefaultMasterIndex.master" />
+    <Content Include="bootstrap-theme.css.map" />
+    <Content Include="bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\hale.pubxml" />
     <None Include="Properties\PublishProfiles\halemeals.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\mongo-commerce.com - Web Deploy.pubxml" />
@@ -1006,6 +1018,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Site.css" />
     <Content Include="star.gif" />
     <Content Include="Styles\admin\Site.css" />
     <Content Include="Styles\boostrap.css" />
@@ -2367,6 +2380,7 @@
     <Content Include="Views\Shared\_PartialDepartmentsMenu.cshtml" />
     <Content Include="Views\Departments\Menu.cshtml" />
     <Content Include="Views\Account\AdminLogin.cshtml" />
+    <Content Include="Views\UsersAdmin\Index.cshtml" />
     <None Include="Web References\com.shade4sale\authenticateUser.disco" />
     <None Include="Web References\com.shade4sale\authenticateUser.wsdl" />
     <None Include="Web References\com.shade4sale\Product.datasource">
