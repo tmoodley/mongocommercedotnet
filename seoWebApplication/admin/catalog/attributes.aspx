@@ -4,7 +4,7 @@
 <%@ MasterType virtualPath="~/seoWebAppAdminEditGrid.master"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
  <asp:GridView ID="cgvAttributes" runat="server"  BorderColor="#CCCCCC" 
-        onrowdatabound="cgvAttributes_RowDataBound" CssClass="wrapper">
+        onrowdatabound="cgvAttributes_RowDataBound" CssClass="table">
     <AlternatingRowStyle BackColor="#CCCCCC" />
 </asp:GridView>
 </asp:Content>

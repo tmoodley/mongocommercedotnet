@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/seoWebAppAdminEditPage.Master" AutoEventWireup="true" CodeBehind="attribute.aspx.cs" Inherits="seoWebApplication.admin.attribute" %>
-
-<%@ Register Assembly="obout_Grid_NET" Namespace="Obout.Grid" TagPrefix="cc1" %>
+ 
 <%@ MasterType virtualPath="~/seoWebAppAdminEditPage.master"%>
  
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder3" runat="server">
@@ -105,7 +104,7 @@
       <asp:View ID="view2" runat="server">
           <asp:Button ID="btnAdd" runat="server" Text="Add" onclick="btnAdd_Click" /> 
           <asp:GridView ID="cgvAttributeValues" runat="server"  BorderColor="#CCCCCC" 
-        onrowdatabound="cgvAttributeValues_RowDataBound" CssClass="wrapper">
+        onrowdatabound="cgvAttributeValues_RowDataBound" CssClass="table">
     <AlternatingRowStyle BackColor="#CCCCCC" />
 </asp:GridView>
 

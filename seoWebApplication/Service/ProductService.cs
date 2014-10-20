@@ -155,7 +155,7 @@ namespace seoWebApplication.Service
             }
         }
 
-        internal IList<mAttribute> GetProductAttributes(int Id)
+        internal IList<mProductAttributeValue> GetProductAttributes(int Id)
         {
             if (Id > 0)
             {
@@ -169,6 +169,23 @@ namespace seoWebApplication.Service
                 return null;
             }
            
+        }
+
+        internal mProductAttributeValue GetProductAttribute(int Id, int AttrId)
+        {
+            if (Id > 0)
+            {
+                mProducts pquery = (from e in _product.Collection.AsQueryable<mProducts>()
+                                   where e.product_id == Id
+                                   select e).First();
+                var query = (from d in pquery.Attributes where d.AttributeValueID == AttrId select d).First();
+                return query;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         internal IList<Categories> ProductCategorySelect(int Id)
@@ -226,10 +243,7 @@ namespace seoWebApplication.Service
                     var update = Update<mProducts>.Set(e => e.Categories, _category);
 
                     _product.Collection.Update(query, update);
-                }
-
-               
-               
+                } 
             }
             catch
             {
@@ -281,6 +295,53 @@ namespace seoWebApplication.Service
                 var query = Query<mProducts>.EQ(e => e.product_id, id);  
 
                 _product.Collection.Remove(query);
+
+            }
+            catch
+            {
+
+            } 
+        }
+
+        internal void AddAttrbuteValue(mProductAttributeValue pvalue)
+        {
+            try
+            {
+                var query = Query<mProducts>.EQ(e => e.product_id, pvalue.product_id);
+
+                IList<mProductAttributeValue> attr = GetProduct(pvalue.product_id).Attributes;
+                 
+                if (attr != null)
+                {
+                    attr.Add(pvalue);
+                    var update = Update<mProducts>.Set(e => e.Attributes, attr);
+
+                    _product.Collection.Update(query, update);
+                }
+                else
+                {
+                    List<mProductAttributeValue> _attr = new List<mProductAttributeValue>();
+                    _attr.Add(pvalue);
+                    var update = Update<mProducts>.Set(e => e.Attributes, _attr);
+
+                    _product.Collection.Update(query, update);
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        internal void DeleteAttrbuteValue(mProductAttributeValue pvalue)
+        {
+            try
+            {
+                List<mProductAttributeValue> attr = GetProduct(pvalue.product_id).Attributes;
+                var query = Query<mProducts>.EQ(e => e.product_id, pvalue.product_id);
+                attr.RemoveAll((x) => x.ProductAttributeValueId == pvalue.ProductAttributeValueId);
+                var update = Update<mProducts>.Set(e => e.Attributes, attr);
+
+                _product.Collection.Update(query, update);
 
             }
             catch

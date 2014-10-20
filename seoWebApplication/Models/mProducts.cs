@@ -49,12 +49,11 @@ namespace seoWebApplication.Models
             get { return date.ToLocalTime(); }
             set { date = value; }
         }
-         [BsonElement("UpdateENTUserAccountId")]
+        [BsonElement("UpdateENTUserAccountId")]
         public int UpdateENTUserAccountId { get; set; }
         [BsonElement("Version")]
-        public byte[] Version { get; set; } 
-        public IList<mAttribute> Attributes { get; set; }
-
+        public byte[] Version { get; set; }
+        public List<mProductAttributeValue> Attributes { get; set; } 
         public List<Categories> Categories { get; set; } 
     }
 }

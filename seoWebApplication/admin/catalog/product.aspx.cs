@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
+﻿using System; 
+using System.Linq; 
 using System.Web.UI.WebControls;
-using seoWebApplication.st.SharkTankDAL;
-using seoWebApplication.st.SharkTankDAL.dataObject;
+using seoWebApplication.st.SharkTankDAL; 
 using seoWebApplication.st.SharkTankDAL.Framework;
 using seoWebApplication.Service;
 using seoWebApplication.Models; 
@@ -32,7 +28,7 @@ namespace seoWebApplication.admin
 
             if (IsPostBack)
             {
-                loadGrid();
+                loadGrid(dc.GetProduct(id));
                 loadCatGrid();
             }
         }
@@ -132,9 +128,9 @@ namespace seoWebApplication.admin
 
             chkdefaultAttCat.Checked = baseEO.defaultAttCat;
 
-            chkpromodept.Checked = baseEO.promodept; 
+            chkpromodept.Checked = baseEO.promodept;
 
-            loadGrid();
+            loadGrid(baseEO);
             commonClasses.LoadDdlCategory(ddlCategory, 0);
             loadCatGrid();
             this.AdminPictures.LoadProductPictures(baseEO.product_id);
@@ -241,37 +237,38 @@ namespace seoWebApplication.admin
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                string aId;
-                mAttribute obj = (mAttribute)(e.Row.DataItem);
-                aId = obj.AttributeID.ToString();
+                string aId, pId;
+                mProductAttributeValue obj = (mProductAttributeValue)(e.Row.DataItem);
+                aId = obj.ProductAttributeValueId.ToString();
+                pId = commonClasses.GetId().ToString();
 
                 //Add the edit link to the action column.
                 HyperLink editLink = new HyperLink();
 
                 editLink.Text = "Edit";
 
-                editLink.NavigateUrl = "productAttributeValue.aspx" + EncryptQueryString.Get("id=" + (aId));
+                editLink.NavigateUrl = "productAttributeValue.aspx" + EncryptQueryString.Get("id=" + (aId) + "&p_order_id=" + (pId));
 
-                e.Row.Cells[3].Controls.Add(editLink);
+                e.Row.Cells[1].Controls.Add(editLink);
 
             }
 
         }
 
-        public void loadGrid()
+        public void loadGrid(mProducts p)
         {
             
                 BoundField bf1 = new BoundField();
                 bf1.DataField = "Value";
                 bf1.HeaderText = "Value";
 
-                BoundField bf2 = new BoundField();
-                bf2.DataField = "Name";
-                bf2.HeaderText = "Name";
+                //BoundField bf2 = new BoundField();
+                //bf2.DataField = "Name";
+                //bf2.HeaderText = "Name";
 
-                BoundField bf3 = new BoundField();
-                bf3.DataField = "AttName";
-                bf3.HeaderText = "AttName";
+                //BoundField bf3 = new BoundField();
+                //bf3.DataField = "AttName";
+                //bf3.HeaderText = "AttName";
 
                 BoundField bf4 = new BoundField();
                 bf4.DataField = "ProductAttributeValueId";
@@ -286,15 +283,15 @@ namespace seoWebApplication.admin
 
 
                 cgvAttributeValues.Columns.Add(bf1);
-                cgvAttributeValues.Columns.Add(bf2);
-                cgvAttributeValues.Columns.Add(bf3);
+                //cgvAttributeValues.Columns.Add(bf2);
+                //cgvAttributeValues.Columns.Add(bf3);
                 cgvAttributeValues.Columns.Add(bf4);
 
 
                 cgvAttributeValues.AutoGenerateColumns = false;
 
                 var dc = new ProductService();
-                cgvAttributeValues.DataSource = dc.GetProductAttributes(Convert.ToInt32(commonClasses.GetId()));
+                cgvAttributeValues.DataSource = p.Attributes;
 
                 cgvAttributeValues.DataBind();
             

@@ -6,18 +6,35 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
-using seoWebApplication.st.SharkTankDAL.Framework; 
+using seoWebApplication.st.SharkTankDAL.Framework;
+using seoWebApplication.Models;
+using seoWebApplication.Service; 
 
 namespace seoWebApplication.admin.catalog
 {
-    public partial class attributeValue : BaseEditPage<AttributeValueEO>
+    public partial class attributeValue : System.Web.UI.Page
     {
         private const string VIEW_STATE_KEY_AttributeValue = "AttributeValue";
         protected void Page_Load(object sender, EventArgs e)
         {
             Master.SaveButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_SaveButton_Click);
             Master.CancelButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_CancelButton_Click);
-
+            var dc = new AttributeValueService();
+            int id = commonClasses.GetId();
+            int attrId = commonClasses.GetP_order_id();
+            if (!IsPostBack)
+            {
+                if (id > 0)
+                {
+                    var attribute = dc.GetAttribute(id);
+                    LoadScreenFromObject(attribute); 
+                }
+                else
+                {
+                    txtAttributeID.Text = attrId.ToString(); 
+                    txtAttributeValueID.Text = "0"; 
+                }
+            }
         }
 
         void Master_CancelButton_Click(object sender, EventArgs e)
@@ -27,20 +44,25 @@ namespace seoWebApplication.admin.catalog
 
         void Master_SaveButton_Click(object sender, EventArgs e)
         {
-            ENTValidationErrors validationErrors = new ENTValidationErrors();
-            AttributeValueEO AttributeValue = (AttributeValueEO)ViewState[VIEW_STATE_KEY_AttributeValue];
-            LoadObjectFromScreen(AttributeValue);
-            if (!AttributeValue.Save(ref validationErrors, 1))
-            {
-                //Master.ValidationErrors = validationErrors;
+            ENTValidationErrors validationErrors = new ENTValidationErrors();  
+            int id = commonClasses.GetId();
+            var dc = new AttributeValueService();
+            mAttributeValue Attribute = new mAttributeValue();
+
+            LoadObjectFromScreen(Attribute);
+
+            try
+            { 
+                dc.Create(Attribute);
+                GoToGridPage();
             }
-            else
+            catch
             {
                 GoToGridPage();
             }
         }
 
-        protected override void LoadObjectFromScreen(AttributeValueEO baseEO)
+        protected void LoadObjectFromScreen(mAttributeValue baseEO)
         {
 
             baseEO.AttributeValueID = Convert.ToInt32(txtAttributeValueID.Text);
@@ -49,10 +71,10 @@ namespace seoWebApplication.admin.catalog
 
             baseEO.Value = txtValue.Text;
 
-            baseEO.webstore_id = Convert.ToInt32(txtwebstore_id.Text); 
+            baseEO.Webstore_id = Convert.ToInt32(dBHelper.GetWebstoreId()); 
              
 
-            if (baseEO.ID == 0)
+            if (baseEO.AttributeValueID == 0)
             {
                 baseEO.InsertENTUserAccountId = Convert.ToInt32(Session["AdminUserId"]);
             }
@@ -63,14 +85,18 @@ namespace seoWebApplication.admin.catalog
              
         }
 
-        protected override void LoadScreenFromObject(AttributeValueEO baseEO)
+        protected void LoadScreenFromObject(mAttributeValue baseEO)
         {
-
-            txtAttributeValueID.Text = Convert.ToString(baseEO.AttributeValueID);
-
-            if (GetId().Equals(0))
+            if (baseEO.AttributeValueID <= 0)
             {
-            txtAttributeID.Text = Convert.ToString(GetP_order_id());
+                txtAttributeValueID.Text = "0";
+            }
+            else {
+                txtAttributeValueID.Text = Convert.ToString(baseEO.AttributeValueID);
+            } 
+            if (commonClasses.GetId().Equals(0))
+            {
+                txtAttributeID.Text = Convert.ToString(commonClasses.GetP_order_id());
             }
             else
             { 
@@ -80,9 +106,9 @@ namespace seoWebApplication.admin.catalog
 
             txtValue.Text = Convert.ToString(baseEO.Value);
 
-            txtwebstore_id.Text = Convert.ToString(baseEO.webstore_id);
+            txtwebstore_id.Text = Convert.ToString(baseEO.Webstore_id);
 
-            if (baseEO.ID == 0)
+            if (baseEO.AttributeValueID == 0)
             {
                 baseEO.InsertENTUserAccountId = Convert.ToInt32(Session["AdminUserId"]);
             }
@@ -91,19 +117,17 @@ namespace seoWebApplication.admin.catalog
                 baseEO.UpdateENTUserAccountId = Convert.ToInt32(Session["AdminUserId"]);
             }
 
-            txtInsertENTUserAccountId.Text = Convert.ToString(baseEO.InsertENTUserAccountId);
-            //Put the object in the view state so it can be attached back to the data context.
-            ViewState[VIEW_STATE_KEY_AttributeValue] = baseEO;
+            txtInsertENTUserAccountId.Text = Convert.ToString(baseEO.InsertENTUserAccountId); 
         }
 
-        protected override void LoadControls()
+        protected void LoadControls()
         {
         }
-        protected override void GoToGridPage()
+        protected void GoToGridPage()
         {
-            Response.Redirect("attribute.aspx" + EncryptQueryString("id=" + (txtAttributeID.Text)));
+            Response.Redirect("attribute.aspx" + EncryptQueryString.Get("id=" + (txtAttributeID.Text)));
         } 
-        public override string MenuItemName()
+        public string MenuItemName()
         {
             return "category";
         }

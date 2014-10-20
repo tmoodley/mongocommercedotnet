@@ -1568,6 +1568,7 @@
     <Compile Include="FBHandler.ashx.cs">
       <DependentUpon>FBHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Framework\ControlTypes.cs" />
     <Compile Include="Framework\emailSend.cs" />
     <Compile Include="Framework\EmailService.cs" />
     <Compile Include="Framework\phasher.cs" />
@@ -1588,6 +1589,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\mAttribute.cs" />
+    <Compile Include="Models\mAttributeValue.cs" />
+    <Compile Include="Models\mControlType.cs" />
+    <Compile Include="Models\mProductAttributeValue.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\mProducts.cs" />
@@ -1672,6 +1676,7 @@
     <Compile Include="seoWebAppAdminEditPage.Master.designer.cs">
       <DependentUpon>seoWebAppAdminEditPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="Service\AttributeValueService.cs" />
     <Compile Include="Service\CompanyService.cs" />
     <Compile Include="Service\CategoriesService.cs" />
     <Compile Include="Service\CustomerService.cs" />

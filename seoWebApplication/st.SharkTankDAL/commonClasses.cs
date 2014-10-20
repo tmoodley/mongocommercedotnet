@@ -1,17 +1,6 @@
-﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
-using seoWebApplication.st.SharkTankDAL;
-using seoWebApplication.st.SharkTankDAL.dataObject;
-using seoWebApplication.st.SharkTankDAL.Framework;
+﻿using System; 
+using System.Linq; 
+using System.Web.UI.WebControls; 
 using System.Collections.Specialized;
 using seoWebApplication.Service;
 
@@ -19,6 +8,14 @@ namespace seoWebApplication.st.SharkTankDAL
 {
     public class commonClasses 
     {
+        enum ControlType
+        {
+            Checkbox,
+            Select,
+            Radio,
+            Textbox
+        };
+
         public static int GetId()
         {
             //Decrypt the query string
@@ -129,6 +126,56 @@ namespace seoWebApplication.st.SharkTankDAL
                 {
                     ddl.SelectedValue = Id.ToString();
                 }
+            
+        }
+
+        public static void LoadDdlAttributes(DropDownList ddl, string Id)
+        {
+
+            Array itemValues = System.Enum.GetValues(typeof(ControlType));
+            Array itemNames = System.Enum.GetNames(typeof(ControlType));
+
+            foreach (var value in itemValues)
+            {
+                ListItem item = new ListItem(value.ToString(), value.ToString());
+                ddl.Items.Add(item);
+            }
+
+            ddl.DataBind(); 
+            if (Id.Length > 0)
+            {
+                ddl.SelectedValue = Id.ToString();
+            }
+
+        }
+
+        public static void LoadAttributes(DropDownList ddl)
+        {
+            var dc = new AttributeService();
+            ddl.DataSource = dc.GetAttributes();
+            ddl.DataTextField = "Name";
+            ddl.DataValueField = "AttributeID";
+            ddl.DataBind(); 
+
+        }
+
+        internal static void LoadDdlAttributeValue(DropDownList ddl, int id)
+        { 
+            var dc = new AttributeValueService();
+            ddl.DataSource = dc.GetAttributesById(id);
+            ddl.DataTextField = "Value";
+            ddl.DataValueField = "AttributeValueID";
+            ddl.DataBind(); 
+        }
+
+        internal static void LoadDdlAttributeValue(DropDownList ddl, int p1, int p2)
+        {
+            var dc = new AttributeValueService();
+            ddl.DataSource = dc.GetAttributesById(p1);
+            ddl.DataTextField = "Value";
+            ddl.DataValueField = "AttributeValueID";
+            ddl.DataBind();
+            ddl.SelectedValue = p2.ToString();
             
         }
     }

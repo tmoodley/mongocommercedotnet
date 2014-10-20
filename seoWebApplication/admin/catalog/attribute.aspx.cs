@@ -7,20 +7,60 @@ using System.Web.UI.WebControls;
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.Framework;
-using System.Data; 
+using System.Data;
+using seoWebApplication.Service;
+using seoWebApplication.Models; 
 
 namespace seoWebApplication.admin
 {
-    public partial class attribute : BaseEditPage<AttributeEO>
+    public partial class attribute : System.Web.UI.Page
     {
         private const string VIEW_STATE_KEY_Attribute = "Attribute";
+
+        enum ControlType
+        {
+            Checkbox,
+            Select,
+            Radio,
+            Textbox            
+        };
         protected void Page_Load(object sender, EventArgs e)
         {
             Master.SaveButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_SaveButton_Click);
             Master.CancelButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_CancelButton_Click);
-            if (IsPostBack)
+            var dc = new AttributeService();
+            var dc2 = new AttributeValueService();
+            int id = commonClasses.GetId();
+            if (!IsPostBack)
             {
-                loadGrid();
+                if (id > 0)
+                {
+                    var attribute = dc.GetAttribute(id);
+                    LoadScreenFromObject(attribute);
+                    LoadGrid(dc2.GetAttributes(id));
+                }
+                else
+                {
+                    Array itemValues = System.Enum.GetValues(typeof(ControlType));
+                    Array itemNames = System.Enum.GetNames(typeof(ControlType));
+
+                    foreach (var value in itemValues)
+                    {
+                        ListItem item = new ListItem(value.ToString(), value.ToString());
+                        ddlControl.Items.Add(item);
+                    }
+
+                    ddlControl.DataBind();
+
+                    this.txtAttributeID.Text = "0";
+
+                }
+            }
+            else {
+                if (id > 0)
+                { 
+                    LoadGrid(dc2.GetAttributes(id));
+                }
             }
         }
 
@@ -31,68 +71,62 @@ namespace seoWebApplication.admin
 
         void Master_SaveButton_Click(object sender, EventArgs e)
         {
-            ENTValidationErrors validationErrors = new ENTValidationErrors();
-            AttributeEO Attribute = (AttributeEO)ViewState[VIEW_STATE_KEY_Attribute];
+            ENTValidationErrors validationErrors = new ENTValidationErrors(); 
+            txtInsertENTUserAccountId.Text = "1";
+            mAttribute Attribute = new mAttribute();
+
             LoadObjectFromScreen(Attribute);
-            if (!Attribute.Save(ref validationErrors, 1))
+            
+            try
             {
-                //Master.ValidationErrors = validationErrors;
+                var dc = new AttributeService();
+                dc.Create(Attribute);
+                GoToGridPage();
             }
-            else
+            catch
             {
                 GoToGridPage();
             }
         }
 
-        protected override void LoadObjectFromScreen(AttributeEO baseEO)
+        protected void LoadObjectFromScreen(mAttribute baseEO)
         {
 
             baseEO.AttributeID = Convert.ToInt32(txtAttributeID.Text);
 
             baseEO.Name = txtName.Text;
 
-            baseEO.controlType_id = Convert.ToInt32(ddlControl.SelectedValue);
+            baseEO.ControlType = ddlControl.SelectedValue;
 
-            baseEO.webstore_id = Convert.ToInt32(txtwebstore_id.Text);
+            baseEO.Webstore_id = Convert.ToInt32(dBHelper.GetWebstoreId());
 
-            baseEO.applyToAllProducts = chkapplyToAllProducts.Checked;
+            baseEO.ApplyToAllProducts = chkapplyToAllProducts.Checked;
 
-            baseEO.applyToCategory = chkapplyToCategory.Checked;
+            baseEO.ApplyToCategory = chkapplyToCategory.Checked;
         }
 
-        protected override void LoadScreenFromObject(AttributeEO baseEO)
+        protected void LoadScreenFromObject(mAttribute baseEO)
         {
-
+          
             txtAttributeID.Text = Convert.ToString(baseEO.AttributeID);
 
             txtName.Text = Convert.ToString(baseEO.Name);
-              
-            loadDdlControlType(ddlControl, baseEO.controlType_id); 
 
-            txtwebstore_id.Text = Convert.ToString(baseEO.webstore_id);
+            commonClasses.LoadDdlAttributes(ddlControl, baseEO.ControlType); 
 
-            chkapplyToAllProducts.Checked = baseEO.applyToAllProducts;
+            txtwebstore_id.Text = Convert.ToString(baseEO.Webstore_id);
 
-            chkapplyToCategory.Checked = baseEO.applyToCategory;
+            chkapplyToAllProducts.Checked = baseEO.ApplyToAllProducts;
 
-            txtInsertENTUserAccountId.Text = Convert.ToString(baseEO.InsertENTUserAccountId);
+            chkapplyToCategory.Checked = baseEO.ApplyToCategory;
 
-            //Put the object in the view state so it can be attached back to the data context.
-            ViewState[VIEW_STATE_KEY_Attribute] = baseEO;
-
-            loadGrid();
+            txtInsertENTUserAccountId.Text = Convert.ToString(baseEO.InsertENTUserAccountId); 
         }
 
-        protected override void LoadControls()
+
+        public void LoadGrid(IList<mAttributeValue> attributeValues)
         {
             
-
-        }
-
-        public void loadGrid()
-        {
-            using (var dc = new seowebappDataContextDataContext())
-            {
 
                 BoundField bf2 = new BoundField();
                 bf2.DataField = "AttributeValueID";
@@ -115,14 +149,13 @@ namespace seoWebApplication.admin
 
                 cgvAttributeValues.AutoGenerateColumns = false;
 
-                cgvAttributeValues.DataSource = dc.AttributeValueSelectByAId(Convert.ToInt32(this.txtAttributeID.Text));
+                cgvAttributeValues.DataSource = attributeValues;
 
-                cgvAttributeValues.DataBind();
-            }
+                cgvAttributeValues.DataBind(); 
         }
 
        
-        protected override void GoToGridPage()
+        protected void GoToGridPage()
         {
             Response.Redirect("attributes.aspx");
         }
@@ -130,10 +163,10 @@ namespace seoWebApplication.admin
         public void ReloadPage()
         {
             AttributeEO Attribute = (AttributeEO)ViewState[VIEW_STATE_KEY_Attribute];
-            Response.Redirect("attribute.aspx" + EncryptQueryString("id=" + (Attribute.AttributeID)));
+            Response.Redirect("attribute.aspx" + EncryptQueryString.Get("id=" + (Attribute.AttributeID)));
         }
 
-        public override string MenuItemName()
+        public string MenuItemName()
         {
             return "product";
         }
@@ -148,16 +181,16 @@ namespace seoWebApplication.admin
         {
              if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                string aId;
-                AttributeValueSelectByAIdResult obj = (AttributeValueSelectByAIdResult)(e.Row.DataItem);
+                string aId, attrId;
+                mAttributeValue obj = (mAttributeValue)(e.Row.DataItem);
                 aId = obj.AttributeValueID.ToString(); 
-
+                attrId = obj.AttributeID.ToString(); 
                 //Add the edit link to the action column.
                 HyperLink editLink = new HyperLink();
 
                 editLink.Text = "Edit";
 
-                editLink.NavigateUrl = "attributeValue.aspx" + EncryptQueryString("id=" + (aId));
+                editLink.NavigateUrl = "attributeValue.aspx" + EncryptQueryString.Get("id=" + (aId) + "&p_order_id=" + attrId);
 
                 e.Row.Cells[1].Controls.Add(editLink);
 
@@ -167,7 +200,7 @@ namespace seoWebApplication.admin
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            Response.Redirect("attributeValue.aspx" + EncryptQueryString("id=0&newRec=true&p_order_id=" + txtAttributeID.Text));
+            Response.Redirect("attributeValue.aspx" + EncryptQueryString.Get("id=0&newRec=true&p_order_id=" + txtAttributeID.Text));
         }
 
         

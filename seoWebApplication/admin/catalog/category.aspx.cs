@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using seoWebApplication.st.SharkTankDAL;
-using seoWebApplication.st.SharkTankDAL.dataObject;
+﻿using System; 
+using System.Linq; 
+using seoWebApplication.st.SharkTankDAL; 
 using seoWebApplication.st.SharkTankDAL.Framework;
 using seoWebApplication.Service;
 using seoWebApplication.Models; 
@@ -90,8 +85,7 @@ namespace seoWebApplication.admin.catalog
         }
 
         protected void LoadScreenFromObject(Categories baseEO)
-        { 
-
+        {  
             commonClasses.LoadDdlDept(ddlDepartments, baseEO.department_id);
 
             txtwebstore_id.Text = Convert.ToString(dBHelper.GetWebstoreId());

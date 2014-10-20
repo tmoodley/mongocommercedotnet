@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using System; 
+using System.Linq; 
 using seoWebApplication.st.SharkTankDAL;
 using seoWebApplication.st.SharkTankDAL.dataObject;
 using seoWebApplication.st.SharkTankDAL.Framework;
-using System.Data; 
+using seoWebApplication.Models;
+using seoWebApplication.Service; 
 
 namespace seoWebApplication.admin
 {
-    public partial class productAttributeValue : BaseEditPage<ProductAttributeValueEO>
+    public partial class productAttributeValue : System.Web.UI.Page
     {
         private bool isSave = false;
-        
-        
+         
         private const string VIEW_STATE_KEY_ProductAttributeValue = "ProductAttributeValue";
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,143 +20,126 @@ namespace seoWebApplication.admin
             Master.DeleteButton_Click += new seoWebAppAdminEditPage.ButtonClickedHandler(Master_DeleteButton_Click);
             
             int attId = 0;
+            var dc = new ProductService();
+            int id = commonClasses.GetId();
+           
             if (!IsPostBack)
             {
-                loadDdlAtt();
+                if (id > 0)
+                {
+                    LoadScreenFromObject(dc.GetProductAttribute(id, attId));
+                }
+                else
+                {
+                    loadDdlAtt();
+                } 
             }
             else
             {
-                attId = Convert.ToInt32(this.ddlAttributes.SelectedValue);
-                loadDdlAttribute(ddlAttributes, attId, Convert.ToInt32(ddlAtt.SelectedValue));            
-            }
-
-            if (!isSave)
-            {
-               
+                attId = Convert.ToInt32(this.ddlAtt.SelectedValue);
+                commonClasses.LoadDdlAttributeValue(ddlAttributes, Convert.ToInt32(ddlAtt.SelectedValue));            
             } 
-           
-            
         }
 
         void Master_DeleteButton_Click(object sender, EventArgs e)
-        {
-            
-            ENTValidationErrors validationErrors = new ENTValidationErrors(); 
-            ProductAttributeValueEO ProductAttributeValue = (ProductAttributeValueEO)ViewState[VIEW_STATE_KEY_ProductAttributeValue];
-            LoadObjectFromScreen(ProductAttributeValue);
+        { 
+            ENTValidationErrors validationErrors = new ENTValidationErrors();
 
-            ProductAttributeValue.DBAction = ENTBaseEO.DBActionEnum.Delete;
-            
-            
-            if (!ProductAttributeValue.Delete(ref validationErrors, 1))
+            mProductAttributeValue pvalue = new mProductAttributeValue();
+            LoadObjectFromScreen(pvalue);
+            try
             {
-                //Master.ValidationErrors = validationErrors;
+                var dc = new ProductService();
+                dc.DeleteAttrbuteValue(pvalue);
+                GoToGridPage();
             }
-            else
+            catch
             {
                 GoToGridPage();
             }
         }
-        
-
+         
         void Master_CancelButton_Click(object sender, EventArgs e)
         {
             GoToGridPage();
         }
 
         void Master_SaveButton_Click(object sender, EventArgs e)
-        {
-           
+        { 
             ENTValidationErrors validationErrors = new ENTValidationErrors();
-            ProductAttributeValueEO ProductAttributeValue = (ProductAttributeValueEO)ViewState[VIEW_STATE_KEY_ProductAttributeValue];
-            LoadObjectFromScreen(ProductAttributeValue);
-            if (!ProductAttributeValue.Save(ref validationErrors, 1))
-            {
-                //Master.ValidationErrors = validationErrors;
+            mProductAttributeValue pvalue = new mProductAttributeValue();
+            LoadObjectFromScreen(pvalue); 
+            try
+            { 
+                var dc = new ProductService();
+                dc.AddAttrbuteValue(pvalue);
+                GoToGridPage();
             }
-            else
+            catch
             {
                 GoToGridPage();
             }
         }
 
-        protected override void LoadObjectFromScreen(ProductAttributeValueEO baseEO)
+        protected void LoadObjectFromScreen(mProductAttributeValue baseEO)
         {
-
-            baseEO.ProductAttributeValueId = Convert.ToInt32(txtProductAttributeValueId.Text);
-
-            baseEO.product_id = Convert.ToInt32(txtproduct_id.Text);
+            if (txtProductAttributeValueId.Text.Length > 0)
+            {
+                baseEO.ProductAttributeValueId = Convert.ToInt32(txtProductAttributeValueId.Text);
+            }
+            else {
+                baseEO.ProductAttributeValueId = 0;
+            }
+           
 
             baseEO.AttributeValueID = Convert.ToInt32(ddlAttributes.SelectedValue);
-
-            baseEO.webstore_id = Convert.ToInt32(txtwebstore_id.Text);
+            baseEO.product_id = Convert.ToInt32(commonClasses.GetP_order_id());
+            baseEO.webstore_id = Convert.ToInt32(dBHelper.GetWebstoreId());
 
             baseEO.Value = Convert.ToDecimal(txtValue.Text);
         }
 
-        protected override void LoadScreenFromObject(ProductAttributeValueEO baseEO)
-        {
-
+        protected void LoadScreenFromObject(mProductAttributeValue baseEO)
+        { 
             txtProductAttributeValueId.Text = Convert.ToString(baseEO.ProductAttributeValueId);
 
-            if (GetId().Equals(0))
+            if (commonClasses.GetId().Equals(0))
             {
-            txtproduct_id.Text = Convert.ToString(GetP_order_id());
+            txtproduct_id.Text = Convert.ToString(commonClasses.GetP_order_id());
             }
             else
             { 
             txtproduct_id.Text = Convert.ToString(baseEO.product_id);
             }
-
-            loadDdlAttribute(ddlAttributes, baseEO.AttributeValueID, Convert.ToInt32(ddlAtt.SelectedValue)); 
+             
+            commonClasses.LoadDdlAttributeValue(ddlAttributes, Convert.ToInt32(ddlAtt.SelectedValue), baseEO.AttributeValueID);     
 
             txtwebstore_id.Text = Convert.ToString(baseEO.webstore_id);
 
             txtValue.Text = Convert.ToString(baseEO.Value);
 
-            txtInsertENTUserAccountId.Text = Convert.ToString(baseEO.InsertENTUserAccountId);
-            //Put the object in the view state so it can be attached back to the data context.
-            ViewState[VIEW_STATE_KEY_ProductAttributeValue] = baseEO;
-
-
-           
-          
-             
+            txtInsertENTUserAccountId.Text = Convert.ToString(baseEO.InsertENTUserAccountId);  
         }
 
-        protected override void LoadControls()
+        protected void LoadControls()
         {
-
-           
-            
+   
         }
 
         public void loadDdlAtt()
         {
-            loadDdlAttr(ddlAtt, dBHelper.GetWebstoreId());
+            commonClasses.LoadAttributes(ddlAtt); 
         }
-
-        
-
-       
-       
-        protected override void GoToGridPage()
-        {
-            Response.Redirect("product.aspx" + EncryptQueryString("id=" + (txtproduct_id.Text)));
-        }
-
          
-
-        public override string MenuItemName()
+        protected void GoToGridPage()
+        {
+            Response.Redirect("product.aspx" + EncryptQueryString.Get("id=" + commonClasses.GetP_order_id()));
+        }
+         
+        public string MenuItemName()
         {
             return "product";
         }
-
          
-         
-
-         
-
-        
     }
 }

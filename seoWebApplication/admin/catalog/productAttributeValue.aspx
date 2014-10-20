@@ -27,19 +27,20 @@
 
 <tr>
 <td>
-<label for="AttributeValueID">AttributeValueID:</label>
+<label for="AttributeValueID">Attributes:</label>
 </td>
 <td> 
     <asp:DropDownList ID="ddlAtt" runat="server" AutoPostBack="True" 
         AppendDataBoundItems="True">
-    </asp:DropDownList>
-
-    <asp:DropDownList ID="ddlAttributes" runat="server">
-    </asp:DropDownList>
-
+    </asp:DropDownList> 
 </td>
 </tr>
-
+<tr>
+    <td><label for="ddlAttributes">Attributes Values:</label></td>
+    <td><asp:DropDownList ID="ddlAttributes" runat="server">
+    </asp:DropDownList> 
+    </td>
+</tr>
 <tr>
 <td>
 <label for="Value">Value:</label>

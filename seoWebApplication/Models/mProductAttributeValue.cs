@@ -7,22 +7,19 @@ using System.Web;
 
 namespace seoWebApplication.Models
 {
-
-    public class mAttribute 
+    public class mProductAttributeValue
     {
         [BsonId(IdGenerator = typeof(CombGuidGenerator))]
         public Guid Id { get; set; }
-        public int AttributeID { get; set; }
+        public int ProductAttributeValueId { get; set; }
 
-        public string Name { get; set; }
+        public int product_id { get; set; }
 
-        public string ControlType { get; set; }
+        public int AttributeValueID { get; set; }
 
-        public int Webstore_id { get; set; }
+        public int webstore_id { get; set; }
 
-        public bool ApplyToAllProducts { get; set; }
-
-        public bool ApplyToCategory { get; set; }
+        public decimal Value { get; set; }
 
         public System.DateTime InsertDate { get; set; }
 
@@ -31,8 +28,5 @@ namespace seoWebApplication.Models
         public System.DateTime UpdateDate { get; set; }
 
         public int UpdateENTUserAccountId { get; set; }
-
-        public byte[] Version { get; set; } 
-        public IList<mAttributeValue> AttributeValues { get; set; }
     }
 }

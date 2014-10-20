@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Configuration;
+﻿using System;  
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
-using seoWebApplication.st.SharkTankDAL;
-using seoWebApplication.st.SharkTankDAL.entObject;
-using seoWebApplication.st.SharkTankDAL.dataObject;
+using System.Linq; 
+using System.Web.UI.WebControls; 
+using seoWebApplication.st.SharkTankDAL; 
 using seoWebApplication.st.SharkTankDAL.Framework;
-using System.Data.SqlClient;
+using seoWebApplication.Service;
+using seoWebApplication.Models; 
 
 namespace seoWebApplication.admin.settings
 {
@@ -26,17 +17,14 @@ namespace seoWebApplication.admin.settings
             Master.AddSearch_Click += new seoWebAppAdminEditGrid.ButtonClickedHandler(Master_AddSearchButton_Click);
             Master.ddlClickEvent_Click += new seoWebAppAdminEditGrid.SelectedIndexChanged(Master_AddSearchDdl_Click);
             if (!IsPostBack)
-            {
-                BindDDlFilter();
-                using (var dc = new seowebappDataContextDataContext())
-                {
-
+            { 
+                
                     BoundField bf2 = new BoundField();
                     bf2.DataField = "Name";
                     bf2.HeaderText = "Name";
 
                     BoundField bf3 = new BoundField();
-                    bf3.DataField = "controlName";
+                    bf3.DataField = "ControlType";
                     bf3.HeaderText = "Control Type";
   
                     BoundField bf5 = new BoundField();
@@ -44,13 +32,12 @@ namespace seoWebApplication.admin.settings
                     bf5.HeaderText = "Attribute ID";
 
                     BoundField bf1 = new BoundField();
-                    bf1.DataField = "applyToAllProducts";
+                    bf1.DataField = "ApplyToAllProducts";
                     bf1.HeaderText = "All Products";
 
                     BoundField bf6 = new BoundField();
-                    bf6.DataField = "applyToCategory";
-                    bf6.HeaderText = "Category";
-
+                    bf6.DataField = "ApplyToCategory";
+                    bf6.HeaderText = "Category"; 
 
                     cgvAttributes.Columns.Add(bf2);
                     cgvAttributes.Columns.Add(bf3);  
@@ -60,10 +47,9 @@ namespace seoWebApplication.admin.settings
 
                     cgvAttributes.AutoGenerateColumns = false;
 
-                    cgvAttributes.DataSource = dc.AttributeSelectByWId(dBHelper.GetWebstoreId());
-
-                    cgvAttributes.DataBind();
-                }
+                    var dc = new AttributeService();
+                    cgvAttributes.DataSource = dc.GetAttributes(); 
+                    cgvAttributes.DataBind(); 
             }
 
         }
@@ -104,16 +90,7 @@ namespace seoWebApplication.admin.settings
             }
         }
 
-        void BindDDlFilter()
-        {
-            getSchema gt = new getSchema();
-            DataTable dt = gt.GetSchema(dBHelper.GetSeoWebAppConnectionString(), "vw_attributes");
-            Master.SearchList.DataSource = dt;
-            Master.SearchList.DataTextField = "ColumnName";
-            Master.SearchList.DataValueField = "ColumnName";
-            Master.SearchList.DataBind();
-
-        }
+       
 
         void Master_AddSearchDdl_Click(object sender, EventArgs e)
         {
@@ -149,11 +126,11 @@ namespace seoWebApplication.admin.settings
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 string cId;
-                AttributeSelectByWIdResult obj = (AttributeSelectByWIdResult)(e.Row.DataItem);
+                mAttribute obj = (mAttribute)(e.Row.DataItem);
                 cId = obj.AttributeID.ToString();
 
-                bool allProducts = obj.applyToAllProducts;
-                bool allCategory = obj.applyToCategory;
+                bool allProducts = obj.ApplyToAllProducts;
+                bool allCategory = obj.ApplyToCategory;
 
 
 

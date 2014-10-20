@@ -41,11 +41,11 @@ namespace seoWebApplication.Service
             }
         }
 
-        public IList<mAttribute> GetAttributesByDepartment(int Id)
+        public IList<mAttribute> GetAttributesById(int Id)
         {
             try
             {
-                return _attribute.Collection.Find(Query.EQ("department_id", Id)).ToList<mAttribute>();
+                return _attribute.Collection.Find(Query.EQ("AttributeID", Id)).ToList<mAttribute>();
 
             }
             catch (MongoConnectionException)
@@ -66,12 +66,7 @@ namespace seoWebApplication.Service
                 return new List<mAttribute>();
             }
         }
-
-        public mAttribute GetAttributes(string name)
-        {
-            var post = _attribute.Collection.Find(Query.EQ("Name", name)).Single();
-            return post;
-        }
+ 
 
         public mAttribute GetAttribute(int Id)
         {
@@ -115,6 +110,45 @@ namespace seoWebApplication.Service
             } 
         }
 
-       
+
+
+        internal mAttributeValue GetAttributeValue(int id, int attrId)
+        {
+            int _Id = Convert.ToInt32(id);
+            seoWebApplication.Models.mAttributeValue query = (from e in _attribute.Collection.AsQueryable<mAttributeValue>()
+                                                         where e.AttributeValueID == _Id
+                                                         select e).First();
+            return query;
+        }
+
+        internal void AddAttributeValue(int id, mAttributeValue mAttr) {
+            try
+            {
+                var query = Query<mAttribute>.EQ(e => e.AttributeID, id);
+
+                IList<mAttributeValue> attr = GetAttribute(id).AttributeValues; 
+
+                if (attr != null)
+                {
+                    attr.Add(mAttr);
+                    var update = Update<mAttribute>.Set(e => e.AttributeValues, attr);
+
+                    _attribute.Collection.Update(query, update);
+                }
+                else
+                {
+                    List<mAttributeValue> _mAttributeValue = new List<mAttributeValue>(); 
+                    var update = Update<mAttribute>.Set(e => e.AttributeValues, _mAttributeValue);
+
+                    _attribute.Collection.Update(query, update);
+                }
+
+
+
+            }
+            catch
+            {
+            }
+        }
     }
 }
