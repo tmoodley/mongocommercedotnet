@@ -24,13 +24,9 @@ namespace seoWebApplication.admin
              if (id > 0 && !IsPostBack)
              {
                  LoadScreenFromObject(dc.GetProduct(id));
-             } 
-
-            if (IsPostBack)
-            {
-                loadGrid(dc.GetProduct(id));
-                loadCatGrid();
-            }
+                 loadGrid(dc.GetProduct(id));
+                 loadCatGrid();
+             }  
         }
 
         void Master_CancelButton_Click(object sender, EventArgs e)
