@@ -95,7 +95,8 @@ namespace seoWebApplication.admin
             baseEO.AttributeValueID = Convert.ToInt32(ddlAttributes.SelectedValue);
             baseEO.product_id = Convert.ToInt32(commonClasses.GetP_order_id());
             baseEO.webstore_id = Convert.ToInt32(dBHelper.GetWebstoreId());
-
+            baseEO.Name = this.ddlAtt.SelectedValue;
+            baseEO.AttributeName = this.ddlAttributes.SelectedValue;
             baseEO.Value = Convert.ToDecimal(txtValue.Text);
         }
 

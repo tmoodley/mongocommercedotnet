@@ -18,12 +18,27 @@
     
     <link href="/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" rel="stylesheet">
     
-    <link href="/css/base-admin-2.css" rel="stylesheet">
-    <link href="/css/base-admin-2-responsive.css" rel="stylesheet">
+    <link href="/css/base-admin-3.css" rel="stylesheet">
+    <link href="/css/base-admin-3-responsive.css" rel="stylesheet">
     
     <link href="/css/pages/dashboard.css" rel="stylesheet">   
-
+      <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <link href="/css/custom.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="/Content/kendo.common.min.css">
+      <link rel="stylesheet" href="/Content/kendo.default.min.css">
+      <script src="/Scripts/jquery.min.js"></script>
+      <script src="/Scripts/kendo.web.min.js"></script>
+      <script src="/Scripts/kendo.aspnetmvc.min.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization"></script>
+<script src="http://maps.google.com/maps?file=api&amp;v=3&amp;key=AIzaSyCnnGruXsiUra-QaQT_Jh9JrnA5ZlZuMHc&libraries=visualization"
+      type="text/javascript"></script>  
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     
 
      <script>
@@ -54,65 +69,62 @@
             width: 738px;
             height: 218px;
         }
+        .subnavbar .mainnav > li > a > span {
+display: block;
+padding-bottom: 20px !important;
+}
     </style> 
 </head> 
 <body>
     <form id="form1" runat="server"> 
-   <div class="navbar navbar-inverse navbar-fixed-top">
-	
-	<div class="navbar-inner">
-		
-		<div class="container">
-			
-			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				<i class="icon-cog"></i>
-			</a>
-			
-			<a class="brand" href="./index.html">
-				Mongo Commerce Admin <sup>
-    <asp:Label ID="lblVersion" runat="server" Text=""></asp:Label></sup>
-			</a>		
-			
-			<div class="nav-collapse collapse">
-				<ul class="nav pull-right">
-					<li class="dropdown">
-						
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="icon-cog"></i>
-							Settings
-							<b class="caret"></b>
-						</a>
-						
-						<ul class="dropdown-menu">
-                         	<li><a href="javascript:;">Privacy Settings</a></li>
-							<li class="divider"></li>
-							<li><a href="javascript:;">Help</a></li> 
-						</ul>
-						
-					</li>
-			
-					<li class="dropdown">
-					 
-												
-					</li>
-				</ul>
-			 
-				
-			</div><!--/.nav-collapse -->	
-	
-		</div> <!-- /container -->
-		
-	</div> <!-- /navbar-inner -->
-	
-</div> <!-- /navbar -->
+   
     
+<nav class="navbar navbar-inverse" role="navigation">
 
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="icon-cog"></i>
+                </button>
+                <a class="navbar-brand" href="./">Mongo Commerce Admin <sup>1.0</sup></a>
+            </div>
 
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
 
-    
+                        <a href="javscript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-cog"></i>
+                            Settings
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="./account.html">Account Settings</a></li>
+                            <li><a href="javascript:;">Privacy Settings</a></li>
+                            <li class="divider"></li>
+                            <li><a href="javascript:;">Help</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li class="dropdown">
+
+               
+
+                    </li>
+                </ul>
+
+               
+            </div><!-- /.navbar-collapse -->
+        </div> <!-- /.container -->
+    </nav>
+
 <div class="subnavbar">
-
-<div class="subnavbar-inner">
+ <div class="subnavbar-inner">
 	
 		<div class="container">
 			
@@ -125,14 +137,14 @@
 				
 					<li class="active">
 						<a href="/Admin/">
-							<i class="icon-home"></i>
+                            <i class="fa fa-home"></i>
 							<span>Home</span>
 						</a>	    				
 					</li>
 					
 					<li class="dropdown">					
 						<a href="javascript:;" class="dropdown-toggle Active" data-toggle="dropdown">
-                            <i class="icon-user"></i>
+                            <i class="fa fa-user"></i>
 							<span>Users</span>
 							<b class="caret"></b>
 						</a>	    
@@ -147,14 +159,14 @@
 					</li>
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle Active" data-toggle="dropdown">
-                            <i class="icon-edit"></i>
+                            <i class="fa fa-cube"></i>
                             <span>Catalog</span>
                             <b class="caret"></b>
                         </a>
 
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="/admin/catalog/products.aspx">Products</a>
+                                <a href="/product">Products</a>
                                 <a href="/admin/catalog/attributes.aspx">Attributes</a>
                                 <a href="/admin/catalog/departments.aspx">Departments</a>
                                 <a href="/admin/catalog/categories.aspx">Categories</a> 
@@ -164,7 +176,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle Active" data-toggle="dropdown">
-                            <i class="icon-time"></i>
+                            <i class="fa fa-barcode"></i>
                             <span>Orders</span>
                             <b class="caret"></b>
                         </a>
@@ -175,7 +187,7 @@
                     </li>
 					<li class="dropdown">					
 						<a href="javascript:;" class="dropdown-toggle Active" data-toggle="dropdown">
-                            <i class="icon-cog"></i>
+                            <i class="fa fa-cog"></i>
 							<span>Process</span>
 							<b class="caret"></b>
 						</a>	    
@@ -187,7 +199,7 @@
 
                     	<li class="dropdown">					
                             <a href="javascript:;" class="dropdown-toggle Active" data-toggle="dropdown">
-                                <i class="icon-wrench"></i>
+                                <i class="fa fa-wrench"></i>
                                 <span>Setup</span>
                                 <b class="caret"></b>
                             </a>	
@@ -200,7 +212,7 @@
 
                     	<li class="dropdown">					
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="icon-signal"></i>
+                            <i class="fa fa-bar-chart"></i>
 							<span>Reports</span>
 							<b class="caret"></b>
 						</a>	
@@ -212,9 +224,8 @@
 
 		</div> <!-- /container -->
 	
-	</div> <!-- /subnavbar-inner -->
-
-</div> <!-- /subnavbar -->
+	</div> <!-- /subnavbar-inner -->   
+ </div>
     
 
 
@@ -349,10 +360,7 @@
 <script src="/js/libs/jquery-1.8.3.min.js"></script>
 <script src="/js/libs/jquery-ui-1.10.0.custom.min.js"></script>
 <script src="/js/libs/bootstrap.min.js"></script>
-<script src="/js/Application.js"></script> 
-<script src="@Url.Content("~/Scripts/polygon.min.js")"></script>
-<script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script> 
-<script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script> 
+<script src="/js/Application.js"></script>  
   
  </form>
 </body>

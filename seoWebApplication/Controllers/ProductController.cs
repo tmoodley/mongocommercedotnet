@@ -8,69 +8,28 @@ using System.Web;
 using System.Web.Mvc;
 using seoWebApplication.Data;
 using seoWebApplication.Service;
+using seoWebApplication.Models;
 
 namespace seoWebApplication.Controllers
 {
     public class ProductController : Controller
-    {
-        private SeoWebAppEntities db = new SeoWebAppEntities();
-        private ProductService _productService = new ProductService();
-        private seoWebApplication.DocumentDbServices.ProductService pDService = new seoWebApplication.DocumentDbServices.ProductService();
+    { 
+        private ProductService _productService = new ProductService(); 
         
-                // GET: /Product/
-        
-        // GET: /Product/
+         // GET: /Product/
         public ActionResult Index()
         {
-            pDService.GetProducts();
-
-            foreach (seoWebApplication.Data.product prod in db.products)
-            {
-                if (seoWebAppConfiguration.UseMongoDb)
-                {
-                    Models.mProducts prods = new Models.mProducts();
-                    prods.product_id = prod.product_id;
-                    prods.name = prod.name;
-                    prods.description = prod.description;
-                    prods.defaultAttCat = prod.defaultAttCat;
-                    prods.defaultAttribute = prod.defaultAttribute;
-                    prods.image = prod.image;
-                    prods.price = prod.price;
-                    prods.promodept = prod.promodept;
-                    prods.promofront = prod.promofront;
-                    prods.thumbnail = prod.thumbnail;
-                    prods.webstore_id = prod.webstore_id;               
-                     _productService.Create(prods);
-                }
-
-                if (seoWebAppConfiguration.UseDocumentDb)
-                {
-                    seoWebApplication.DocumentDbModels.Products prods = new seoWebApplication.DocumentDbModels.Products();
-                    prods.product_id = prod.product_id;
-                    prods.name = prod.name;
-                    prods.description = prod.description;
-                    prods.defaultAttCat = prod.defaultAttCat;
-                    prods.defaultAttribute = prod.defaultAttribute;
-                    prods.image = prod.image;
-                    prods.price = prod.price;
-                    prods.promodept = prod.promodept;
-                    prods.promofront = prod.promofront;
-                    prods.thumbnail = prod.thumbnail;
-                    prods.webstore_id = prod.webstore_id;
-                    pDService.Create(prods);
-                }
-            }
-            return View(db.products.ToList());
+            return View(_productService.GetProducts().ToList());
         }
 
         // GET: /Product/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            seoWebApplication.Data.product product = db.products.Find(id);
+            seoWebApplication.Models.mProducts product = _productService.GetProduct(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -89,12 +48,11 @@ namespace seoWebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "product_id,webstore_id,name,description,price,thumbnail,image,promofront,promodept,defaultAttribute,defaultAttCat,InsertDate,InsertENTUserAccountId,UpdateDate,UpdateENTUserAccountId,Version,IsSpecial")] seoWebApplication.Data.product product)
+        public ActionResult Create([Bind(Include = "product_id,webstore_id,name,description,price,thumbnail,image,promofront,promodept,defaultAttribute,defaultAttCat,InsertDate,InsertENTUserAccountId,UpdateDate,UpdateENTUserAccountId,Version,IsSpecial")] mProducts product)
         {
             if (ModelState.IsValid)
             {
-                db.products.Add(product);
-                db.SaveChanges();
+                _productService.Create(product); 
                 return RedirectToAction("Index");
             }
 
@@ -102,13 +60,13 @@ namespace seoWebApplication.Controllers
         }
 
         // GET: /Product/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            seoWebApplication.Data.product product = db.products.Find(id);
+            seoWebApplication.Models.mProducts product = _productService.GetProduct(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -121,25 +79,24 @@ namespace seoWebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "product_id,webstore_id,name,description,price,thumbnail,image,promofront,promodept,defaultAttribute,defaultAttCat,InsertDate,InsertENTUserAccountId,UpdateDate,UpdateENTUserAccountId,Version,IsSpecial")] seoWebApplication.Data.product product)
+        public ActionResult Edit([Bind(Include = "product_id,webstore_id,name,description,price,thumbnail,image,promofront,promodept,defaultAttribute,defaultAttCat,InsertDate,InsertENTUserAccountId,UpdateDate,UpdateENTUserAccountId,Version,IsSpecial")] mProducts product)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                _productService.Update(product); 
                 return RedirectToAction("Index");
             }
             return View(product);
         }
 
         // GET: /Product/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            seoWebApplication.Data.product product = db.products.Find(id);
+            mProducts product = _productService.GetProduct(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -152,19 +109,9 @@ namespace seoWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            seoWebApplication.Data.product product = db.products.Find(id);
-            db.products.Remove(product);
-            db.SaveChanges();
+            _productService.Delete(id); 
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+         
     }
 }

@@ -20,6 +20,8 @@ namespace seoWebApplication.Models
         public int webstore_id { get; set; }
 
         public decimal Value { get; set; }
+        public string Name { get; set; }
+        public string AttributeName { get; set; }
 
         public System.DateTime InsertDate { get; set; }
 

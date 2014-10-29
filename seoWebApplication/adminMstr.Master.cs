@@ -27,7 +27,7 @@ namespace seoWebApplication
             else
             {  
                 //Set the version
-                lblVersion.Text = ConfigurationManager.AppSettings["version"].ToString();
+                //lblVersion.Text = ConfigurationManager.AppSettings["version"].ToString();
             }
            
         }

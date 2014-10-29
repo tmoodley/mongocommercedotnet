@@ -1,7 +1,9 @@
-﻿@model seoWebApplication.Data.product
+﻿@model seoWebApplication.Models.mProducts
 
 @{
     ViewBag.Title = "Edit";
+
+    Layout = "~/Views/Shared/_BaseAdminSingle.cshtml";
 }
 
 <h2>Edit</h2>
@@ -16,15 +18,7 @@
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.product_id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.webstore_id, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.webstore_id)
-                @Html.ValidationMessageFor(model => model.webstore_id)
-            </div>
-        </div>
-
+         
         <div class="form-group">
             @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -54,6 +48,23 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.thumbnail)
                 @Html.ValidationMessageFor(model => model.thumbnail)
+                @(Html.Kendo().Upload()
+                      .Name("files")
+            .Async(a => a
+                .Save("Save", "Upload")
+                .Remove("Remove", "Upload")
+                .AutoUpload(true)
+
+                 ).Events(e => e
+                 .Success("onSuccess")
+             )
+                )
+                <script>
+                        function onSuccess(e) {
+                            $('#thumbnail').val($('.k-filename').attr(name = 'title'));
+                            $('#image').val($('.k-filename').attr(name = 'title'));
+                        }
+                </script>
             </div>
         </div>
 
@@ -136,15 +147,7 @@
                 @Html.ValidationMessageFor(model => model.Version)
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsSpecial, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IsSpecial)
-                @Html.ValidationMessageFor(model => model.IsSpecial)
-            </div>
-        </div>
-
+         
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

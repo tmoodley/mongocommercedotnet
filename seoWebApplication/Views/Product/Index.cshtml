@@ -1,7 +1,8 @@
-﻿@model IEnumerable<seoWebApplication.Data.product>
+﻿@model IEnumerable<seoWebApplication.Models.mProducts>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index"; 
+    Layout = "~/Views/Shared/_BaseAdminSingle.cshtml";
 }
 
 <h2>Index</h2>
@@ -10,10 +11,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.webstore_id)
-        </th>
+    <tr> 
         <th>
             @Html.DisplayNameFor(model => model.name)
         </th>
@@ -41,32 +39,12 @@
         <th>
             @Html.DisplayNameFor(model => model.defaultAttCat)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InsertDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InsertENTUserAccountId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateENTUserAccountId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Version)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsSpecial)
-        </th>
+        
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.webstore_id)
-        </td>
+    <tr> 
         <td>
             @Html.DisplayFor(modelItem => item.name)
         </td>
@@ -94,24 +72,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.defaultAttCat)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InsertDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InsertENTUserAccountId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateENTUserAccountId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Version)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsSpecial)
-        </td>
+     
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.product_id }) |
             @Html.ActionLink("Details", "Details", new { id=item.product_id }) |

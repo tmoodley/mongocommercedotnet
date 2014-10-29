@@ -24,6 +24,8 @@ namespace seoWebApplication.Service
         {
             product.product_id = GetLastId();
             product.webstore_id = dBHelper.GetWebstoreId();
+            product.InsertDate = DateTime.Now;
+            product.InsertENTUserAccountId = 1;
             _product.Collection.Insert(product);
         }
 

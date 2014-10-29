@@ -15,8 +15,8 @@ namespace seoWebApplication.Models
 
         public int AttributeID { get; set; }
 
-        public string Value { get; set; }
-
+        public string Value { get; set; } 
+    
         public int Webstore_id { get; set; }
 
         public System.DateTime InsertDate { get; set; }

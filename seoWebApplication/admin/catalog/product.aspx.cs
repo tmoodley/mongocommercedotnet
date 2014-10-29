@@ -24,9 +24,12 @@ namespace seoWebApplication.admin
              if (id > 0 && !IsPostBack)
              {
                  LoadScreenFromObject(dc.GetProduct(id));
+             }
+
+             if (id > 0 && IsPostBack) {
                  loadGrid(dc.GetProduct(id));
                  loadCatGrid();
-             }  
+             }
         }
 
         void Master_CancelButton_Click(object sender, EventArgs e)
@@ -245,7 +248,7 @@ namespace seoWebApplication.admin
 
                 editLink.NavigateUrl = "productAttributeValue.aspx" + EncryptQueryString.Get("id=" + (aId) + "&p_order_id=" + (pId));
 
-                e.Row.Cells[1].Controls.Add(editLink);
+                e.Row.Cells[3].Controls.Add(editLink);
 
             }
 
@@ -258,13 +261,13 @@ namespace seoWebApplication.admin
                 bf1.DataField = "Value";
                 bf1.HeaderText = "Value";
 
-                //BoundField bf2 = new BoundField();
-                //bf2.DataField = "Name";
-                //bf2.HeaderText = "Name";
+                BoundField bf2 = new BoundField();
+                bf2.DataField = "Name";
+                bf2.HeaderText = "Name";
 
-                //BoundField bf3 = new BoundField();
-                //bf3.DataField = "AttName";
-                //bf3.HeaderText = "AttName";
+                BoundField bf3 = new BoundField();
+                bf3.DataField = "AttributeName";
+                bf3.HeaderText = "Attribute Name";
 
                 BoundField bf4 = new BoundField();
                 bf4.DataField = "ProductAttributeValueId";
@@ -279,8 +282,8 @@ namespace seoWebApplication.admin
 
 
                 cgvAttributeValues.Columns.Add(bf1);
-                //cgvAttributeValues.Columns.Add(bf2);
-                //cgvAttributeValues.Columns.Add(bf3);
+                cgvAttributeValues.Columns.Add(bf2);
+                cgvAttributeValues.Columns.Add(bf3);
                 cgvAttributeValues.Columns.Add(bf4);
 
 
