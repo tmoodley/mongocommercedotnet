@@ -1534,6 +1534,7 @@
     <Compile Include="Controllers\PCategoryController.cs" />
     <Compile Include="Controllers\PCategoryProductController.cs" />
     <Compile Include="Controllers\PictureController.cs" />
+    <Compile Include="Controllers\ProductAttributeValuesController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RavenController.cs" />
@@ -2417,6 +2418,12 @@
     <Content Include="Views\Account\AdminLogin.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\Account\LoginFromControl.cshtml" />
+    <Content Include="Views\Shared\_BaseAdminDouble.cshtml" />
+    <Content Include="Views\ProductAttributeValues\Create.cshtml" />
+    <Content Include="Views\ProductAttributeValues\Delete.cshtml" />
+    <Content Include="Views\ProductAttributeValues\Details.cshtml" />
+    <Content Include="Views\ProductAttributeValues\Edit.cshtml" />
+    <Content Include="Views\ProductAttributeValues\Index.cshtml" />
     <None Include="Web References\com.shade4sale\authenticateUser.disco" />
     <None Include="Web References\com.shade4sale\authenticateUser.wsdl" />
     <None Include="Web References\com.shade4sale\Product.datasource">

@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System; 
 using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using seoWebApplication.Data;
+using System.Net; 
+using System.Web.Mvc; 
 using seoWebApplication.Service;
 using seoWebApplication.Models;
 
 namespace seoWebApplication.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     { 
         private ProductService _productService = new ProductService(); 
