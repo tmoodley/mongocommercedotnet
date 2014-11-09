@@ -108,7 +108,7 @@ namespace seoWebApplication.Service
         {
             try
             {
-                var query = (from d in GetProducts() orderby d.product_id ascending select d).First();
+                var query = (from d in GetProducts() orderby d.product_id descending select d).First();
 
                 return query.product_id + 1;
             }
@@ -340,7 +340,7 @@ namespace seoWebApplication.Service
             {
                 List<mProductAttributeValue> attr = GetProduct(pvalue.product_id).Attributes;
                 var query = Query<mProducts>.EQ(e => e.product_id, pvalue.product_id);
-                attr.RemoveAll((x) => x.ProductAttributeValueId == pvalue.ProductAttributeValueId);
+                attr.RemoveAll((x) => x.AttributeValueID == pvalue.AttributeValueID);
                 var update = Update<mProducts>.Set(e => e.Attributes, attr);
 
                 _product.Collection.Update(query, update);
@@ -351,5 +351,23 @@ namespace seoWebApplication.Service
 
             } 
         }
+        internal void UpdateAttrbuteValue(mProductAttributeValue pvalue)
+        {
+            try
+            {
+                List<mProductAttributeValue> attr = GetProduct(pvalue.product_id).Attributes;
+                var query = Query<mProducts>.EQ(e => e.product_id, pvalue.product_id);
+                attr.RemoveAll((x) => x.AttributeValueID == pvalue.AttributeValueID);
+                attr.Add(pvalue);
+                var update = Update<mProducts>.Set(e => e.Attributes, attr); 
+                _product.Collection.Update(query, update);
+
+            }
+            catch
+            {
+
+            }
+        }
+
     }
 }

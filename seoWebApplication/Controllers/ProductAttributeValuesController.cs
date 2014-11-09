@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using seoWebApplication.Data;
+using seoWebApplication.Service;
+using seoWebApplication.Models;
 
 namespace seoWebApplication.Controllers
 {
@@ -37,10 +39,13 @@ namespace seoWebApplication.Controllers
         }
 
         // GET: ProductAttributeValues/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.AttributeValueID = new SelectList(db.AttributeValues, "AttributeValueID", "Value");
-            ViewBag.product_id = new SelectList(db.products, "product_id", "name");
+            var AttributeValues = new AttributeValueService().GetAllAttributes();
+            ViewBag.AttributeValueID = new SelectList(AttributeValues, "AttributeValueID", "Value");
+            ViewBag.product_id = id.ToString();
+            ViewBag.webstore_id = seoWebApplication.st.SharkTankDAL.dBHelper.GetWebstoreId().ToString();
+            
             return PartialView();
         }
 
@@ -51,33 +56,33 @@ namespace seoWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductAttributeValueId,product_id,AttributeValueID,webstore_id,Value,InsertDate,InsertENTUserAccountId,UpdateDate,UpdateENTUserAccountId,Version")] ProductAttributeValue productAttributeValue)
         {
-            if (ModelState.IsValid)
-            {
-                db.ProductAttributeValues.Add(productAttributeValue);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            
+                mProductAttributeValue pvalue = new mProductAttributeValue();
+                pvalue.Value = productAttributeValue.Value; 
+                pvalue.AttributeValueID = productAttributeValue.AttributeValueID; 
+                pvalue.product_id = productAttributeValue.product_id;
+                pvalue.Name = new AttributeValueService().GetAttribute(pvalue.AttributeValueID).Value;
 
-            ViewBag.AttributeValueID = new SelectList(db.AttributeValues, "AttributeValueID", "Value", productAttributeValue.AttributeValueID);
-            ViewBag.product_id = new SelectList(db.products, "product_id", "name", productAttributeValue.product_id);
-            return View(productAttributeValue);
+                new ProductService().AddAttrbuteValue(pvalue);
+                return RedirectToAction("edit", "product", new { id = pvalue.product_id });
+          
         }
 
         // GET: ProductAttributeValues/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id, int attrId)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ProductAttributeValue productAttributeValue = db.ProductAttributeValues.Find(id);
+            var AttributeValues = new AttributeValueService().GetAllAttributes();
+            ViewBag.AttributeValueID = new SelectList(AttributeValues, "AttributeValueID", "Value");
+            ViewBag.product_id = id.ToString();
+            ViewBag.webstore_id = seoWebApplication.st.SharkTankDAL.dBHelper.GetWebstoreId().ToString();
+
+            mProductAttributeValue productAttributeValue = new ProductService().GetProductAttribute(id, attrId); 
+
             if (productAttributeValue == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AttributeValueID = new SelectList(db.AttributeValues, "AttributeValueID", "Value", productAttributeValue.AttributeValueID);
-            ViewBag.product_id = new SelectList(db.products, "product_id", "name", productAttributeValue.product_id);
-            return View(productAttributeValue);
+            return PartialView(productAttributeValue); 
         }
 
         // POST: ProductAttributeValues/Edit/5
@@ -85,43 +90,37 @@ namespace seoWebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductAttributeValueId,product_id,AttributeValueID,webstore_id,Value,InsertDate,InsertENTUserAccountId,UpdateDate,UpdateENTUserAccountId,Version")] ProductAttributeValue productAttributeValue)
+        public ActionResult Edit([Bind(Include = "ProductAttributeValueId,product_id,AttributeValueID,webstore_id,Value,InsertDate,InsertENTUserAccountId,UpdateDate,UpdateENTUserAccountId,Version")] mProductAttributeValue pval)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(productAttributeValue).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                mProductAttributeValue pvalue = new ProductService().GetProductAttribute(pval.product_id, pval.AttributeValueID);
+
+                pvalue.Value = pval.Value;
+                new ProductService().UpdateAttrbuteValue(pvalue);
+                return RedirectToAction("edit", "product", new { id = pvalue.product_id });
             }
-            ViewBag.AttributeValueID = new SelectList(db.AttributeValues, "AttributeValueID", "Value", productAttributeValue.AttributeValueID);
-            ViewBag.product_id = new SelectList(db.products, "product_id", "name", productAttributeValue.product_id);
-            return View(productAttributeValue);
+            return RedirectToAction("Index");
         }
 
         // GET: ProductAttributeValues/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ProductAttributeValue productAttributeValue = db.ProductAttributeValues.Find(id);
+        public ActionResult Delete(int id, int attrId)
+        { 
+            mProductAttributeValue productAttributeValue = new ProductService().GetProductAttribute(id, attrId); ;
             if (productAttributeValue == null)
             {
                 return HttpNotFound();
             }
-            return View(productAttributeValue);
+            return PartialView(productAttributeValue);
         }
 
         // POST: ProductAttributeValues/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            ProductAttributeValue productAttributeValue = db.ProductAttributeValues.Find(id);
-            db.ProductAttributeValues.Remove(productAttributeValue);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+        public ActionResult DeleteConfirmed(mProductAttributeValue pvalue)
+        {  
+            new ProductService().DeleteAttrbuteValue(pvalue);
+            return RedirectToAction("edit", "product", new { id = pvalue.product_id });
         }
 
         protected override void Dispose(bool disposing)
