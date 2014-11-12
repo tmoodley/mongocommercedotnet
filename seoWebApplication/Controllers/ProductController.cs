@@ -4,6 +4,8 @@ using System.Net;
 using System.Web.Mvc; 
 using seoWebApplication.Service;
 using seoWebApplication.Models;
+using Kendo.Mvc.UI; 
+using Kendo.Mvc.Extensions;
 
 namespace seoWebApplication.Controllers
 {
@@ -15,7 +17,7 @@ namespace seoWebApplication.Controllers
          // GET: /Product/
         public ActionResult Index()
         {
-            return View(_productService.GetProducts().ToList());
+            return View();
         }
 
         // GET: /Product/Details/5
@@ -37,6 +39,16 @@ namespace seoWebApplication.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            //int clientId = Convert.ToInt32(Session["ClientId"]);
+            var products = (from e in _productService.GetProducts()
+                                select e).ToList();
+
+            DataSourceResult result = products.ToDataSourceResult(request);
+            return Json(result);
         }
 
         // POST: /Product/Create

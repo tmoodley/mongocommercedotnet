@@ -7,18 +7,32 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using seoWebApplication.Data;
+using Kendo.Mvc.UI;
+using seoWebApplication.Service; 
+using Kendo.Mvc.Extensions;
 
 namespace seoWebApplication.Controllers
 {
     public class OrdersController : Controller
     {
         private SeoWebAppEntities db = new SeoWebAppEntities();
-
+        private OrderService _orderService = new OrderService(); 
+      
         // GET: /Orders/
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Shipping).Include(o => o.Tax);
             return View(orders.ToList());
+        }
+
+        public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            //int clientId = Convert.ToInt32(Session["ClientId"]);
+            var transformers = (from e in _orderService.GetOrders() 
+                                select e).ToList();  
+
+            DataSourceResult result = transformers.ToDataSourceResult(request);
+            return Json(result);
         }
 
         // GET: /Orders/Details/5

@@ -22,7 +22,7 @@ namespace seoWebApplication
         {
             if (!Convert.ToBoolean(Session["AdminUser"]))
             {
-                Response.Redirect("Adminlogin.aspx");
+                Response.Redirect("../admin/Adminlogin.aspx");
             }
             else
             {  

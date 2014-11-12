@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using seoWebApplication.Data;
 using seoWebApplication.Service;
 using seoWebApplication.st.SharkTankDAL;
+using Kendo.Mvc.UI; 
+using Kendo.Mvc.Extensions;
 
 namespace seoWebApplication.Controllers
 {
@@ -18,16 +20,18 @@ namespace seoWebApplication.Controllers
         private DepartmentService _departmentService = new DepartmentService();
         // GET: /Departments/
         public ActionResult Index()
+        { 
+            return View();
+        }
+
+        public ActionResult Departments_Read([DataSourceRequest]DataSourceRequest request)
         {
-            foreach(seoWebApplication.Data.department dep in db.departments){
-                Models.Departments depts = new Models.Departments();
-                depts.department_id = dep.department_id;
-                depts.Description = dep.Description;
-                depts.Name = dep.Name;
-                depts.webstore_id = dep.webstore_id;
-                _departmentService.Create(depts);
-            }
-            return View(db.departments.ToList());
+            //int clientId = Convert.ToInt32(Session["ClientId"]);
+            var depts = (from e in _departmentService.GetDepartments()
+                            select e).ToList();
+
+            DataSourceResult result = depts.ToDataSourceResult(request);
+            return Json(result);
         }
 
         public ActionResult Menu(string Id) { 
@@ -58,19 +62,18 @@ namespace seoWebApplication.Controllers
         // POST: /Departments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include="department_id,webstore_id,Description,Name,InsertDate,InsertENTUserAccountId,UpdateDate,UpdateENTUserAccountId,Version")] department department)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.departments.Add(department);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "department_id,webstore_id,Description,Name,InsertDate,InsertENTUserAccountId,UpdateDate,UpdateENTUserAccountId,Version")] department department)
+        {
+            if (ModelState.IsValid)
+            {
+                _departmentService.Create(department); 
+                return RedirectToAction("Index");
+            }
 
-        //    return View(department);
-        //}
+            return View(department);
+        }
 
         // GET: /Departments/Edit/5
         //public ActionResult Edit(int? id)
